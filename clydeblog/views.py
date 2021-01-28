@@ -65,8 +65,8 @@ def register(request):
             return redirect(request.GET.get("from", reverse('home')))
 
     else:
-        reg_form = RegForm()  # request方法不是POST时
+        reg_form = RegForm()  #request方法不是POST时
 
-    context = {}  # if分支的共有部分，都会执行以下代码。
+    context = {}  #if分支的共有部分，都会执行以下代码。
     context['reg_form'] = reg_form
     return render(request, 'register.html', context)
