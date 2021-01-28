@@ -1,0 +1,34 @@
+      <nav id="nav-menu-container">
+        <ul class="nav-menu">
+          <li><a href="{% url "about" %}">关于</a></li>
+          <li><a href="{% url "diary_list" %}">日志</a></li>
+
+          <li class="menu-has-children"><a href="{% url "arch_blog_list" %}">建筑</a>
+            <ul>
+              {% for i in arch_categorys%}
+                      <li><a href="{% url "arch_blog_category" i.id %}">{{ i }}</a></li>
+                  {% endfor %}
+                </ul>
+              </li>
+
+          <li class="menu-has-children"><a href="{% url "blog_list" %}">编程</a>
+            <ul>
+              {% for i in categorys%}
+                      <li><a href="{% url "blog_category" i.id %}">{{ i }}</a></li>
+                  {% endfor %}
+              <li class="menu-has-children"><a href="#">子分类</a>
+                <ul>
+                  {% for i in categorys%}
+                      <li><a href="{% url "blog_category" i.id %}">{{ i }}</a></li>
+                  {% endfor %}
+                  </li>
+
+                </ul>
+              </li>
+
+
+            </ul>
+          </li>
+          <li><a href="#contact">联系我</a></li>
+        </ul>
+      </nav>

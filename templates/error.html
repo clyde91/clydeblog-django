@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>错误</title>
+{% endblock %}
+
+{% block body %}
+{{ message }}<a href="{{ redirect_to }}">返回</a>
+{% endblock %}
+
+{% block index_active %}{% endblock %}

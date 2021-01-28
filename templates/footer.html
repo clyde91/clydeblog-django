@@ -1,0 +1,56 @@
+{#<footer class="navbar-fixed-bottom">#}
+{#    <div class="blog-footer">Copyright clyde Rights Reserved.</div>#}
+{#</footer>#}
+
+  <footer class="site-footer">
+    <div class="bottom">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-6 col-xs-12 text-lg-left text-center">
+            <p class="copyright-text">
+              &copy; Copyright <strong>clyde</strong>. All Rights Reserved
+            </p>
+            <div class="credits">
+              <!--
+              All the links in the footer should remain intact.
+              You can delete the links only if you purchased the pro version.
+              Licensing information: https://bootstrapmade.com/license/
+              Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Bell
+            -->
+              Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-xs-12 text-lg-right text-center">
+            <ul class="list-inline">
+              <li class="list-inline-item">
+                <a href="{% url "home" %}">主页</a>
+              </li>
+
+              <li class="list-inline-item">
+                <a href="#about">关于</a>
+              </li>
+
+              <li class="list-inline-item">
+                <a href="{% url "diary_list" %}">日志</a>
+              </li>
+
+              <li class="list-inline-item">
+                <a href="{% url "arch_blog_list" %}">建筑</a>
+              </li>
+
+              <li class="list-inline-item">
+                <a href="{% url "blog_list" %}">编程</a>
+              </li>
+
+              <li class="list-inline-item">
+                <a href="#contact">联系我</a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </footer>

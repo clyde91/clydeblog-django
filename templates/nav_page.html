@@ -1,0 +1,31 @@
+                <nav aria-label="Page navigation example" class="paginator">
+                  <ul class="pagination">
+                    {% if page.has_previous %}{# 判断是否有前页 #}
+                        <li class="page-item"><a class="page-link" href="?page={{ page.previous_page_number }}">Previous</a></li>{# 当前页.previous_page_number来找上一页码 #}
+                    {% else %}
+                        <li class="page-item disabled"><span class="page-link">Previous</span></li>
+                    {% endif %}
+
+{#                    {% for i in page.paginator.page_range %} 分页器，页码范围 通过当前页.paginator找到分页器#}
+                    {% for i in nav_page_range %}
+                        {% if i == page.number %}{# 前者是循环的数，后者是当前网页地址获得的数值 #}
+                            <li class="page-item active"><span class="page-link">{{ i }}</span></li>
+                        {% else %}
+                            {% if i == '...' %}{# 如果是省略号就灰色 #}
+                                <li class="page-item disabled"><span class="page-link">{{ i }}</span></li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                            {% endif %}
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                    {% if page.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page.next_page_number }}">Next</a></li>
+                    {% else %}
+                        <li class="page-item disabled"><span class="page-link">Next</span></li>
+                    {% endif %}
+                  </ul>
+                  <p>一共有{{ page.paginator.count }}篇文章，当前第{{ page.number }}页，共{{ page.paginator.num_pages }}页</p>
+                </nav>

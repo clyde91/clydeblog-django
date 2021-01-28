@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block head %}
+    <title>博客列表</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8">
+                <div class="card-header">博客列表</div>
+                <div class="card-body">
+                    <ul>
+                    {% for i in page.object_list %}
+                        <li class="blog">
+                            <p><a href="{% url 'blog_article' i.id %}">{{i.title}}</a></p>
+                            <p>{{ i.body|striptags|truncatechars_html:50 }}...</p>
+                            <p><span>作者：{{i.author}}</span><span class="span-right">阅读({{ i.get_read_num }})</span></p>
+
+                        </li>
+                        <p class="diag"></p>
+                    {% empty %}
+                        <li>暂无文章</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+{% include 'nav_page.html' %}
+            </div>
+            <div class="d-none d-sm-block col-sm-4">
+{% include 'righter.html' %}
+            </div>
+        </div>
+    </div>
+
+
+    <hr/>
+
+
+{% endblock %}

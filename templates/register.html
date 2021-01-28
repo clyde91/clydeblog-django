@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>clyde blog|注册</title>
+{% endblock %}
+
+{% block body %}
+    <form action="" method="POST">     <!--POST大写，这里action一定要空。不然后面提交表单时候会出问题无法跳转回之前页面.提交为空表示提交给当前页面-->
+        {% csrf_token %}
+        {{ reg_form }}
+        <!--
+        <span>用户名：</span>
+        <input type="text" name="username">
+        <span>密码：</span>
+        <input type="password" name="password">
+        -->
+        <input type="submit" value="注册">
+    </form>
+{% endblock %}
+

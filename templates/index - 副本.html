@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>clyde blog</title>
+{% endblock %}
+
+{% block body %}
+{% for i in apps %}
+    <a href="/{{ i }}/">{{i}}</a>
+    <br>
+{% endfor %}
+{% endblock %}
+
+{% block index_active %}active{% endblock %}

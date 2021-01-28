@@ -1,0 +1,596 @@
+﻿启动服务器
+python manage.py runserver
+ 
+同步数据库
+python manage.py makemigrations   制造
+python manage.py migrate  迁移
+ 
+创建超级管理员
+python manage.py createsuperuser
+ 
+创建应用 
+python manage.py startapp XXX
+ 
+注册应用（创建后需要注册才能使用）
+在根目录settings.py里面的INSTALLED_APPS添加应用名
+ 
+生成环境需求文件
+pip freeze > requirements.txt
+ 
+
+
+ 
+views   存放请求方法。即不同网页回复请求
+创建一个文章请求方法
+def article_detail(request,XXX):                     #request是必写。XXX是传入值。函数内部调用
+
+    return HttpResponse(标题是)
+ 
+views或者模板引用模型实例的属性，如文章的标题
+先获取实例，方法是objects.get
+article = Article.objects.get(id=article_id)    #article_id这个变量是自己取的。要保证其他地方一致
+然后就能article.title获得标题了
+获取所有实例，方法是objects,all()
+ 
+添加404报错
+    try:
+       article = Article.objects.get(id=article_id)
+    except Article.DoesNotExist:
+        raise Http404
+ 
+同时获得实例加添加404报错
+article = get_object_or_404(Article,id=article_id)    #模型名，根据id来检索实例
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+ 
+ 
+templates    创建模板
+新建文件夹templates。创建article_detail.html
+ 
+在settings.py注册公用模板
+'DIRS': [os.path.join(BASE_DIR, 'templates')]    #意思是BASE_DIR/templates。os模块的方法将根目录赋予给BASE_DIR
+如果是存放在某个应用的专有模板只要html文件名前缀是该应用名。如
+blog_detail.html。那么系统会先找公用模板。找不到后找。blog下的模板blog_detail.html。
+ 
+ 
+修改views（将views和templates联系起来）
+用render
+def article_detail(request,article_id):
+     article = Article.objects.get(id=article_id)    #提取文章实例
+    context = {}                               # 创建字典
+    context['article']=article              #将文章实例放入字典
+    return render(request,"article_detail.html",context)   #request，模板文件位置，字典
+
+获得文章实例的方法 
+Article.objects.get或者all或者filter。
+
+
+在模板引用  （views里面把模型实例导入字典后）
+{{article.title}} #引用标题
+ 
+在模板用循环的标签
+{% for i in articles %}    #开始
+{{i.title}}    #夹在中间的循环体。引用实例的属性。如标题等等
+{% endfor %}    #结尾
+ 
+在循环文章列表前先在views获取所有的文章实例
+
+在模板创建链接   
+<a href="{{ i.id }}">{{i.title}}</a>
+<a href="/blog/{{ i.id }}">{{i.title}}</a>
+<a href="{% url 'article_detail' i.id %}">{{i.title}}</a>   #三者等价，习惯用这种。引用的是在urls里面name=XXXX的网址。如果正则引用了参数。则
+ 
+空格后放参数。需要非常注意的是。参数是i.XX因为前面for i。i指代articles集合中的article实例。
+
+在views里面方法如果是传参数的。记得匹配进参数。而views参数的源头是模板。模板的参数源头是数据库。整个调用层次是urls-views-模板-数据库。
+
+url和views和templates关系
+每个正则url对应着views一个方法。然后views的那个方法写明了指定的模板，传入了数据库数据。最后渲染出网页来。
+
+
+{% for i in articles %}
+    <a href="{% url 'blog_article' i.id %}">{{i.title}}</a><span>{{i.author}}</span><br>    #这句里面传入了数据库里面的article.id。
+{% endfor %}
+ 
+ 
+ 
+ 
+
+
+
+
+
+ 
+
+models    存放模型 如创建一个文章模型。或者说类。
+创建一个文章模型
+class Article(models.Model):
+    title = models.CharField(max_length=30)
+    content = models.TextField()
+
+__str__方法。如果定义了。那么返回定义的信息。用于对实例的描述
+    def __str__(self):
+        return '<%s>'% self.title
+Meta
+    class Meta:
+        ordering = ['-']
+
+
+ 
+将模型注册到后台
+admin.site.register(Article)    #在admin.py里添加
+admin.site.register([Article,Tag])    #多个一起注册
+admin.site.register(Article,ArticleAdmin)    #后台注册模型以及显示格式。其中ArticleAdmin这名字是习惯的取法。并且要规定便不能多个一起注册。
+@admin.register(Article)    #装饰器模式。只要在ArticleAdmin前面加这个。等价于上面。
+
+admin 定制后台
+ 
+后台列表显示标题加内容。同时需要注册ArticleAdmin这个类
+class ArticleAdmin(admin.ModelAdmin) :
+    list_display = ("id","title","body")    #显示id标题内容
+    ordering = ("id",)    #按id正序（倒序加负号）
+    fields = （"title","body"）    #编辑模式只显示标题和内容
+    list_per_page = 5    #每页显示条目数
+    list_display_links = ("title",)    #设置带链接的字段。跟的是元组列表或者none
+ 
+ 
+ 
+
+
+
+urls    网址和请求方法对应关系（将url与views联系起来）
+path("<int:article_id>", views.article_detail, name="article_detail")    #第一个是网址的正则，第二个是对应请求方法，第三个是网址的引用名
+ 
+ 
+在总的urls引用应用的urls
+path('blog/',include('blog.urls',namespace='blog')),  #切记！namespace='blog'必不可少
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+Django建网页流程
+
+创建、注册应用#settings.py
+创建管理员
+关联网址#urls.py
+
+
+创建模型并生成数据库。#models.py
+修改后台#admin.py 
+ 
+
+1.在views创建一个请求方法。用来回复请求。如文章列表页
+方法包含了1.抓取后面模板所需的实例。如文章。抓取方法见  views或者模板得以引用模型实例的属性。2.与模板html关联
+ 
+ 
+2.在templates创建模板，并且用{{}}调用实例属性
+ 
+ 
+3.在urls创建网址与请求方法对应关系
+输入网址。方法。如果是子应用写在主urls要import
+
+
+
+
+
+
+
+
+
+
+
+
+
+models的类型
+
+models.CharField(max_length=70)    #字符串
+models.TextField()    #文本框
+models.DateTimeField(auto_now_add=True)    #日期。默认值为现在，另一种default=timezone.now需要导入from django.utils import timezone。
+models.ForeignKey(Category,on_delete=models.CASCADE)    #关联的模型。删除时的处理方式
+models.ManyToManyField(Tag,blank=True)    #多对多
+models.BooleanField(default=False)    #是否。默认否。可以设置是否隐藏文章。在列表的views
+models.ImageField(upload_to='architecture/img_architect', blank=True, null=True)    #上传图片。路径
+blank=True,null = True    #表单可以为空 数据库空为null
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Django标签、过滤器
+
+{{ articles|length }}
+{{ articles.count }}
+二者等价为统计个数
+
+{% for i in articles %}    #for开始。同理还有if
+{% empty %}    #当循环输出为空时显示内容
+{% endfor %} #for结束
+{# XXXXXXXX #}     #注释
+
+模板嵌套
+{% block XXX %}{% endblock %}    #模板嵌套的位置。X为名字
+{% extends XXX %}    #模板引用。X为引用文件。模板嵌套可以将不同部分block出来。另一个模板继续嵌套这个模板，多层嵌套。
+{% include XXX %}    #内容引用。X为引用文件
+
+{{ article.body|truncatechars:50 }}    #只显示前50字符。truncatechars_html切片时候不会切到标签，如<p
+{{XXX|date:"Y-m-d G:i:s"}}    #时间格式
+
+
+{{ articles|safe }}    #html标签显示
+{{ articles|striptags }}    #去掉html标签
+
+
+
+
+django中静态文件引用设置css,javascript
+
+STATIC_URL = '/static/'
+#设置静态文件的地址
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static/'),
+]
+#设置静态文件位置。访问地址就访问到文件位置。
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/clydeblog.css' %}">
+
+<link rel="stylesheet" href="/static/css/clydeblog.css">
+#二者等价
+
+<script type="text/javascript"  src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script type="text/javascript"  src="{% static 'js/bootstrap.js' %}"></script>
+#jquery要放在bootstrap前面
+
+
+
+
+
+
+django-ckeditor    #富文本编辑器
+
+
+
+
+
+
+
+
+
+shell
+python manage.py shell
+启动shell
+
+
+from APP.models import MODEL
+引用模型
+
+添加文章，即实例化
+Article
+a=Article()
+a.XXX=XXX
+a.save
+这里的a随便都可以，只是过渡用的变量
+
+
+分页器
+from django.core.paginator import Paginator
+articles=Article.objects.all()
+paginator = Paginator(articles,5)
+
+paginator.count
+文章数
+paginator.num_pages
+页数
+paginator.page_range
+页码范围
+paginator.page(1)
+取第一页
+paginator.page(1).number
+取当前页的页码
+paginator.page(1).object_list
+第一页的文章列表
+
+
+page_num = request.GET.get('page',1)
+
+在views里获取url里的get请求
+
+
+page.paginator.page_range
+不用专门定义一个paginator，通过.paginator就能引用分页器
+
+
+nav_page_range
+
+
+
+
+
+
+
+富文本编辑区
+pip install django-ckeditor
+
+在settings的apps添加‘ckeditor’
+在models
+from ckeditor.fields import RichTextField
+把需要的模型更改类型RichTextField()
+
+
+
+添加上传图片功能
+安装pillow
+
+在settings的apps添加‘ckeditor_uploader’
+然后添加
+# 配置ckeditor
+CKEDITOR_UPLOAD_PATH = 'upload/'
+
+# media配置
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+放在全局变量前面
+
+
+在总路由添加路径
+path('ckeditor', include('ckeditor_uploader.urls')),    # 添加上传功能
+然后添加
+from django.conf.urls.static import static
+from django.conf import settings
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
+在models
+from ckeditor_uploader.fields import RichTextUploadingField
+把需要的模型更改类型RichTextUploadingField()
+
+切记设置完后还需要收集静态文件才能在服务端使用
+python manage.py collectstatic
+
+
+
+
+
+
+
+添加点击次数功能
+models：
+read_num = models.IntegerField(default=0,verbose_name="阅读次数")
+
+views：
+    if not request.COOKIES.get("article_%s_read" % id)
+        article.read_num +=1
+        article.save()     # 这里article保存一次
+
+    response = render(request,"article_detail.html", context)    # 响应
+    response.set_cookie("article_%s_read" % id, max_age=120,)    # 给字典赋值真
+    return response
+
+这样会导致后台点一次就保存一次article就加一次。所以。把这数据迁移到其他表上。后台每次执行的是article的。所以后台并不会加
+
+models:修改添加独立的模型存次数。article引用该模型数据即可。一对一关系。注意！类名字不要和属性名字相同。不然会乱
+class Readnum(models.Model):
+    read_num = models.IntegerField(default=0, verbose_name="阅读次数")
+    article = models.OneToOneField(Article, on_delete=models.DO_NOTHING)
+
+
+通用功能放在一个app里
+ContentType
+可以在不同的app引用。想想比如导航栏
+ContentType就是起搭桥作用。如阅读数是给博客app的文章用的。那么ct就等于blog-article。代码里并不是类Article。而是要用ContentType.objects.get_for_model(Article)来获取
+其中id是要自己创的。不是阅读数自增id。即一班有个1号。二班也有个1号。不冲突的。他就相当于是把一二班的人的阅读数单独集合在一起。
+GenericForeignKey这个方法是通过ct+id获得该实例。
+
+ContentType实例提供的接口 :
+ContentType.model_class() 
+获取当前ContentType类型所代表的模型类
+
+ContentType.objects.get_for_id() 
+通过id寻找ContentType类型，这个跟传统的get方法的区别就是它跟get_for_model共享一个缓存，因此更为推荐。
+ContentType.objects.get_for_model() 
+通过model或者model的实例来寻找ContentType类型
+
+
+
+封装通用方法
+将通用的做成类。让需要的继承。
+class ReadnumMethod():
+    def get_read_num(self):
+        ct = ContentType.objects.get_for_model(self)    # 获得ct
+        try:
+            readnum = Readnum.objects.get(content_type=ct, object_id=self.id)  # 获得该文章的阅读数。通过关联模型，id
+            return readnum.read_num
+        except Exception as e:
+            return 0
+
+
+
+
+
+登录功能
+模板：
+                    <div>
+                        {% if user.is_authenticated%}
+                            已登录
+                        {% else %}
+                            未登录
+                            <form action="{% url 'login' %}" method="POST">    # POST大写
+                                {% csrf_token %}
+                                <input type="text" name="username">
+                                <input type="password" name="password">
+                                <input type="submit" value="登录">
+                            </form>
+                        {% endif %}
+                    </div>
+
+
+urls：
+    path('login/', views.login, name='login'),
+
+views：
+
+def login(request):
+    username = request.POST['username']     # POST大写  request.POST.get('text','')这种get方式如果没获得则按后面的
+    password = request.POST['password']
+    user = auth.authenticate(request, username=username,password=password)
+    if user is not None:
+        auth.login(request, user)
+        return redirect('/')
+    else:
+        return render(request, 'error.html', {"message":'用户名或密码不正确'})
+
+
+csrf验证
+要加{% csrf_token %}
+
+
+
+
+
+
+评论功能
+
+views:
+
+
+def submit_comment(request):
+    referer = request.META.get('HTTP_REFERER', reverse('home'))
+    # 数据检查
+    user = request.user
+    if not user.is_authenticated:
+        return render(request, "error.html", {'message':'用户未登录', 'redirect_to':referer})    #返回链接为之前页
+    text = request.POST.get('text','').strip()
+    if text =='':
+        return render(request, "error.html", {'message':'评论内容为空', 'redirect_to':referer})
+    try:
+        content_type = request.POST.get('content_type','')    # 这些数据都是通过request获得
+        object_id = int(request.POST.get('object_id',''))
+        content_object = ContentType.objects.get(model=content_type).model_class().objects.get(id=object_id)
+        # 通过模型的名字这里是article，获得ct。然后ct的方法.model_class获得模型，这里是Article。然后get再获得实例。
+    except Exception as e:
+        return render(request, "error.html", {'message':'评论对象不存在', 'redirect_to':referer})
+
+    # 检查通过，保持
+    comment = Comment()
+    comment.user = user
+    comment.text = text
+    comment.content_object = content_object
+    comment.save()
+    return redirect(referer)
+
+
+
+
+模板：
+
+                <div class="card-header">提交评论区</div>
+                <div class="card-body">
+                    <div>
+                        {% if user.is_authenticated%}
+                            {{ user.username }},已登录
+                            <form action="{% url 'submit_comment' %}" method="POST">
+                                {% csrf_token %}
+                                <textarea name="text"></textarea>
+                                <input type="hidden" name="object_id" value="{{ object_id }}">
+                                <input type="hidden" name="content_type" value="{{ content_type }}">
+                                <input type="submit" value="评论">
+                            </form>
+                        {% else %}
+                            未登录
+                            <form action="{% url 'login' %}" method="POST">     <!--POST大写-->
+                                {% csrf_token %}
+                                <span>用户名：</span>
+                                <input type="text" name="username">
+                                <span>密码：</span>
+                                <input type="password" name="password">
+                                <input type="submit" value="登录">
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-header">评论列表区域</div>
+                <div class="card-body">
+                    <ul>
+                    {% for i in comments %}
+                        <li>作者{{ i.user }}时间：{{ i.created_time|date:"Y-m-d H:i:s"}}<p>{{ i.text }}</p></li>
+                    {% empty %}
+                        <li>暂无评论</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+
+
+models：
+
+class Comment(models.Model):
+    content_type = models.ForeignKey(ContentType, on_delete=models.DO_NOTHING)    #评论所属的ct
+    object_id = models.PositiveIntegerField()    # 在app里的id
+    content_object = GenericForeignKey('content_type', "object_id")    # 评论的实例
+    text = models.TextField()
+    created_time = models.DateTimeField(auto_now_add=True, verbose_name="创建日期")
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name="评论人")
+
+    class Meta:
+        verbose_name_plural = "评论"
+        ordering = ['-created_time']
+
+
+urls：
+
+urlpatterns = [
+    path('submit_comment', views.submit_comment, name="submit_comment"),
+]
+
+
+
+
+
+
+
+django表单
+
+新建forms.py
+
+from django import forms
+
+class LoginForm(forms.Form):
+#定义表单
+    username = forms.CharField(label="用户名")
+    password = forms.CharField(label="密码", widget=forms.PasswordInput)
+#定义字段
+
+在views里面传入表单LoginForm
+
+
+?from={{ request.get_full_path }} 在链接后面加入个get。此标签是引用当前网址。

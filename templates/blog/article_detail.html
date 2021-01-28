@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>{{article.title}}-{{ article.category.name }}</title>
+    <meta content="{{article.keywords}}" name="keywords">
+    <meta content="{{article.descriptison}}" name="descriptison">
+
+<!--    <meta content="{{webseo.keywords}}" name="keywords">
+    <meta content="{{webseo.descriptison}}" name="descriptison">
+-->
+
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-8">
+                <div class="card-header">{{article.title}}</div>
+                <div class="card-body">
+                    <h3>博客主题：{{article.title}}</h3>
+                    <ul class="blog-detail">
+                        <li>作者：{{article.author}}</li>
+                        <li>分类：<a href="{% url "blog_category" article.category.id %}">{{article.category.name}}</a></li>
+                        <li>发表日期：{{ article.created_time|date:"Y-m-d H:i:s" }}</li>
+                        <li>阅读次数：{{ article.get_read_num }}</li>
+                    </ul>
+                    <div>{{article.body|safe}}</div>
+                </div>
+            </div>
+            <div class="d-none d-md-block col-md-4">
+{% include 'righter_article.html' %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-8">
+                {% include 'comment.html' %}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+
+
+

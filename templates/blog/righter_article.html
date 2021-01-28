@@ -1,0 +1,10 @@
+                <div class="card-header">博客分类</div>
+                <div class="card-body">
+                    <ul>
+                    {% for i in categorys %}
+                        <li><a href="{% url 'blog_category' i.id %}">{{i.name}}</a></li>
+                    {% empty %}
+                        <li>暂无分类</li>
+                    {% endfor %}
+                    </ul>
+                </div>

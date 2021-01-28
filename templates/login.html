@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+    <title>clyde blog|登录</title>
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xs-8 col-xs-4">
+            <form action="" method="POST">     <!--POST大写，这里action一定要空。不然后面提交表单时候会出问题无法跳转回之前页面.提交为空表示提交给当前页面-->
+            {% csrf_token %}
+            {% for field in login_form %}
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+            {% endfor %}
+            <!--
+            <span>用户名：</span>
+            <input type="text" name="username">
+            <span>密码：</span>
+            <input type="password" name="password">
+            -->
+            <input type="submit" value="登录">
+            </form>
+        </div>
+
+    </div>
+{% endblock %}
+

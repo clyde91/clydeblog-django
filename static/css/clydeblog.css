@@ -1,0 +1,20 @@
+/**{margin: 0;padding: 0;}*/
+body{background-image: url('../assets/img/bg.jpg');}
+/*#main{border-radius: 6px;background: #FFFFFF;}*/
+.mainer{background: #FFFFFF;border-radius: 6px;}
+
+
+.span-right {
+  float:right;
+}
+
+.diag {
+    height: 6px;
+    background: url(../assets/img/bg-diag.png) repeat-x;
+    width: 98%;
+    margin: 4px 0px 5px 10px;
+}
+
+.blog {
+    list-style: none;
+}
