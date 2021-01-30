@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
     path('arch_blog/', include('arch_blog.urls')),
+    path('code_blog/', include('code_blog.urls')),
     path('diary/', include('diary.urls')),
     path('architecture/', include('architecture.urls')),
     path('', views.index, name='home'),
@@ -31,6 +32,7 @@ urlpatterns = [
     path('test', views.test, name='test'),
     path('ckeditor', include('ckeditor_uploader.urls')),    # 添加上传功能
     path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),  # 退出登录
     path('register/', views.register, name='register'),
     path('comment/', include('comment.urls')),
 ]

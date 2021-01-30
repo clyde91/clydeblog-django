@@ -6,7 +6,7 @@
                             <form action="{% url 'submit_comment' %}" method="POST">
                                 {% csrf_token %}
                                 <label for="exampleFormControlTextarea1">{{ user.username }},已登录。请填写评论</label>
-                                <a href="">退出登录</a>
+                                <a href="{% url 'logout' %}">退出登录</a>
                                 <br>
                                 {{ comment_form }}
 {#                                <textarea name="text" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>#}

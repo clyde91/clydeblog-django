@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404
-from .models import Arch_blog, Category
+from .models import CodeBlog, Category
 from django.core.paginator import Paginator
 from django.conf import settings
 from common_func.utils import read_click, paginate
@@ -8,9 +8,8 @@ from comment.models import Comment
 #from common_func.models import WebSEO
 
 
-def arch_blog_article(request, id):
-    article = get_object_or_404(Arch_blog, id=id)
-    category = article.category
+def code_blog_article(request, id):
+    article = get_object_or_404(CodeBlog, id=id)
     key=read_click(request, obj=article)
     context = {}
     context['article'] = article
@@ -28,23 +27,21 @@ def arch_blog_article(request, id):
     return response
 
 
-def arch_blog_list(request):
+def code_blog_list(request):
     context = {}
-    articles_all = Arch_blog.objects.all()
+    articles_all = CodeBlog.objects.all()
     paginate(request,articles_all=articles_all,context=context)    # 分页器
     context['articles'] = articles_all
-    context['url_name'] = "arch_blog_article"
-    context['categorys'] = Category.objects.all()
+    context['url_name'] = "code_blog_article"
     return render(request, "article_list.html", context)
 
 
-def arch_blog_category(request, id):
+def code_blog_category(request, id):
     context = {}
     category = get_object_or_404(Category,id=id)    #通过id=id获取分类的实例
-    articles_category = Arch_blog.objects.filter(category=id)    #用分类筛选后的文章
+    articles_category = CodeBlog.objects.filter(category=id)    #用分类筛选后的文章
     paginate(request,articles_all=articles_category,context=context)    # 分页器
     context["articles"] = articles_category
-    context['url_name'] = "arch_blog_article"
-    context['categorys'] = Category.objects.all()
+    context['url_name'] = "code_blog_article"
     return render(request, "article_category.html", context)
 

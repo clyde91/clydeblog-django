@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models import Article, Category, Tag
+from .models import CodeBlog, Category, Tag
 # Register your models here.
 
 
-@admin.register(Article)
-class ArticleAdmin(admin.ModelAdmin):
+@admin.register(CodeBlog)
+class CodeBlogAdmin(admin.ModelAdmin):
     list_display = ("id", "title", "created_time", "modified_time", "get_read_num", "keywords", "descriptison")
     list_per_page = 20
     ordering = ("id",)

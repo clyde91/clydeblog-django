@@ -33,6 +33,7 @@ def blog_list(request):
     articles_all = Article.objects.all()
     paginate(request,articles_all=articles_all,context=context)    # 分页器
     context['articles'] = articles_all
+    context['url_name'] = "blog_article"
     return render(request, "article_list.html", context)
 
 
@@ -42,5 +43,6 @@ def blog_category(request, id):
     articles_category = Article.objects.filter(category=id)    #用分类筛选后的文章
     paginate(request,articles_all=articles_category,context=context)    # 分页器
     context["articles"] = articles_category
+    context['url_name'] = "blog_article"
     return render(request, "article_category.html", context)
 

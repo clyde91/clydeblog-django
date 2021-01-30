@@ -49,6 +49,14 @@ def login(request):
     context['login_form'] = login_form
     return render(request, 'login.html', context)
 
+
+def logout(request):  #退出登录
+    referer = request.META.get('HTTP_REFERER', reverse('home'))
+    auth.logout(request)
+    return redirect(referer)
+
+
+
 def register(request):
     if request.method == 'POST':
         reg_form = RegForm(request.POST)

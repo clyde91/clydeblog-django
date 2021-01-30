@@ -5,15 +5,23 @@
 
           <li class="menu-has-children"><a href="{% url "arch_blog_list" %}">建筑</a>
             <ul>
-              {% for i in arch_categorys%}
+              {% for i in nav_arch_categorys%}
                       <li><a href="{% url "arch_blog_category" i.id %}">{{ i }}</a></li>
                   {% endfor %}
                 </ul>
               </li>
 
-          <li class="menu-has-children"><a href="{% url "blog_list" %}">编程</a>
+          <li class="menu-has-children"><a href="{% url "code_blog_list" %}">编程</a>
             <ul>
-              {% for i in categorys%}
+              {% for i in nav_code_categorys%}
+                      <li><a href="{% url "code_blog_category" i.id %}">{{ i }}</a></li>
+                  {% endfor %}
+                </ul>
+              </li>
+
+          <li class="menu-has-children"><a href="{% url "blog_list" %}">博客</a>
+            <ul>
+              {% for i in nav_categorys%}
                       <li><a href="{% url "blog_category" i.id %}">{{ i }}</a></li>
                   {% endfor %}
               <li class="menu-has-children"><a href="#">子分类</a>

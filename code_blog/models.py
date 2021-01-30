@@ -20,7 +20,7 @@ class Tag(models.Model):
         return self.name
 
 
-class Arch_blog(models.Model, ReadnumMethod):
+class CodeBlog(models.Model, ReadnumMethod):
     title = models.CharField(max_length=70, verbose_name="标题")
     body = RichTextUploadingField(verbose_name="正文")
     created_time = models.DateTimeField(auto_now_add=True, verbose_name="创建日期")
@@ -32,7 +32,7 @@ class Arch_blog(models.Model, ReadnumMethod):
     descriptison = models.CharField(max_length=70, blank=True, verbose_name="描述")
 
     def __str__(self):
-        return '<%s>' % self.title  #设置后台显示默认模型信息
+        return '<%s>' % self.title  # 设置后台显示默认模型信息
 
     class Meta:
         verbose_name_plural = "文章"
