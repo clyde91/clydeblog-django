@@ -8,10 +8,9 @@
                                 <label for="exampleFormControlTextarea1">{{ user.username }},已登录。请填写评论</label>
                                 <a href="{% url 'logout' %}">退出登录</a>
                                 <br>
-                                {{ comment_form }}
-{#                                <textarea name="text" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>#}
-{#                                <input type="hidden" name="object_id" value="{{ object_id }}">#}
-{#                                <input type="hidden" name="content_type" value="{{ content_type }}">#}
+                                <textarea name="text" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <input type="hidden" name="object_id" value="{{ object_id }}">
+                                <input type="hidden" name="content_type" value="{{ content_type }}">
                                 <input type="submit" value="评论" class="btn btn-primary">
                             </form>
                         {% else %}
