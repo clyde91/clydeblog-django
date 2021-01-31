@@ -22,6 +22,7 @@ def blog_article(request, id):
     context["now_category"] = article.category  # 获得当前文章的category
     context["now_categorys"] = Category.objects.all()  # 当前所有分类
     context['url_name'] = "blog_article"
+    context['prefix'] = ""
     # webseos = WebSEO.objects.filter(content_type=content_type, object_id=id)
     #for i in webseos:
     #    webseo1 = i

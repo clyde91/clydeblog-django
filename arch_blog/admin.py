@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Arch_blog, Category, Tag
+from .models import ArchBlog, Category, Tag
 # Register your models here.
 
 
-@admin.register(Arch_blog)
+@admin.register(ArchBlog)
 class Arch_blogAdmin(admin.ModelAdmin):
     list_display = ("id", "title", "created_time", "modified_time", "get_read_num", "keywords", "descriptison")
     list_per_page = 20

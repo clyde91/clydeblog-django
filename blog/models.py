@@ -4,9 +4,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from common_func.models import ReadnumMethod
 # Create your models here.
 
-
-
-
+prefix = ""  # 设置前缀
 
 
 class Category(models.Model):
@@ -15,6 +13,10 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse(prefix+'blog_category', args=(self.id,))
 
 
 class Tag(models.Model):
@@ -36,12 +38,13 @@ class Article(models.Model, ReadnumMethod):
     descriptison = models.CharField(max_length=70, blank=True, verbose_name="描述")
 
     def __str__(self):
-        return '<%s>' % self.title  #设置后台显示默认模型信息
+        return '<%s>' % self.title  # 设置后台显示默认模型信息
 
     class Meta:
         verbose_name_plural = "文章"
         ordering = ['-created_time']
 
-
-
+    def get_absolute_url(self):  # 获得自己文章的url
+        from django.urls import reverse
+        return reverse(prefix+'blog_article', args=(self.id,))
 

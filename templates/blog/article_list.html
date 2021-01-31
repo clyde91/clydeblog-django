@@ -12,7 +12,7 @@
                     <ul>
                     {% for i in page.object_list %}
                         <li class="blog">
-                            <p><a href="{% url url_name i.id %}">{{i.title}}</a></p>
+                            <p><a href="{{ i.get_absolute_url }}">{{i.title}}</a></p><!-- 创造了方法反解析自己的地址 -->
                             <p>{{ i.body|striptags|truncatechars_html:50 }}...</p>
                             <p><span>作者：{{i.author}}</span><span class="span-right">阅读({{ i.get_read_num }})</span></p>
 
