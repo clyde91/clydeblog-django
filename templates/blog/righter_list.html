@@ -1,14 +1,17 @@
+
+            <div class="card border-success python manage.py runservermb-3" style="width: 18rem;">
                 <div class="card-header">博客分类</div>
                 <div class="card-body">
-                    <ul class="nav flex-column">
+                    <ul class="list-group list-group-flush">
                     {% for i in now_categorys %}
                         {% if i == now_category %}
-                            <li class="nav-item active"><a class="nav-link active" href="{{i.get_absolute_url}}">{{i.name}}</a></li>
+                            <li class="list-group-item active"><a class="nav-link active" href="{{i.get_absolute_url}}">{{i.name}}</a></li>
                         {% else %}
-                            <li class="nav-item"><a class="nav-link active" href="{{i.get_absolute_url}}">{{i.name}}</a></li>
+                            <li class="list-group-item"><a class="nav-link active" href="{{i.get_absolute_url}}">{{i.name}}</a></li>
                         {% endif %}
                     {% empty %}
                         <li>暂无分类</li>
                     {% endfor %}
                     </ul>
                 </div>
+            </div>

@@ -5,7 +5,7 @@ from .models import Comment
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ("id", "text", "user", "created_time", "content_type", "object_id", "content_object")
+    list_display = ("id", "text", "user", "created_time", "content_type", "object_id", "content_object", "parent")
     list_per_page = 20
     ordering = ("id",)
     list_display_links = ("text",)

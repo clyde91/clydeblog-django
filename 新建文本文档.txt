@@ -1,0 +1,10 @@
+ContentType.objects.get(model=str)从字符串找CT
+ContentType.objects.get_for_model(model)从实例找CT
+
+
+
+CT.model    找字符串    得到的是“model”存疑
+CT.model_class()    找模型     得到的是Model                 .objects.get(id=object_id)
+
+
+

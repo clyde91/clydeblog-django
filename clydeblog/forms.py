@@ -12,7 +12,7 @@ class LoginForm(forms.Form):  #表单类
         password = self.cleaned_data["password"]
 
         user = auth.authenticate(username=username, password=password)
-        if user is None:
+        if user is None:  # 验证用户
             raise forms.ValidationError("用户名或者密码不正确")
         else:
             self.cleaned_data["user"] = user

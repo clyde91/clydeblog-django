@@ -1,3 +1,7 @@
+{% load static %}
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+
                 <div class="card-header">提交评论区</div>
                 <div class="card-body">
                     <div>
@@ -8,11 +12,18 @@
                                 <label for="exampleFormControlTextarea1">{{ user.username }},已登录。请填写评论</label>
                                 <a href="{% url 'logout' %}">退出登录</a>
                                 <br>
-                                <textarea name="text" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                <input type="hidden" name="object_id" value="{{ object_id }}">
-                                <input type="hidden" name="content_type" value="{{ content_type }}">
+{#                                <textarea name="text" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>#}
+{#                                <input type="hidden" name="object_id" value="{{ object_id }}">#}
+{#                                <input type="hidden" name="content_type" value="{{ content_type }}">#}
+                                {% for field in comment_form %}
+                                    {{ field }}
+                                {% endfor %}
+{#                                {{ test }}#}
                                 <input type="submit" value="评论" class="btn btn-primary">
+
+
                             </form>
+
                         {% else %}
                             未登录,登录后评论
                             <!--<form action="{% url 'login' %}" method="POST">
@@ -30,13 +41,98 @@
                         {% endif %}
                     </div>
                 </div>
+
+
                 <div class="card-header">评论列表区域</div>
                 <div class="card-body">
                     <ul>
-                    {% for i in comments %}
-                        <li>作者{{ i.user }}时间：{{ i.created_time|date:"Y-m-d H:i:s"}}<p>{{ i.text }}</p></li>
+                    {% for comment in comments %}
+                        <li>作者{{ comment.user }}时间：{{ comment.created_time|date:"Y-m-d H:i:s"}}<p>{{ comment.text }}</p></li>
+                        {% for reply in comment.root_comments.all %}
+                            <li>作者{{ reply.user }}时间：{{ reply.created_time|date:"Y-m-d H:i:s"}}<p>回复{{ reply.reply_to.username }}：{{ reply.text }}</p></li>
+                        {% endfor %}
                     {% empty %}
                         <li>暂无评论</li>
                     {% endfor %}
                     </ul>
+                </div>
+
+
+
+
+
+                <div class="col-md-12">
+                  <div class="comments text-left padDiv mb-30">
+                    <div class="entry-comments">
+                      <h6 class="mb-30">4 comments</h6>    <!-- 评论数 -->
+                      <ul class="entry-comments-list list-unstyled">
+                        <li>
+                          <div class="entry-comments-item">
+{#                            <img src="assets/img/avatar.jpg" class="entry-comments-avatar" alt="">#}    <!-- 头像 -->
+                            <div class="entry-comments-body">
+                              <span class="entry-comments-author">Sommer Christian</span>
+                              <span><a href="#">fev 14, 2018 at 12:48 pm</a></span>
+                              <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam justo, ullamcorper tincidunt pellentesque in, condimentum ut enim. Aenean at pharetra diam, quis vulputate urna. </p>
+                              <a class="rep" href="#">Reply</a>
+                            </div>
+                          </div>
+                          <ul class="entry-comments-reply list-unstyled">
+                            <li>
+                              <div class="entry-comments-item">
+                                <img src="assets/img/avatar.jpg" class="entry-comments-avatar" alt="">
+                                <div class="entry-comments-body">
+                                  <span class="entry-comments-author">Sara Smith</span>
+                                  <span><a href="#">fev 14, 2018 at 12:51 pm</a></span>
+                                  <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam justo, ullamcorper tincidunt pellentesque in, condimentum ut enim. Aenean at pharetra diam, quis vulputate urna.</p>
+                                  <a class="rep" href="#">Reply</a>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </li>
+                        <li>
+                          <div class="entry-comments-item">
+                            <img src="assets/img/avatar.jpg" class="entry-comments-avatar" alt="">
+                            <div class="entry-comments-body">
+                              <span class="entry-comments-author">Andrew Lupkin</span>
+                              <span><a href="#">fev 14, 2018 at 12:55 pm</a></span>
+                              <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam justo, ullamcorper tincidunt pellentesque in, condimentum ut enim. Aenean at pharetra diam, quis vulputate urna. </p>
+                              <a class="rep" href="#">Reply</a>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="cmt padDiv">
+                    <form id="comment-form" method="post" action="" role="form">
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <input id="form_name" type="text" name="name" class="form-control" placeholder="Name *" required="required">
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <input id="form_email" type="email" name="email" class="form-control" placeholder="email *" required="required">
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <input id="form_name" type="text" name="website" class="form-control" placeholder="Website">
+                          </div>
+                        </div>
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                            <textarea id="form_message" name="message" class="form-control" placeholder="Message *" style="height: 200px;" required="required"></textarea>
+                          </div>
+                        </div>
+                        <div class="col-lg-12">
+                          <input type="submit" class="btn btn-defeault btn-send" value="Send message">
+                        </div>
+                      </div>
+                    </form>
+                  </div>
                 </div>
