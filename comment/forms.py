@@ -7,9 +7,9 @@ from ckeditor.widgets import CKEditorWidget
 class CommentForm(forms.Form):
     content_type = forms.CharField(widget=forms.HiddenInput)
     object_id = forms.IntegerField(widget=forms.HiddenInput)
-    text = forms.CharField(widget=CKEditorWidget(config_name='comment_ckeditor'),
-                            error_messages={'required': '评论内容不能为空'})
-    #text = forms.CharField(widget=forms.Textarea)
+    #text = forms.CharField(widget=CKEditorWidget(config_name='comment_ckeditor'),
+    #                        error_messages={'required': '评论内容不能为空'})
+    text = forms.CharField(widget=forms.Textarea)
 
     def __init__(self, *args, **kwargs):  # 好像是重写了init函数，把额外传入的user提取后剔除（pop）。然后继承回原来的参数。就达到了传入额外需要参数的目的
         if "user" in kwargs:
