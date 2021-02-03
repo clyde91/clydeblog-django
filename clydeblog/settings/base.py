@@ -171,6 +171,27 @@ CKEDITOR_CONFIGS = {
         'tabSpaces': 4,
         'removePlugins': 'elementspath',
         'resize_enabled': False,
+    },
+
+    'default': {
+        # 使用简体中文
+        'language': 'zh-cn',
+        # 编辑器的宽高请根据你的页面自行设置
+        'width': 'auto',
+        'height': '150px',
+        'image_previewText': ' ',
+        'tabSpaces': 4,
+        'toolbar': 'Custom',
+        # 添加按钮在这里
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline', 'Format', 'RemoveFormat'],
+            ['NumberedList', 'BulletedList'],
+            ['Blockquote', 'CodeSnippet'],
+            ['Image', 'Link', 'Unlink'],
+            ['Maximize']
+        ],
+        # 插件
+        'extraPlugins': ','.join(['codesnippet', 'uploadimage', 'widget', 'lineutils', ]),
     }
 }
 # media配置
