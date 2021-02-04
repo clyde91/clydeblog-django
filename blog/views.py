@@ -19,7 +19,7 @@ def blog_article(request, id):
     content_type = ContentType.objects.get_for_model(article)  # 用具体的obj来获得content_type
     comments = Comment.objects.filter(content_type=content_type, object_id=id, parent=None)  #只筛选根评论
     context['comments'] = comments
-    context['comment_form'] = CommentForm(initial={"content_type":content_type.model, "object_id":id, "text":"11"})  # 实例化一个form表单。content_type.model这个.model很关键不然会出错
+    context['comment_form'] = CommentForm(initial={"content_type":content_type.model, "object_id":id, "reply_comment_id":"0"})  # 实例化一个form表单。content_type.model这个.model很关键不然会出错
 
     #context["test"] = content_type.model_class  # 测试专用
     context["now_category"] = article.category  # 获得当前文章的category

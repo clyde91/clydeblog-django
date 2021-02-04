@@ -4,8 +4,14 @@
     <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
     <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
 
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script type="text/javascript">
+{#回复#}
+        function reply(reply_comment_id) {
+            $("reply_comment_id").val(reply_comment_id);
+        }
+    </script>
 
-{#    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>#}
 {#    <script type="text/javascript">#}
 {#        $("#comment_form").submit(function(){#}
 {#            // 判断是否为空#}
@@ -115,9 +121,17 @@
                 <div class="card-body">
                     <ul>
                     {% for comment in comments %}
-                        <li>作者{{ comment.user }}时间：{{ comment.created_time|date:"Y-m-d H:i:s"}}<p>{{ comment.text }}</p></li>
+                        <li>
+                            作者{{ comment.user }}时间：{{ comment.created_time|date:"Y-m-d H:i:s"}}
+                            <p>{{ comment.text }}</p>
+                            <a href="javascript:reply({{ comment.id }});">回复</a>
+                        </li>
                         {% for reply in comment.root_comments.all %}
-                            <li>作者{{ reply.user }}时间：{{ reply.created_time|date:"Y-m-d H:i:s"}}<p>回复{{ reply.reply_to.username }}：{{ reply.text }}</p></li>
+                            <li>
+                                作者{{ reply.user }}时间：{{ reply.created_time|date:"Y-m-d H:i:s"}}
+                                <p>回复{{ reply.reply_to.username }}：{{ reply.text }}</p>
+                                <a href="javascript:reply({{ reply.id }});">回复</a>
+                            </li>
                         {% endfor %}
                     {% empty %}
                         <li>暂无评论</li>
