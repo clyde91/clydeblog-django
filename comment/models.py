@@ -10,7 +10,7 @@ class Comment(models.Model):
     object_id = models.PositiveIntegerField()    # 在app里的id
     content_object = GenericForeignKey('content_type', "object_id")    # 评论的实例
     text = models.TextField()
-    created_time = models.DateTimeField(auto_now_add=True, verbose_name="创建日期")
+    comment_time = models.DateTimeField(auto_now_add=True, verbose_name="评论时间")
     user = models.ForeignKey(User, related_name="comments", on_delete=models.DO_NOTHING, verbose_name="评论人")
     # 指定user与comment链接是"comments"。即调用obj.user与obj.reply_to。同样都是链接User的数据他内部能区分开来
 
@@ -22,7 +22,7 @@ class Comment(models.Model):
 
     class Meta:
         verbose_name_plural = "评论"
-        ordering = ['-created_time']
+        ordering = ['-comment_time']
 
     def __str__(self):  # 当显示comment对象时改为显示comment.text的内容
         return self.text

@@ -1,93 +1,28 @@
 {% load static %}
 
-{% block script %}
-    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
-    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
-
-    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-    <script type="text/javascript">
-{#回复#}
-        function reply(reply_comment_id) {
-            $("reply_comment_id").val(reply_comment_id);
-        }
-    </script>
-
-{#    <script type="text/javascript">#}
-{#        $("#comment_form").submit(function(){#}
-{#            // 判断是否为空#}
-{#            $("#comment_error").text('');#}
-{#            if(CKEDITOR.instances["id_text"].document.getBody().getText().trim()==''){#}
-{#                $("#comment_error").text('评论内容不能为空');#}
-{#                return false;#}
-{#            }#}
-{##}
-{#            // 更新数据到textarea#}
-{#            CKEDITOR.instances['id_text'].updateElement();#}
-{##}
-{#            // 异步提交#}
-{#            $.ajax({#}
-{#                url: "{% url 'submit_comment' %}",#}
-{#                type: 'POST',#}
-{#                data: $(this).serialize(),#}
-{#                cache: false,#}
-{#                success: function(data){#}
-{#                    console.log(data);#}
-{#                    if(data['status']=="SUCCESS"){#}
-{#                        // 插入数据#}
-{#                        var comment_html = '<div>' + data['username'] +#}
-{#                                           ' (' + data['comment_time'] + ')：' +#}
-{#                                           data['text'] + '</div>';#}
-{#                        $("#comment_list").prepend(comment_html);#}
-{#                        // 清空编辑框的内容#}
-{#                        CKEDITOR.instances['id_text'].setData('');#}
-{#                    }else{#}
-{#                        // 显示错误信息#}
-{#                        $("#comment_error").text(data['message']);#}
-{#                    }#}
-{#                },#}
-{#                error: function(xhr){#}
-{#                    console.log(xhr);#}
-{#                }#}
-{#            });#}
-{#            return false;#}
-{#        });#}
-{#    </script>#}
 
 
-
-
-{#    <script type="text/javascript">#}
-{#        $("#comment_form").submit(function () {#}
-{#            $.ajax({#}
-{#                url:"{% url 'submit_comment' %}",#}
-{#                type:"POST",#}
-{#                data:$(this).serialize(),#}
-{#                cache:false,#}
-{#                success: function (data) {#}
-{#                    console.log(data);#}
-{#                },#}
-{#                error:function (xhr) {#}
-{#                    console.log(xhr);#}
-{#                }#}
-{#            });#}
-{#            return false;#}
-{#        })#}
-{#    </script>#}
-{% endblock %}
 
                 <div class="card-header">提交评论区</div>
                 <div class="card-body">
                     <div>
                         {% if user.is_authenticated%}
 
-                            <form id="comment_form" action="{% url 'submit_comment' %}" method="POST">
-                                {% csrf_token %}
-                                <label for="exampleFormControlTextarea1">{{ user.username }},已登录。请填写评论</label>
+                            <form id="comment_form" action="{% url 'submit_comment' %}" method="POST" style="overflow:hidden">
+
+                                <label>{{ user.username }},已登录。请填写评论</label>
                                 <a href="{% url 'logout' %}">退出登录</a>
+
+                                <div id="reply_content_container" style="display:none;">
+                                    <p>回复：</p>
+                                    <div id="reply_content"></div>
+                                </div>
+
                                 <br>
 {#                                <textarea name="text" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>#}
 {#                                <input type="hidden" name="object_id" value="{{ object_id }}">#}
 {#                                <input type="hidden" name="content_type" value="{{ content_type }}">#}
+                                {% csrf_token %}
                                 {% for field in comment_form %}
                                     {{ field }}
                                 {% endfor %}
@@ -118,103 +53,104 @@
 
 
                 <div class="card-header">评论列表区域</div>
-                <div class="card-body">
+                <div class="card-body" id="comment_list">
                     <ul>
                     {% for comment in comments %}
                         <li>
-                            作者{{ comment.user }}时间：{{ comment.created_time|date:"Y-m-d H:i:s"}}
+                            作者{{ comment.user }}时间：{{ comment.comment_time|date:"Y-m-d H:i:s"}}
                             <p>{{ comment.text }}</p>
                             <a href="javascript:reply({{ comment.id }});">回复</a>
                         </li>
                         {% for reply in comment.root_comments.all %}
                             <li>
-                                作者{{ reply.user }}时间：{{ reply.created_time|date:"Y-m-d H:i:s"}}
+                                <span>作者{{ reply.user }}</span><span>时间：{{ reply.comment_time|date:"Y-m-d H:i:s"}}</span>
                                 <p>回复{{ reply.reply_to.username }}：{{ reply.text }}</p>
                                 <a href="javascript:reply({{ reply.id }});">回复</a>
                             </li>
                         {% endfor %}
                     {% empty %}
-                        <li>暂无评论</li>
+                        <span id="no_comment">暂无评论</span>
                     {% endfor %}
                     </ul>
                 </div>
 
 
 
-
-
-                <div class="col-md-12">
-                  <div class="comments text-left padDiv mb-30">
-                    <div class="entry-comments">
-                      <h6 class="mb-30">4 comments</h6>    <!-- 评论数 -->
-                      <ul class="entry-comments-list list-unstyled">
-                        <li>
-                          <div class="entry-comments-item">
+{##}
+{##}
+{##}
+{#                <div class="col-md-12">#}
+{#                  <div class="comments text-left padDiv mb-30">#}
+{#                    <div class="entry-comments">#}
+{#                      <h6 class="mb-30">4 comments</h6>    <!-- 评论数 -->#}
+{#                      <ul class="entry-comments-list list-unstyled">#}
+{#                        <li>#}
+{#                          <div class="entry-comments-item">#}
 {#                            <img src="assets/img/avatar.jpg" class="entry-comments-avatar" alt="">#}    <!-- 头像 -->
-                            <div class="entry-comments-body">
-                              <span class="entry-comments-author">Sommer Christian</span>
-                              <span><a href="#">fev 14, 2018 at 12:48 pm</a></span>
-                              <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam justo, ullamcorper tincidunt pellentesque in, condimentum ut enim. Aenean at pharetra diam, quis vulputate urna. </p>
-                              <a class="rep" href="#">Reply</a>
-                            </div>
-                          </div>
-                          <ul class="entry-comments-reply list-unstyled">
-                            <li>
-                              <div class="entry-comments-item">
+{#                            <div class="entry-comments-body">#}
+{#                              <span class="entry-comments-author">Sommer Christian</span>#}
+{#                              <span><a href="#">fev 14, 2018 at 12:48 pm</a></span>#}
+{#                              <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam justo, ullamcorper tincidunt pellentesque in, condimentum ut enim. Aenean at pharetra diam, quis vulputate urna. </p>#}
+{#                              <a class="rep" href="#">Reply</a>#}
+{#                            </div>#}
+{#                          </div>#}
+{#                          <ul class="entry-comments-reply list-unstyled">#}
+{#                            <li>#}
+{#                              <div class="entry-comments-item">#}
 {#                                <img src="assets/img/avatar.jpg" class="entry-comments-avatar" alt="">#}
-                                <div class="entry-comments-body">
-                                  <span class="entry-comments-author">Sara Smith</span>
-                                  <span><a href="#">fev 14, 2018 at 12:51 pm</a></span>
-                                  <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam justo, ullamcorper tincidunt pellentesque in, condimentum ut enim. Aenean at pharetra diam, quis vulputate urna.</p>
-                                  <a class="rep" href="#">Reply</a>
-                                </div>
-                              </div>
-                            </li>
-                          </ul>
-                        </li>
-                        <li>
-                          <div class="entry-comments-item">
+{#                                <div class="entry-comments-body">#}
+{#                                  <span class="entry-comments-author">Sara Smith</span>#}
+{#                                  <span><a href="#">fev 14, 2018 at 12:51 pm</a></span>#}
+{#                                  <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam justo, ullamcorper tincidunt pellentesque in, condimentum ut enim. Aenean at pharetra diam, quis vulputate urna.</p>#}
+{#                                  <a class="rep" href="#">Reply</a>#}
+{#                                </div>#}
+{#                              </div>#}
+{#                            </li>#}
+{#                          </ul>#}
+{#                        </li>#}
+{#                        <li>#}
+{#                          <div class="entry-comments-item">#}
 {#                            <img src="assets/img/avatar.jpg" class="entry-comments-avatar" alt="">#}
-                            <div class="entry-comments-body">
-                              <span class="entry-comments-author">Andrew Lupkin</span>
-                              <span><a href="#">fev 14, 2018 at 12:55 pm</a></span>
-                              <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam justo, ullamcorper tincidunt pellentesque in, condimentum ut enim. Aenean at pharetra diam, quis vulputate urna. </p>
-                              <a class="rep" href="#">Reply</a>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="cmt padDiv">
-                    <form id="comment-form" method="post" action="" role="form">
-                      <div class="row">
-                        <div class="col-lg-6">
-                          <div class="form-group">
-                            <input id="form_name" type="text" name="name" class="form-control" placeholder="Name *" required="required">
-                          </div>
-                        </div>
-                        <div class="col-lg-6">
-                          <div class="form-group">
-                            <input id="form_email" type="email" name="email" class="form-control" placeholder="email *" required="required">
-                          </div>
-                        </div>
-                        <div class="col-md-12">
-                          <div class="form-group">
-                            <input id="form_name" type="text" name="website" class="form-control" placeholder="Website">
-                          </div>
-                        </div>
-                        <div class="col-lg-12">
-                          <div class="form-group">
-                            <textarea id="form_message" name="message" class="form-control" placeholder="Message *" style="height: 200px;" required="required"></textarea>
-                          </div>
-                        </div>
-                        <div class="col-lg-12">
-                          <input type="submit" class="btn btn-defeault btn-send" value="Send message">
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
+{#                            <div class="entry-comments-body">#}
+{#                              <span class="entry-comments-author">Andrew Lupkin</span>#}
+{#                              <span><a href="#">fev 14, 2018 at 12:55 pm</a></span>#}
+{#                              <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam justo, ullamcorper tincidunt pellentesque in, condimentum ut enim. Aenean at pharetra diam, quis vulputate urna. </p>#}
+{#                              <a class="rep" href="#">Reply</a>#}
+{#                            </div>#}
+{#                          </div>#}
+{#                        </li>#}
+{#                      </ul>#}
+{#                    </div>#}
+{#                  </div>#}
+{#                </div>#}
+{#                <div class="col-lg-12">#}
+{#                  <div class="cmt padDiv">#}
+{#                    <form id="comment-form" method="post" action="" role="form">#}
+{#                      <div class="row">#}
+{#                        <div class="col-lg-6">#}
+{#                          <div class="form-group">#}
+{#                            <input id="form_name" type="text" name="name" class="form-control" placeholder="Name *" required="required">#}
+{#                          </div>#}
+{#                        </div>#}
+{#                        <div class="col-lg-6">#}
+{#                          <div class="form-group">#}
+{#                            <input id="form_email" type="email" name="email" class="form-control" placeholder="email *" required="required">#}
+{#                          </div>#}
+{#                        </div>#}
+{#                        <div class="col-md-12">#}
+{#                          <div class="form-group">#}
+{#                            <input id="form_name" type="text" name="website" class="form-control" placeholder="Website">#}
+{#                          </div>#}
+{#                        </div>#}
+{#                        <div class="col-lg-12">#}
+{#                          <div class="form-group">#}
+{#                            <textarea id="form_message" name="message" class="form-control" placeholder="Message *" style="height: 200px;" required="required"></textarea>#}
+{#                          </div>#}
+{#                        </div>#}
+{#                        <div class="col-lg-12">#}
+{#                          <input type="submit" class="btn btn-defeault btn-send" value="Send message">#}
+{#                        </div>#}
+{#                      </div>#}
+{#                    </form>#}
+{#                  </div>#}
+{#                </div>#}
