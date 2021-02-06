@@ -21,6 +21,7 @@ DATABASES = {
         'PASSWORD': DATABASE_PASSWORD,
         'HOST': 'localhost',
         'PORT': '3306',
+        'charset': 'utf8',
     }
 }
 

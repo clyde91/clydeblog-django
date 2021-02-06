@@ -21,5 +21,6 @@ DATABASES = {
         'PASSWORD': 'yitian3314',
         'HOST': 'localhost',
         'PORT': '3306',
+        'charset': 'utf8',
     }
 }
