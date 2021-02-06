@@ -9,12 +9,12 @@ from django.http import JsonResponse
 
 def submit_comment(request):
     referer = request.META.get('HTTP_REFERER', reverse('home'))
-    comment_form = CommentForm(request.POST, user=request.user)
+    comment_form = CommentForm(request.POST, user=request.user)  # 用post传来的数据实例化一个表单
     data = {}
 
     if comment_form.is_valid():
         # 检查通过，保存数据
-        comment = Comment()
+        comment = Comment()    # 实例化一个评论
         comment.user = comment_form.cleaned_data['user']
         comment.text = comment_form.cleaned_data['text']
         comment.content_object = comment_form.cleaned_data['content_object']

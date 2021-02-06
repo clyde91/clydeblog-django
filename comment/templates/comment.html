@@ -154,3 +154,75 @@
 {#                    </form>#}
 {#                  </div>#}
 {#                </div>#}
+
+
+
+
+
+
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+    <script type="text/javascript">
+
+
+        $("#comment_form").submit(function(){
+            // 判断是否为空
+            $("#comment_error").text('');
+            if(CKEDITOR.instances["id_text"].document.getBody().getText().trim()==''){
+                $("#comment_error").text('评论内容不能为空');
+                return false;
+            }
+
+            // 更新数据到textarea
+            CKEDITOR.instances['id_text'].updateElement();
+
+
+            // 异步提交
+            $.ajax({
+                url: "{% url 'submit_comment' %}",
+                type: 'POST',
+                data: $("#comment_form").serialize(),
+                cache: false,
+                success: function(data){
+                    console.log(data);
+                    if(data['status']=="SUCCESS"){
+                        if($('#reply_comment_id').val()=='0'){
+                            // 插入评论
+                            var comment_html = '<div id="root_' + data['id'] + '" class="comment"><span>' + data['username'] + '</span><span> (' + data['comment_time'] + ')：</span><div id="comment_' + data['id'] + '">' + data['text'] + '</div><a href="javascript:reply(' + data['id'] + ');">回复</a></div>';
+                            $("#comment_list").prepend(comment_html);
+                        }else{
+                            // 插入回复
+                            var reply_html ='<div class="reply"><span>' + data['username'] + '</span><span> (' + data['comment_time'] + ')</span><span> 回复 </span><span>' + data['reply_to'] + '：</span><div id="comment_' + data['id'] + '">' + data['text'] + '</div><a href="javascript:reply(' + data['id'] + ');">回复</a></div>';
+                            $("#root_" + data['root_id']).append(reply_html);
+                        }
+
+                        // 清空编辑框的内容
+                        CKEDITOR.instances['id_text'].setData('');
+                        $('#reply_content_container').hide();
+                        $('#reply_comment_id').val('0');
+                        $('#no_comment').remove();
+                    }else{
+                        // 显示错误信息
+                        $("#comment_error").text(data['message']);
+                    }
+                },
+                error: function(xhr){
+                    console.log(xhr);
+                }
+            });
+            return false;
+        });
+        function reply(reply_comment_id){
+            // 设置值
+            $('#reply_comment_id').val(reply_comment_id);
+            var html = $("#comment_" + reply_comment_id).html();
+            $('#reply_content').html(html);
+            $('#reply_content_container').show();
+
+            $('html').animate({scrollTop: $('#comment_form').offset().top - 60}, 300, function(){
+                CKEDITOR.instances['id_text'].focus();
+            });
+        }
+    </script>
