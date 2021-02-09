@@ -1,5 +1,7 @@
 {% extends "article_list.html" %}
 
 {% block head %}
-    <title>{{ category.name }}</title>
+    <title>{{ now_category.name }}</title>
 {% endblock %}
+
+{% block list_title %}<h3>{{ now_category.name }}</h3>{% endblock %}

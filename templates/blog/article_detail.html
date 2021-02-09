@@ -5,46 +5,47 @@
     <title>{{article.title}}-{{ article.category.name }}</title>
     <meta content="{{article.keywords}}" name="keywords">
     <meta content="{{article.descriptison}}" name="descriptison">
-
-<!--    <meta content="{{webseo.keywords}}" name="keywords">
-    <meta content="{{webseo.descriptison}}" name="descriptison">
--->
-
 {% endblock %}
 
 {% block body %}
+<div class="main-content paddsection">
     <div class="container">
-        <div class="row">
-            <div class="col-sm-12 col-md-8">
-                <div class="card-header">{{article.title}}</div>
-                <div class="card-body">
-                    <h3>博客主题：{{article.title}}</h3>
-                    <ul class="blog-detail">
-                        <li>作者：{{article.author}}</li>
-                        <li>分类：<a href="{% url "blog_category" article.category.id %}">{{article.category.name}}</a></li>
-                        <li>发表日期：{{ article.created_time|date:"Y-m-d H:i:s" }}</li>
-                        <li>阅读次数：{{ article.get_read_num }}</li>
-                        <li>评论数：{% get_comment_num article %}</li>
-                    </ul>
-                    <div>{{article.body|safe}}</div>
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-md-offset-2">
+                <div class="row">
+                    <div class="container-main single-main">
+                        <div class="col-md-12">
+                            <div class="block-main mb-30">
+{#                                <img src="assets/img/blog-post-big.jpg" class="img-responsive" alt="reviews2">#}
+                                <div class="content-main single-post padDiv">
+                                    <div class="journal-txt">
+                                        <h4><a href="#">{{article.title}}</a></h4>
+                                    </div>
+                                    <div class="post-meta">
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="author">作者：<a href="#">{{article.author}}</a></li>
+                                            <li class="">分类：<a href="{{ article.category.get_absolute_url }}">{{article.category.name}}</a></li>
+                                            <li class="date">发表日期：<a href="#">{{ article.created_time|date:"Y-m-d H:i:s" }}</a></li>
+                                            <li class="commont"><i class="ion-ios-heart-outline"></i>阅读数：<a href="#">{{ article.get_read_num }}</a></li>
+                                            <li class="commont"><i class="ion-ios-heart-outline"></i>评论数：<a href="#">{% get_comment_num article %}</a></li>
+                                        </ul>
+                                    </div>
+                                    <p class="mb-30">
+                                        {{article.body|safe}}
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- comment -->
+                        {% include 'comment.html' %}
+                        <!-- comment -->
+                    </div>
                 </div>
             </div>
-            <div class="d-none d-md-block col-md-4">
-{#{% include 'righter_article.html' %}#}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-8">
-                {% include 'comment.html' %}
-            </div>
-
         </div>
     </div>
-
-
-
-
-
+</div>
 
 
 

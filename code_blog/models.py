@@ -4,7 +4,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from common_func.models import ReadnumMethod
 # Create your models here.
 
-prefix = "code_"  # 设置前缀
+prefix = "arch_"  # 设置前缀
 
 
 class Category(models.Model):

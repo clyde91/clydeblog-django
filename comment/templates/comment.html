@@ -1,160 +1,77 @@
 {% load static %}
+{% load comment_tags %}
 
 
-
-
-                <div class="card-header">提交评论区</div>
-                <div class="card-body">
-                    <div>
-                        {% if user.is_authenticated%}
-
-                            <form id="comment_form" action="{% url 'submit_comment' %}" method="POST" style="overflow:hidden">
-
-                                <label>{{ user.username }},已登录。请填写评论</label>
-                                <a href="{% url 'logout' %}">退出登录</a>
-
-                                <div id="reply_content_container" style="display:none;">
-                                    <p>回复：</p>
-                                    <div id="reply_content"></div>
-                                </div>
-
-                                <br>
-{#                                <textarea name="text" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>#}
-{#                                <input type="hidden" name="object_id" value="{{ object_id }}">#}
-{#                                <input type="hidden" name="content_type" value="{{ content_type }}">#}
-                                {% csrf_token %}
-                                {% for field in comment_form %}
-                                    {{ field }}
-                                {% endfor %}
-{#                                {{ test }}#}
-                                <span id="comment_error" class="text-danger pull-left"></span>
-                                <input type="submit" value="评论" class="btn btn-primary">
-
-
-                            </form>
-
-                        {% else %}
-                            未登录,登录后评论
-                            <!--<form action="{% url 'login' %}" method="POST">
-                                {% csrf_token %}
-                                <span>用户名：</span>
-                                <input type="text" name="username">
-                                <span>密码：</span>
-                                <input type="password" name="password">
-                                <input type="submit" value="登录">
-                            </form>
-                            -->
-                            <a class="btn btn-primary" href="{% url 'login' %}?from={{ request.get_full_path }}">登录</a>
-                            <span> </span>
-                            <a class="btn btn-danger" href="{% url 'register' %}?from={{ request.get_full_path }}">注册</a>
-                        {% endif %}
-                    </div>
+<div class="col-lg-12">
+    <div class="cmt padDiv">
+    {% if user.is_authenticated%}
+        <form id="comment_form" method="POST" action="{% url 'submit_comment' %}" role="form" style="overflow:hidden">
+                        <label>{{ user.username }},已登录。请填写评论。</label>
+            <a href="{% url 'logout' %}">退出登录</a>
+            <div id="reply_content_container" style="display:none;">
+                <p>回复：</p>
+                <div id="reply_content"></div>
+            </div>
+            <br>
+            {% csrf_token %}
+            {% for field in comment_form %}
+                {{ field }}
+            {% endfor %}
+            <br>
+            <br>
+            <div>
+                <input type="submit" value="    评论    " class="btn btn-defeault btn-send">
+                <span id="comment_error" class="text-danger pull-left"></span>
+            </div>
+        </form>
+    {% else %}
+        <span>未登录,登录后评论</span>
+        <a class="btn btn-primary" href="{% url 'login' %}?from={{ request.get_full_path }}">登录</a>
+        <span> </span>
+        <a class="btn btn-danger" href="{% url 'register' %}?from={{ request.get_full_path }}">注册</a>
+    {% endif %}
+    </div>
+</div>
+<br>
+<div class="col-md-12">
+  <div class="comments text-left padDiv mb-30">
+    <div class="entry-comments" id="comment_list">
+      <h6 class="mb-30">{% get_comment_num article %} comments</h6>
+      <ul class="entry-comments-list list-unstyled">
+      {% for comment in comments %}
+        <li>
+          <div class="entry-comments-item">
+{#            <img src="assets/img/avatar.jpg" class="entry-comments-avatar" alt="">#}
+            <div class="entry-comments-body">
+              <span class="entry-comments-author">{{ comment.user }}</span>
+              <span><a href="#">{{ comment.comment_time|date:"Y-m-d H:i:s"}}</a></span>
+              <p id="comment_{{ comment.id }}" class="mb-10">{{ comment.text|safe }}</p>
+              <a class="rep" href="javascript:reply({{ comment.id }});">回复</a>
+            </div>
+          </div>
+          <ul class="entry-comments-reply list-unstyled">
+          {% for reply in comment.root_comments.all %}
+            <li>
+              <div class="entry-comments-item">
+{#                <img src="assets/img/avatar.jpg" class="entry-comments-avatar" alt="">#}
+                <div class="entry-comments-body">
+                  <span class="entry-comments-author">{{ reply.user }}</span>
+                  <span><a href="#">{{ reply.comment_time|date:"Y-m-d H:i:s"}}</a></span>
+                  <p class="mb-10" id="comment_{{ reply.id }}">{{ reply.text|safe }}</p>
+                  <a class="rep" href="javascript:reply({{ reply.id }});">回复</a>
                 </div>
-
-
-                <div class="card-header">评论列表区域</div>
-                <div class="card-body" id="comment_list">
-                    <ul>
-                    {% for comment in comments %}
-                        <li>
-                            作者{{ comment.user }}时间：{{ comment.comment_time|date:"Y-m-d H:i:s"}}
-                            <p>{{ comment.text }}</p>
-                            <a href="javascript:reply({{ comment.id }});">回复</a>
-                        </li>
-                        {% for reply in comment.root_comments.all %}
-                            <li>
-                                <span>作者{{ reply.user }}</span><span>时间：{{ reply.comment_time|date:"Y-m-d H:i:s"}}</span>
-                                <p>回复{{ reply.reply_to.username }}：{{ reply.text }}</p>
-                                <a href="javascript:reply({{ reply.id }});">回复</a>
-                            </li>
-                        {% endfor %}
-                    {% empty %}
-                        <span id="no_comment">暂无评论</span>
-                    {% endfor %}
-                    </ul>
-                </div>
-
-
-
-{##}
-{##}
-{##}
-{#                <div class="col-md-12">#}
-{#                  <div class="comments text-left padDiv mb-30">#}
-{#                    <div class="entry-comments">#}
-{#                      <h6 class="mb-30">4 comments</h6>    <!-- 评论数 -->#}
-{#                      <ul class="entry-comments-list list-unstyled">#}
-{#                        <li>#}
-{#                          <div class="entry-comments-item">#}
-{#                            <img src="assets/img/avatar.jpg" class="entry-comments-avatar" alt="">#}    <!-- 头像 -->
-{#                            <div class="entry-comments-body">#}
-{#                              <span class="entry-comments-author">Sommer Christian</span>#}
-{#                              <span><a href="#">fev 14, 2018 at 12:48 pm</a></span>#}
-{#                              <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam justo, ullamcorper tincidunt pellentesque in, condimentum ut enim. Aenean at pharetra diam, quis vulputate urna. </p>#}
-{#                              <a class="rep" href="#">Reply</a>#}
-{#                            </div>#}
-{#                          </div>#}
-{#                          <ul class="entry-comments-reply list-unstyled">#}
-{#                            <li>#}
-{#                              <div class="entry-comments-item">#}
-{#                                <img src="assets/img/avatar.jpg" class="entry-comments-avatar" alt="">#}
-{#                                <div class="entry-comments-body">#}
-{#                                  <span class="entry-comments-author">Sara Smith</span>#}
-{#                                  <span><a href="#">fev 14, 2018 at 12:51 pm</a></span>#}
-{#                                  <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam justo, ullamcorper tincidunt pellentesque in, condimentum ut enim. Aenean at pharetra diam, quis vulputate urna.</p>#}
-{#                                  <a class="rep" href="#">Reply</a>#}
-{#                                </div>#}
-{#                              </div>#}
-{#                            </li>#}
-{#                          </ul>#}
-{#                        </li>#}
-{#                        <li>#}
-{#                          <div class="entry-comments-item">#}
-{#                            <img src="assets/img/avatar.jpg" class="entry-comments-avatar" alt="">#}
-{#                            <div class="entry-comments-body">#}
-{#                              <span class="entry-comments-author">Andrew Lupkin</span>#}
-{#                              <span><a href="#">fev 14, 2018 at 12:55 pm</a></span>#}
-{#                              <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam justo, ullamcorper tincidunt pellentesque in, condimentum ut enim. Aenean at pharetra diam, quis vulputate urna. </p>#}
-{#                              <a class="rep" href="#">Reply</a>#}
-{#                            </div>#}
-{#                          </div>#}
-{#                        </li>#}
-{#                      </ul>#}
-{#                    </div>#}
-{#                  </div>#}
-{#                </div>#}
-{#                <div class="col-lg-12">#}
-{#                  <div class="cmt padDiv">#}
-{#                    <form id="comment-form" method="post" action="" role="form">#}
-{#                      <div class="row">#}
-{#                        <div class="col-lg-6">#}
-{#                          <div class="form-group">#}
-{#                            <input id="form_name" type="text" name="name" class="form-control" placeholder="Name *" required="required">#}
-{#                          </div>#}
-{#                        </div>#}
-{#                        <div class="col-lg-6">#}
-{#                          <div class="form-group">#}
-{#                            <input id="form_email" type="email" name="email" class="form-control" placeholder="email *" required="required">#}
-{#                          </div>#}
-{#                        </div>#}
-{#                        <div class="col-md-12">#}
-{#                          <div class="form-group">#}
-{#                            <input id="form_name" type="text" name="website" class="form-control" placeholder="Website">#}
-{#                          </div>#}
-{#                        </div>#}
-{#                        <div class="col-lg-12">#}
-{#                          <div class="form-group">#}
-{#                            <textarea id="form_message" name="message" class="form-control" placeholder="Message *" style="height: 200px;" required="required"></textarea>#}
-{#                          </div>#}
-{#                        </div>#}
-{#                        <div class="col-lg-12">#}
-{#                          <input type="submit" class="btn btn-defeault btn-send" value="Send message">#}
-{#                        </div>#}
-{#                      </div>#}
-{#                    </form>#}
-{#                  </div>#}
-{#                </div>#}
-
+              </div>
+            </li>
+          {% endfor %}
+          </ul>
+        </li>
+      {% empty %}
+          <span id="no_comment">暂无评论</span>
+      {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
 
 
 
@@ -217,7 +134,8 @@
         function reply(reply_comment_id){
             // 设置值
             $('#reply_comment_id').val(reply_comment_id);
-            var html = $("#comment_" + reply_comment_id).html();
+            var html = $("#comment_" + reply_comment_id);
+            // 回复：？
             $('#reply_content').html(html);
             $('#reply_content_container').show();
 

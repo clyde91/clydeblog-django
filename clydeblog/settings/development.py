@@ -16,11 +16,10 @@ ALLOWED_HOSTS = ['*', ]
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'clydeblog_db',#数据库名称
+        'NAME': 'clydeblog_db',   # 数据库名称
         'USER': 'clyde',
         'PASSWORD': 'yitian3314',
         'HOST': 'localhost',
         'PORT': '3306',
-        'charset': 'utf8',
     }
 }

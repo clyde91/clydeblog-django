@@ -1,13 +1,47 @@
 {% extends "base.html" %}
 {% load static %}
+{% load comment_tags %}
+
 
 {% block head %}
     <title>关于——clyde blog</title>
 {% endblock %}
 
 {% block body %}
-关于我
-    <img src="{% static 'img/clyde.jpg' %}" class="img-fluid" alt="Responsive image">
+
+
+
+
+
+<div class="main-content paddsection">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-md-offset-2">
+                <div class="row">
+                    <div class="container-main single-main">
+                        <div class="col-md-12">
+                            <div class="block-main mb-30">
+                                <div class="content-main single-post padDiv">
+
+                            关于我
+                                <img src="{% static 'img/clyde.jpg' %}" class="img-fluid" alt="Responsive image">
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- comment -->
+{#                        {% include 'comment.html' %}#}
+                        <!-- comment -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block index_active %}{% endblock %}

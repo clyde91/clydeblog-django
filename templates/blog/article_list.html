@@ -1,38 +1,60 @@
 {% extends "base.html" %}
+
 {% block head %}
-    <title>博客列表</title>
+    <title>{{ now_list_name }}</title>
 {% endblock %}
 
 {% block body %}
+
+<div class="main-content paddsection main-content_imp">
+<div class="container">
+        <div class="list_head">
+            {% block list_title %}<h3>{{ now_list_name }}</h3>{% endblock %}
+           <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="portfolio.html">{{ now_list_name }}</a></li>
+            <li>{{ now_category.name }}</li>
+          </ol>
+        </div>
+      </div>
+
     <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8">
-                <div class="card-header">博客列表</div>
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-md-offset-2">
+                <div class="row">
+                    <div class="container-main single-main">
+                        <div class="col-md-12">
+                            <div class="block-main mb-30">
+{#                                <img src="assets/img/blog-post-big.jpg" class="img-responsive" alt="reviews2">#}
+                                <div class="content-main single-post padDiv">
+
                 <div class="card-body">
                     <ul>
                     {% for i in page.object_list %}
-                        <li class="blog">
+                        <li class="blog entry-comments-item">
                             <p><a href="{{ i.get_absolute_url }}">{{i.title}}</a></p><!-- 创造了方法反解析自己的地址 -->
                             <p>{{ i.body|striptags|truncatechars_html:50 }}...</p>
                             <p><span>作者：{{i.author}}</span><span class="span-right">阅读({{ i.get_read_num }})</span></p>
 
                         </li>
-                        <p class="diag"></p>
+                        <p class=""></p>
                     {% empty %}
                         <li>暂无文章</li>
                     {% endfor %}
                     </ul>
+
                 </div>
-{% include 'nav_page.html' %}
-            </div>
-            <div class="d-none d-sm-block col-sm-4">
-{#{% include 'righter_list.html' %}#}
+                {% include 'nav_page.html' %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+</div>
 
-
-    <hr/>
 
 
 {% endblock %}

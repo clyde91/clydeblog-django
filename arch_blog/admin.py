@@ -4,7 +4,7 @@ from .models import ArchBlog, Category, Tag
 
 
 @admin.register(ArchBlog)
-class Arch_blogAdmin(admin.ModelAdmin):
+class ArchBlogAdmin(admin.ModelAdmin):
     list_display = ("id", "title", "created_time", "modified_time", "get_read_num", "keywords", "descriptison")
     list_per_page = 20
     ordering = ("id",)
@@ -16,7 +16,6 @@ class Arch_blogAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("id", "name", )
     ordering = ("id",)
-
 
 
 admin.site.register(Tag)

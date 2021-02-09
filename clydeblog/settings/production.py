@@ -16,12 +16,11 @@ DATABASE_PASSWORD = os.environ['DATABASE_PASSWORD']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'clydeblog_db',#数据库名称
+        'NAME': 'clydeblog_db',  # 数据库名称
         'USER': 'clyde',
         'PASSWORD': DATABASE_PASSWORD,
         'HOST': 'localhost',
         'PORT': '3306',
-        'charset': 'utf8',
     }
 }
 

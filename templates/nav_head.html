@@ -1,48 +1,128 @@
-      <nav id="nav-menu-container">
-        <ul class="nav-menu">
-          <li><a href="{% url "about" %}">关于</a></li>
-          <li><a href="{% url "diary_list" %}">日志</a></li>
+{% load static %}
+<nav id="main-nav" class="subpage-nav">
+    <div class="row">
+        <div class="container">
+            <div class="logo"><a href="{% url "home" %}"><img src="{% static 'assets/img/logo-nav.png' %}" alt="logo"></a></div>
+            <div class="responsive"><i data-icon="m" class="ion-navicon-round"></i></div>
+            <ul class="nav-menu list-unstyled">
+                <li><a href="{% url "home" %}">主页</a></li>
+                <li><a href="{% url "about" %}">关于</a></li>
+                <li><a href="{% url "diary_list" %}">日志</a></li>
 
-          <li class="menu-has-children"><a href="{% url "arch_blog_list" %}">建筑</a>
-            <ul>
-              {% for i in nav_arch_categorys%}
-                      <li><a href="{% url "arch_blog_category" i.id %}">{{ i }}</a></li>
-                  {% endfor %}
-                </ul>
-              </li>
+                <li class="dropdown"><a href="{% url "arch_blog_list" %}" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="100" data-close-others="false">建筑</a>
+                    <ul class="dropdown-menu">
+                    {% for i in nav_arch_categorys%}
+                        <li><a href="{% url "arch_blog_category" i.id %}">{{ i }}</a></li>
+                    {% endfor %}
+                    </ul>
+                </li>
 
-          <li class="menu-has-children"><a href="{% url "code_blog_list" %}">编程</a>
-            <ul>
-              {% for i in nav_code_categorys%}
-                      <li><a href="{% url "code_blog_category" i.id %}">{{ i }}</a></li>
-                  {% endfor %}
-                </ul>
-              </li>
-
-          <li class="menu-has-children"><a href="{% url "blog_list" %}">博客</a>
-            <ul>
-              {% for i in nav_categorys%}
-                      <li><a href="{% url "blog_category" i.id %}">{{ i }}</a></li>
-                  {% endfor %}
-              <li class="menu-has-children"><a href="#">子分类</a>
-                <ul>
-                  {% for i in categorys%}
-                      <li><a href="{% url "blog_category" i.id %}">{{ i }}</a></li>
-                  {% endfor %}
-                  </li>
-
-                </ul>
-              </li>
+                <li class="dropdown"><a href="{% url "code_blog_list" %}" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="100" data-close-others="false">编程</a>
+                    <ul class="dropdown-menu">
+                    {% for i in nav_code_categorys%}
+                        <li><a href="{% url "code_blog_category" i.id %}">{{ i }}</a></li>
+                    {% endfor %}
+                    </ul>
+                </li>
 
 
+                <li><a href="#contact">联系我</a></li>
             </ul>
-          </li>
-          <li><a href="#contact">联系我</a></li>
-        </ul>
-      </nav>
+        </div>
+    </div>
+</nav>
 
-      <!-- ======= 社交按钮 ======= -->
-      <nav class="nav social-nav pull-right d-none d-lg-inline">
-        <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-linkedin"></i></a> <a href="#"><i class="fa fa-envelope"></i></a>
-      </nav>
+{#<!-- ======= 社交按钮 ======= -->#}
+{#<nav class="nav social-nav pull-right d-none d-lg-inline">#}
+{#<a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-linkedin"></i></a> <a href="#"><i class="fa fa-envelope"></i></a>#}
+{#</nav>#}
 
+<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+<script type="text/javascript">
+ (function ($, window, undefined) {
+ // outside the scope of the jQuery plugin to
+ // keep track of all dropdowns
+ var $allDropdowns = $();
+
+// if instantlyCloseOthers is true, then it will instantly
+ // shut other nav items when a new one is hovered over
+ $.fn.dropdownHover = function (options) {
+
+// the element we really care about
+ // is the dropdown-toggle's parent
+ $allDropdowns = $allDropdowns.add(this.parent());
+
+return this.each(function () {
+ var $this = $(this).parent(),
+ defaults = {
+ delay: 500,
+ instantlyCloseOthers: true
+ },
+ data = {
+ delay: $(this).data('delay'),
+ instantlyCloseOthers: $(this).data('close-others')
+ },
+ options = $.extend(true, {}, defaults, options, data),
+ timeout;
+
+$this.hover(function () {
+ if (options.instantlyCloseOthers === true) {
+ $allDropdowns.removeClass('show');
+$allDropdowns.find(".dropdown-menu").removeClass('show');
+ }
+
+window.clearTimeout(timeout);
+ $(this).addClass('show');
+$(this).find(".dropdown-menu").addClass('show');
+ }, function () {
+ timeout = window.setTimeout(function () {
+ $this.removeClass('show');
+$this.find(".dropdown-menu").removeClass('show');
+ }, options.delay);
+ });
+ });
+ };
+ $('[data-hover="dropdown"]').dropdownHover();
+ })(jQuery, this);
+
+
+
+{#//在你调用的地方里加上 time是你给的反应时间。比如500这样。#}
+{#$('.dropdown-toggle').dropdownHover(time);#}
+{##}
+
+ //点击链接如下：
+
+$('a.dropdown-toggle').one('click', function () {
+ if ($(this).attr('href')!="")
+ location.href = $(this).attr('href');
+ });
+
+	</script>
+
+
+
+
+
+
+
+
+
+{#<script type="text/javascript">#}
+{#    $(document).ready(function(){#}
+{#     dropdownOpen();//调用#}
+{#    });#}
+{#    /**#}
+{#     * 鼠标划过就展开子菜单，免得需要点击才能展开#}
+{#     */#}
+{#    function dropdownOpen() {#}
+{##}
+{#     var $dropdownLi = $('.dropdown');#}
+{##}
+{#     $dropdownLi.mouseover(function() {#}
+{#     $(this).addClass('show');#}
+{#     }).mouseout(function() {#}
+{#     $(this).removeClass('show');#}
+{#     });#}
+{#    }#}
+{#</script>#}
