@@ -18,7 +18,6 @@ from django.urls import path,include
 from . import views
 from django.conf.urls.static import static
 from django.conf import settings
-
 from django.contrib.sitemaps.views import sitemap
 from .sitemap import sitemap_dict
 
@@ -39,20 +38,13 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),  # 退出登录
     path('register/', views.register, name='register'),
     path('comment/', include('comment.urls')),
-    # path('sitemap.xml', sitemap, {'sitemaps': ArchBlogSitemap},
-    #  name='django.contrib.sitemaps.views.sitemap')
-    #
     path('sitemap.xml', sitemap,
          {'sitemaps': sitemap_dict},
-         name='django.contrib.sitemaps.views.sitemap'),
+         name='django.contrib.sitemaps.views.sitemap'),  # sitemap
 ]
-
 
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
-
 
 
