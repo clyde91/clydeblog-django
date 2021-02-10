@@ -42,7 +42,7 @@ def blog_category(request, id):
     articles_category = ArchBlog.objects.filter(category=id)    #用分类筛选后的文章
     paginate(request,articles_all=articles_category,context=context)    # 分页器
     context["articles"] = articles_category
-    context['now_list_name'] = "博客"
+    context['now_list_name'] = "建筑"
     context["now_category"] = category
     context["now_categorys"] = Category.objects.all()  # 当前所有分类
     return render(request, "article_category.html", context)

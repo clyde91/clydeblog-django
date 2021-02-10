@@ -28,9 +28,9 @@ class Comment(models.Model):
         return self.text
 
 
-class Reply(models.Model):
-    comment = models.ForeignKey(Comment, on_delete=models.DO_NOTHING)  # 设置外键。将回复与评论绑定
-
+# class Reply(models.Model):
+#     comment = models.ForeignKey(Comment, on_delete=models.DO_NOTHING)  # 设置外键。将回复与评论绑定
+#
 
 
 
