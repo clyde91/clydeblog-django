@@ -2,8 +2,8 @@ import os
 from .base import *
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY']
-
+#SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = ")g1ch@o4wi9w$xow5alf1%^zee0pt7%-unw0gu8d0j)satdtkl"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
