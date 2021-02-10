@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'common_func',  # 注册通用功能app
     'comment',    # 注册评论功能app
+    'django.contrib.sitemaps',    # 注册sitemap
+    'django.contrib.sites',    # 注册sitemap
 ]
 
 MIDDLEWARE = [
@@ -64,7 +66,7 @@ ROOT_URLCONF = 'clydeblog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates', ), os.path.join(BASE_DIR, 'templates/blog', ), ]  #模板路径添加
+        'DIRS': [os.path.join(BASE_DIR, 'templates', ), os.path.join(BASE_DIR, 'templates/blog', ), ]  #    模板路径添加
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -199,4 +201,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace('\\', '/')
 
 # 全局变量
-NUM_ARTICLE_PER_PAGE = 8 #每页显示文章数
+NUM_ARTICLE_PER_PAGE = 8  # 每页显示文章数
+
+
+# sitemap
+SITE_ID = 1
