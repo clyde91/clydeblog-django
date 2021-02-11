@@ -20,10 +20,10 @@ class LoginForm(forms.Form):  #表单类
 
 
 class RegForm(forms.Form):
-    username = forms.CharField(label="用户名")
-    email = forms.EmailField(label="邮箱", required=False)
-    password = forms.CharField(label="密码", widget=forms.PasswordInput, required=False)
-    password_c = forms.CharField(label="确认密码", widget=forms.PasswordInput, required=False)
+    username = forms.CharField(label="用户名", widget=forms.TextInput(attrs={"class": "form-control", }))
+    email = forms.EmailField(label="邮箱", widget=forms.TextInput(attrs={"class": "form-control", }), required=False)
+    password = forms.CharField(label="密码", widget=forms.PasswordInput(attrs={"class": "form-control", }), required=False)
+    password_c = forms.CharField(label="确认密码", widget=forms.PasswordInput(attrs={"class": "form-control", }), required=False)
 
     def clean_username(self):
         username = self.cleaned_data["username"]

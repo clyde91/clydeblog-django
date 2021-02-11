@@ -7,6 +7,7 @@ from django.contrib.contenttypes.fields import ContentType
 from comment.models import Comment
 from comment.forms import CommentForm
 
+prefix = "arch_"
 
 def blog_article(request, id):
     article = get_object_or_404(ArchBlog, id=id)  #通过content_type和id获得的obj
@@ -20,7 +21,7 @@ def blog_article(request, id):
     context['comment_form'] = CommentForm(initial={"content_type":content_type.model, "object_id":id, "reply_comment_id":"0"})  # 实例化一个form表单。content_type.model这个.model很关键不然会出错
     context["now_category"] = article.category  # 获得当前文章的category
     context["now_categorys"] = Category.objects.all()  # 当前所有分类
-    context['prefix'] = "arch_"
+    context['prefix'] = prefix
     response = render(request,"article_detail.html", context)    # 响应
     response.set_cookie(key, max_age=1200,)    # 给字典赋值真
     return response
@@ -33,6 +34,7 @@ def blog_list(request):
     context['articles'] = articles_all
     context['now_list_name'] = "建筑"
     context["now_categorys"] = Category.objects.all()  # 当前所有分类
+    context['now_list_url'] = prefix+"blog_list"
     return render(request, "article_list.html", context)
 
 
@@ -45,5 +47,6 @@ def blog_category(request, id):
     context['now_list_name'] = "建筑"
     context["now_category"] = category
     context["now_categorys"] = Category.objects.all()  # 当前所有分类
+    context['now_list_url'] = prefix+"blog_list"
     return render(request, "article_category.html", context)
 

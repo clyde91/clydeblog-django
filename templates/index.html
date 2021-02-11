@@ -39,116 +39,207 @@
 <body>
 
   <!-- ======= Navbar ======= -->
-      {% include 'nav_head.html' %}
+<nav id="main-nav">
+    <div class="row">
+        <div class="container">
+            <div class="logo"><a href="{% url "home" %}"><img src="{% static 'assets/img/logo-nav.png' %}" alt="logo"></a></div>
+            <div class="responsive"><i data-icon="m" class="ion-navicon-round"></i></div>
+            <ul class="nav-menu list-unstyled">
+                <li><a href="{% url "home" %}">主页</a></li>
+                <li><a href="{% url "about" %}">关于</a></li>
+                <li><a href="{% url "diary_list" %}">日志</a></li>
+
+                <li class="dropdown"><a href="{% url "arch_blog_list" %}" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="100" data-close-others="false">建筑</a>
+                    <ul class="dropdown-menu">
+                    {% for i in nav_arch_categorys%}
+                        <li><a href="{% url "arch_blog_category" i.id %}">{{ i }}</a></li>
+                    {% endfor %}
+                    </ul>
+                </li>
+
+                <li class="dropdown"><a href="{% url "code_blog_list" %}" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="100" data-close-others="false">编程</a>
+                    <ul class="dropdown-menu">
+                    {% for i in nav_code_categorys%}
+                        <li><a href="{% url "code_blog_category" i.id %}">{{ i }}</a></li>
+                    {% endfor %}
+                    </ul>
+                </li>
+
+
+                <li><a href="#contact">联系我</a></li>
+            </ul>
+        </div>
+    </div>
+
+<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+<script type="text/javascript">
+ (function ($, window, undefined) {
+ // outside the scope of the jQuery plugin to
+ // keep track of all dropdowns
+ var $allDropdowns = $();
+
+// if instantlyCloseOthers is true, then it will instantly
+ // shut other nav items when a new one is hovered over
+ $.fn.dropdownHover = function (options) {
+
+// the element we really care about
+ // is the dropdown-toggle's parent
+ $allDropdowns = $allDropdowns.add(this.parent());
+
+return this.each(function () {
+ var $this = $(this).parent(),
+ defaults = {
+ delay: 500,
+ instantlyCloseOthers: true
+ },
+ data = {
+ delay: $(this).data('delay'),
+ instantlyCloseOthers: $(this).data('close-others')
+ },
+ options = $.extend(true, {}, defaults, options, data),
+ timeout;
+
+$this.hover(function () {
+ if (options.instantlyCloseOthers === true) {
+ $allDropdowns.removeClass('show');
+$allDropdowns.find(".dropdown-menu").removeClass('show');
+ }
+
+window.clearTimeout(timeout);
+ $(this).addClass('show');
+$(this).find(".dropdown-menu").addClass('show');
+ }, function () {
+ timeout = window.setTimeout(function () {
+ $this.removeClass('show');
+$this.find(".dropdown-menu").removeClass('show');
+ }, options.delay);
+ });
+ });
+ };
+ $('[data-hover="dropdown"]').dropdownHover();
+ })(jQuery, this);
+
+
+
+ //点击链接如下：
+
+$('a.dropdown-toggle').one('click', function () {
+ if ($(this).attr('href')!="")
+ location.href = $(this).attr('href');
+ });
+
+</script>
+
+</nav>
   <!-- End Navbar -->
 
   <!-- ======= Hero Section ======= -->
   <div id="hero" class="home">
 
     <div class="container">
-      <div class="hero-content">
+      <div class="hero-content hero-content_ex">
         <h1>I'm <span class="typed"></span></h1>
-        <p class="typed-items" data-typed-person="Alex Smith">Designer, Developer, Freelancer, Photographer</p>
+        <p class="typed-items" data-typed-person="Clyde the god">Architect, Programmer, Gamer</p>
 
-        <ul class="list-unstyled list-social">
-          <li><a href="#"><i class="ion-social-facebook"></i></a></li>
-          <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-          <li><a href="#"><i class="ion-social-instagram"></i></a></li>
-          <li><a href="#"><i class="ion-social-googleplus"></i></a></li>
-          <li><a href="#"><i class="ion-social-tumblr"></i></a></li>
-          <li><a href="#"><i class="ion-social-dribbble"></i></a></li>
-        </ul>
+{#        <ul class="list-unstyled list-social">#}
+{#          <li><a href="#"><i class="ion-social-facebook"></i></a></li>#}
+{#          <li><a href="#"><i class="ion-social-twitter"></i></a></li>#}
+{#          <li><a href="#"><i class="ion-social-instagram"></i></a></li>#}
+{#          <li><a href="#"><i class="ion-social-googleplus"></i></a></li>#}
+{#          <li><a href="#"><i class="ion-social-tumblr"></i></a></li>#}
+{#          <li><a href="#"><i class="ion-social-dribbble"></i></a></li>#}
+{#        </ul>#}
       </div>
     </div>
   </div><!-- End Hero -->
 
   <main id="main">
 
-    <!-- ======= About Section ======= -->
-    <div id="about" class="paddsection">
-      <div class="container">
-        <div class="row justify-content-between">
-
-          <div class="col-lg-4 ">
-            <div class="div-img-bg">
-              <div class="about-img">
-                <img src="assets/img/me.jpg" class="img-responsive" alt="me">
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-7">
-            <div class="about-descr">
-
-              <p class="p-heading">im a ux /ui designer austin based who loves clean, simple & unique design. i also enjoy crafting brand identities, icons, & ilustration work. </p>
-              <p class="separator">To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me what Occidental is. The European languages are members of the same family.English person.</p>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div><!-- End About Section -->
-
-    <!-- ======= Services Section ======= -->
-    <div id="services">
-      <div class="container">
-
-        <div class="services-carousel owl-theme">
-
-          <div class="services-block">
-
-            <i class="ion-ios-browsers-outline"></i>
-            <span>UI/UX DESIGN</span>
-            <p class="separator">To an English person, it will seem like simplified English,told me what </p>
-
-          </div>
-
-          <div class="services-block">
-
-            <i class="ion-ios-lightbulb-outline"></i>
-            <span>BRAND IDENTITY</span>
-            <p class="separator">To an English person, it will seem like simplified English,told me what </p>
-
-          </div>
-
-          <div class="services-block">
-
-            <i class="ion-ios-color-wand-outline"></i>
-            <span>WEB DESIGN</span>
-            <p class="separator">To an English person, it will seem like simplified English,told me what </p>
-
-          </div>
-
-          <div class="services-block">
-
-            <i class="ion-social-android-outline"></i>
-            <span>MOBILE APPS</span>
-            <p class="separator">To an English person, it will seem like simplified English,told me what </p>
-
-          </div>
-
-          <div class="services-block">
-
-            <i class="ion-ios-analytics-outline"></i>
-            <span>Analytics</span>
-            <p class="separator">To an English person, it will seem like simplified English,told me what </p>
-
-          </div>
-
-          <div class="services-block">
-
-            <i class="ion-ios-camera-outline"></i>
-            <span>PHOTOGRAPHY</span>
-            <p class="separator">To an English person, it will seem like simplified English,told me what </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div><!-- End Services Section -->
+{#    <!-- ======= About Section ======= -->#}
+{#    <div id="about" class="paddsection">#}
+{#      <div class="container">#}
+{#        <div class="row justify-content-between">#}
+{##}
+{#          <div class="col-lg-4 ">#}
+{#            <div class="div-img-bg">#}
+{#              <div class="about-img">#}
+{#                <img src="assets/img/me.jpg" class="img-responsive" alt="me">#}
+{#              </div>#}
+{#            </div>#}
+{#          </div>#}
+{##}
+{#          <div class="col-lg-7">#}
+{#            <div class="about-descr">#}
+{##}
+{#              <p class="p-heading">im a ux /ui designer austin based who loves clean, simple & unique design. i also enjoy crafting brand identities, icons, & ilustration work. </p>#}
+{#              <p class="separator">To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me what Occidental is. The European languages are members of the same family.English person.</p>#}
+{##}
+{#            </div>#}
+{##}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </div><!-- End About Section -->#}
+{##}
+{#    <!-- ======= Services Section ======= -->#}
+{#    <div id="services">#}
+{#      <div class="container">#}
+{##}
+{#        <div class="services-carousel owl-theme">#}
+{##}
+{#          <div class="services-block">#}
+{##}
+{#            <i class="ion-ios-browsers-outline"></i>#}
+{#            <span>UI/UX DESIGN</span>#}
+{#            <p class="separator">To an English person, it will seem like simplified English,told me what </p>#}
+{##}
+{#          </div>#}
+{##}
+{#          <div class="services-block">#}
+{##}
+{#            <i class="ion-ios-lightbulb-outline"></i>#}
+{#            <span>BRAND IDENTITY</span>#}
+{#            <p class="separator">To an English person, it will seem like simplified English,told me what </p>#}
+{##}
+{#          </div>#}
+{##}
+{#          <div class="services-block">#}
+{##}
+{#            <i class="ion-ios-color-wand-outline"></i>#}
+{#            <span>WEB DESIGN</span>#}
+{#            <p class="separator">To an English person, it will seem like simplified English,told me what </p>#}
+{##}
+{#          </div>#}
+{##}
+{#          <div class="services-block">#}
+{##}
+{#            <i class="ion-social-android-outline"></i>#}
+{#            <span>MOBILE APPS</span>#}
+{#            <p class="separator">To an English person, it will seem like simplified English,told me what </p>#}
+{##}
+{#          </div>#}
+{##}
+{#          <div class="services-block">#}
+{##}
+{#            <i class="ion-ios-analytics-outline"></i>#}
+{#            <span>Analytics</span>#}
+{#            <p class="separator">To an English person, it will seem like simplified English,told me what </p>#}
+{##}
+{#          </div>#}
+{##}
+{#          <div class="services-block">#}
+{##}
+{#            <i class="ion-ios-camera-outline"></i>#}
+{#            <span>PHOTOGRAPHY</span>#}
+{#            <p class="separator">To an English person, it will seem like simplified English,told me what </p>#}
+{##}
+{#          </div>#}
+{##}
+{#        </div>#}
+{##}
+{#      </div>#}
+{##}
+{#    </div><!-- End Services Section -->#}
 
     <!-- ======= Portfolio Section ======= -->
     <div id="portfolio" class="paddsection">
@@ -175,17 +266,17 @@
         <div class="row portfolio-container">
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+{#            <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">#}
             <div class="portfolio-info">
               <h4>App 1</h4>
               <p>App</p>
-              <a href="assets/img/portfolio/portfolio-1.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
+{#              <a href="assets/img/portfolio/portfolio-1.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="App 1"><i class="bx bx-plus"></i></a>#}
               <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
+{#            <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">#}
             <div class="portfolio-info">
               <h4>Web 3</h4>
               <p>Web</p>
@@ -195,7 +286,7 @@
           </div>
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
+{#            <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">#}
             <div class="portfolio-info">
               <h4>App 2</h4>
               <p>App</p>
@@ -205,7 +296,7 @@
           </div>
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
+{#            <img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">#}
             <div class="portfolio-info">
               <h4>Card 2</h4>
               <p>Card</p>
@@ -215,7 +306,7 @@
           </div>
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
+{#            <img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">#}
             <div class="portfolio-info">
               <h4>Web 2</h4>
               <p>Web</p>
@@ -225,7 +316,7 @@
           </div>
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
+{#            <img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">#}
             <div class="portfolio-info">
               <h4>App 3</h4>
               <p>App</p>
@@ -256,7 +347,7 @@
             <div class="col-lg-4 col-md-6">
               <div class="journal-info">
 
-                <a href="blog-single.html"><img src="assets/img/blog-post-1.jpg" class="img-responsive" alt="img"></a>
+{#                <a href="blog-single.html"><img src="assets/img/blog-post-1.jpg" class="img-responsive" alt="img"></a>#}
 
                 <div class="journal-txt">
 
@@ -272,7 +363,7 @@
             <div class="col-lg-4 col-md-6">
               <div class="journal-info">
 
-                <a href="blog-single.html"><img src="assets/img/blog-post-2.jpg" class="img-responsive" alt="img"></a>
+{#                <a href="blog-single.html"><img src="assets/img/blog-post-2.jpg" class="img-responsive" alt="img"></a>#}
 
                 <div class="journal-txt">
 
@@ -288,7 +379,7 @@
             <div class="col-lg-4 col-md-6">
               <div class="journal-info">
 
-                <a href="blog-single.html"><img src="assets/img/blog-post-3.jpg" class="img-responsive" alt="img"></a>
+{#                <a href="blog-single.html"><img src="assets/img/blog-post-3.jpg" class="img-responsive" alt="img"></a>#}
 
                 <div class="journal-txt">
 
@@ -381,42 +472,9 @@
   </main><!-- End #main -->
 
 
-    <!-- ======= Footer ======= -->
+  <!-- ======= Footer ======= -->
   {% include 'footer.html' %}
   <!-- End Footer -->
-
-
-
-  <!-- ======= Footer ======= -->
-  <div id="footer" class="text-center">
-    <div class="container">
-      <div class="socials-media text-center">
-
-        <ul class="list-unstyled">
-          <li><a href="#"><i class="ion-social-facebook"></i></a></li>
-          <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-          <li><a href="#"><i class="ion-social-instagram"></i></a></li>
-          <li><a href="#"><i class="ion-social-googleplus"></i></a></li>
-          <li><a href="#"><i class="ion-social-tumblr"></i></a></li>
-          <li><a href="#"><i class="ion-social-dribbble"></i></a></li>
-        </ul>
-
-      </div>
-
-      <p>&copy; Copyrights Folio. All rights reserved.</p>
-
-      <div class="credits">
-        <!--
-        All the links in the footer should remain intact.
-        You can delete the links only if you purchased the pro version.
-        Licensing information: https://bootstrapmade.com/license/
-        Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Folio
-      -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-
-    </div>
-  </div><!-- End Footer -->
 
   <!-- Vendor JS Files -->
   <script src="{% static 'assets/vendor/jquery/jquery.min.js    ' %}"></script>

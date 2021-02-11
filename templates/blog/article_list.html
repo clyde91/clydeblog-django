@@ -11,8 +11,8 @@
         <div class="list_head">
             {% block list_title %}<h3>{{ now_list_name }}</h3>{% endblock %}
            <ol>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="portfolio.html">{{ now_list_name }}</a></li>
+            <li><a href="{% url "home" %}">Home</a></li>
+            <li><a href="{% url now_list_url %}">{{ now_list_name }}</a></li>
             <li>{{ now_category.name }}</li>
           </ol>
         </div>

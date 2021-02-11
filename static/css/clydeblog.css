@@ -48,11 +48,17 @@
   content: "/";
 }
 
+
+
+.hero-content {
+    padding-left: 150px;
+}
+
 /*.blog {*/
 /*    list-style: none;*/
 /*}*/
 
-
-
-
-
+/*添加缩进*/
+.margin-h {
+    padding:0 100px!important;
+}
