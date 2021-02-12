@@ -34,8 +34,8 @@ class ArchBlog(models.Model, ReadnumMethod):
     category = models.ForeignKey(Category,on_delete=models.CASCADE, verbose_name="分类")
     tag = models.ManyToManyField(Tag, blank=True, verbose_name="标签")
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="作者")
-    keywords = models.CharField(max_length=70, blank=True, verbose_name="关键词")
-    descriptison = models.CharField(max_length=70, blank=True, verbose_name="描述")
+    keywords = models.CharField(max_length=100, blank=True, verbose_name="关键词")
+    descriptison = models.CharField(max_length=200, blank=True, verbose_name="描述")
 
     def __str__(self):
         return '<%s>' % self.title  # 设置后台显示默认模型信息
