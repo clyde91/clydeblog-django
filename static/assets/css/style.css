@@ -9,7 +9,7 @@
 # General
 --------------------------------------------------------------*/
 body {
-  background: #ffffff;
+  background: url("../img/bg.jpg");
   color: #898989;
   font-family: 'Poppins', helvetica;
   font-size: 15px;
@@ -166,7 +166,7 @@ p {
 --------------------------------------------------------------*/
 nav {
   position: fixed;
-  background: #fff;
+  background: #393a45;
   z-index: 1000;
   width: 100%;
   padding: 20px;
@@ -225,7 +225,7 @@ nav ul li a {
 # Hero
 --------------------------------------------------------------*/
 #hero {
-  background: url("../img/home-bg.jpg") repeat scroll center center/cover;
+  background: url("../img/home-bg.jpg") no-repeat 0px 0px scroll ;
   height: 100vh;
   width: 100%;
 }

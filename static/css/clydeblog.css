@@ -62,3 +62,11 @@
 .margin-h {
     padding:0 80px!important;
 }
+
+#body_bg {
+    background: url("../img/hyejin.jpg") center!important;
+}
+
+.border-r {
+    border-radius: 15px;
+}
