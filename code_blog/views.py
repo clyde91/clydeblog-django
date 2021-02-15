@@ -8,6 +8,8 @@ from comment.models import Comment
 from comment.forms import CommentForm
 
 prefix = "code_"
+now_app_name = "编程"
+
 
 def blog_article(request, id):
     article = get_object_or_404(CodeBlog, id=id)  #通过content_type和id获得的obj
@@ -19,21 +21,19 @@ def blog_article(request, id):
     comments = Comment.objects.filter(content_type=content_type, object_id=id, parent=None)  #只筛选根评论
     context['comments'] = comments
     context['comment_form'] = CommentForm(initial={"content_type":content_type.model, "object_id":id, "reply_comment_id":"0"})  # 实例化一个form表单。content_type.model这个.model很关键不然会出错
-    context["now_category"] = article.category  # 获得当前文章的category
     context["now_categorys"] = Category.objects.all()  # 当前所有分类
-    context['prefix'] = prefix
+    context['now_app_name'] = now_app_name
     response = render(request,"article_detail.html", context)    # 响应
     response.set_cookie(key, max_age=1200,)    # 给字典赋值真
     return response
-
 
 def blog_list(request):
     context = {}
     articles_all = CodeBlog.objects.all()
     paginate(request,articles_all=articles_all,context=context)    # 分页器
     context['articles'] = articles_all
-    context['now_list_name'] = "编程"
     context["now_categorys"] = Category.objects.all()  # 当前所有分类
+    context['now_app_name'] = now_app_name
     context['now_list_url'] = prefix+"blog_list"
     return render(request, "article_list.html", context)
 
@@ -43,10 +43,10 @@ def blog_category(request, id):
     category = get_object_or_404(Category,id=id)    #通过id=id获取分类的实例（当前category）
     articles_category = CodeBlog.objects.filter(category=id)    #用分类筛选后的文章
     paginate(request,articles_all=articles_category,context=context)    # 分页器
-    context["articles"] = articles_category
-    context['now_list_name'] = "编程"
-    context["now_category"] = category
+    context["articles"] = articles_category  # 当前分类的所有文章
+    context["now_category"] = category  # 当前分类
     context["now_categorys"] = Category.objects.all()  # 当前所有分类
+    context['now_app_name'] = now_app_name
     context['now_list_url'] = prefix+"blog_list"
     return render(request, "article_category.html", context)
 

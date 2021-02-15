@@ -2,7 +2,7 @@
 {% load comment_tags %}
 {% load static %}
 {% block head %}
-    <title>{{article.title}}|{{ article.category.name }}|Clyde Blog</title>
+    <title>{{article.title}}|{{ article.category.name }}|{{ now_app_name }}|Clyde Blog</title>
     <meta content="郑伊田,{{article.keywords}}" name="keywords">
     <meta content="{{article.descriptison}}" name="descriptison">
 {% endblock %}
@@ -15,11 +15,11 @@
                 <div class="row">
                     <div class="container-main single-main">
                         <div class="col-md-12">
-                            <div class="block-main mb-30">
+                            <div class="block-main mb-30 pd-t50">
 {#                                <img src="assets/img/blog-post-big.jpg" class="img-responsive" alt="reviews2">#}
                                 <div class="content-main single-post padDiv border-r">
                                     <div class="journal-txt">
-                                        <h4><a href="#">{{article.title}}</a></h4>
+                                        <h3><a href="#">{{article.title}}</a></h3>
                                     </div>
                                     <div class="post-meta">
                                         <ul class="list-unstyled mb-0">
@@ -29,6 +29,7 @@
                                             <li class="commont"><i class="ion-ios-heart-outline"></i>阅读数：<a href="#">{{ article.get_read_num }}</a></li>
                                             <li class="commont"><i class="ion-ios-heart-outline"></i>评论数：<a href="#">{% get_comment_num article %}</a></li>
                                         </ul>
+                                        <hr class="diag">
                                     </div>
                                     <p class="mb-30">
                                         {{article.body|safe}}

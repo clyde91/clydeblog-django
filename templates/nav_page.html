@@ -1,5 +1,5 @@
 {#                <nav aria-label="Page navigation" class="paginator">#}
-                  <ul class="pagination">
+                  <ul class="pagination pd-l50">
                     {% if page.has_previous %}{# 判断是否有前页 #}
                         <li class="page-item"><a class="page-link" href="?page={{ page.previous_page_number }}">Previous</a></li>{# 当前页.previous_page_number来找上一页码 #}
                     {% else %}
@@ -27,5 +27,5 @@
                         <li class="page-item disabled"><span class="page-link">Next</span></li>
                     {% endif %}
                   </ul>
-                  <p>一共有{{ page.paginator.count }}篇文章，当前第{{ page.number }}页，共{{ page.paginator.num_pages }}页</p>
+                  <p class="pd-l50">一共有{{ page.paginator.count }}篇文章，当前第{{ page.number }}页，共{{ page.paginator.num_pages }}页</p>
 {#                </nav>#}

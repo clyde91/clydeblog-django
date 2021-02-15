@@ -15,6 +15,11 @@
 
 <div class="main-content paddsection">
     <div class="container">
+        <div class="text-center list_dairy">
+            {% block list_title %}<h3>关于</h3>{% endblock %}
+        </div>
+    </div>
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10 col-md-offset-2">
                 <div class="row">
@@ -23,7 +28,7 @@
                             <div class="block-main mb-30">
                                 <div class="content-main single-post padDiv border-r">
 
-                                <img src="{% static 'img/clyde.jpg' %}" class="img-fluid" alt="Responsive image">
+                                <img src="{% static 'img/clyde.jpg' %}" class="img-fluid center-clyde" alt="Responsive image">
 <div style="padding: 0px 20px 0px 20px">
 &nbsp;<strong style="font-size: 24px;">关于为什么会有这个blog：</strong><br style="font-size: 24px;" />
 <span style="font-size:18px;"><span style="color: rgb(51, 51, 51); font-family: 微软雅黑;">起初是为了科学上网，搞了个ss。然后

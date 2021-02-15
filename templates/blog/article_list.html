@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
 {% block head %}
-    <title>{{ now_list_name }}|Clyde Blog</title>
+    <title>{{ now_app_name }}|Clyde Blog</title>
 {% endblock %}
 
 {% block body %}
 
-<div class="main-content paddsection main-content_imp">
+<div class="main-content paddsection">
     <div class="container">
         <div class="list_head">
-            {% block list_title %}<h3>{{ now_list_name }}</h3>{% endblock %}
+            {% block list_title %}<h3>{{ now_app_name }}</h3>{% endblock %}
            <ol>
             <li><a href="{% url "home" %}">Home</a></li>
-            <li><a href="{% url now_list_url %}">{{ now_list_name }}</a></li>
+            <li><a href="{% url now_list_url %}">{{ now_app_name }}</a></li>
             <li>{{ now_category.name }}</li>
           </ol>
         </div>
@@ -34,9 +34,9 @@
                             <p><a href="{{ i.get_absolute_url }}">{{i.title}}</a></p><!-- 创造了方法反解析自己的地址 -->
                             <p>{{ i.body|striptags|truncatechars_html:50 }}...</p>
                             <p><span>作者：{{i.author}}</span><span class="span-right">阅读({{ i.get_read_num }})</span></p>
-
+{#                        <hr>#}
                         </li>
-                        <p class=""></p>
+
                     {% empty %}
                         <li>暂无文章</li>
                     {% endfor %}

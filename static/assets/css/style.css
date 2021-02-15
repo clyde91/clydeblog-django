@@ -151,7 +151,7 @@ p {
 }
 
 .main-content {
-  padding-top: 140px;
+  padding-top: 90px;
 }
 
 /*--------------------------------------------------------------
@@ -632,7 +632,7 @@ nav ul li a {
   position: relative;
 }
 
-.journal-block .journal-info .journal-txt h4 a {
+.journal-block .journal-info .journal-txt h3 a {
   display: block;
   font-size: 19px;
   line-height: 24px;
@@ -642,7 +642,7 @@ nav ul li a {
   transition: all 0.5s ease-in-out 0s;
 }
 
-.journal-block .journal-info .journal-txt h4 a:hover {
+.journal-block .journal-info .journal-txt h3 a:hover {
   color: #b8a07e;
   transition: all 0.5s ease-in-out 0s;
 }
@@ -780,17 +780,17 @@ nav ul li a {
   width: 100%;
 }
 
-.journal-txt h4 a {
+.journal-txt h3 a {
   display: block;
-  font-size: 19px;
-  line-height: 24px;
-  margin: 0 0 13px 0;
-  font-weight: 500;
+  font-size: 25px;
+  line-height: 25px;
+  margin: 0 0 20px 0;
+  font-weight: 600;
   color: #292929;
   transition: all 0.5s ease-in-out 0s;
 }
 
-.journal-txt h4 a:hover {
+.journal-txt h3 a:hover {
   color: #b8a07e;
   transition: all 0.5s ease-in-out 0s;
 }
@@ -825,7 +825,7 @@ nav ul li a {
 .entry-comments-item {
   margin-top: 40px;
   padding-bottom: 40px;
-  border-bottom: 1px solid #f2f2f2;
+  border-bottom: 2px dotted #B4B4B4;
 }
 
 .entry-comments-avatar {
