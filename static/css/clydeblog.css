@@ -52,7 +52,7 @@
 
 
 
-
+/*根据网页宽度触发css样式*/
 @media (min-width: 992px){
     .list_head{
         margin: 0 80px;
@@ -91,7 +91,7 @@
 }
 
 
-
+/*根据网页宽度触发css样式*/
 @media (min-width: 992px){
     .hero-content {
         padding-left: 200px;
@@ -114,9 +114,13 @@
     background: url("../img/hyejin.jpg") center!important;
 }
 
+
+/*边框倒角*/
 .border-r {
     border-radius: 15px;
 }
+
+/*根据网页宽度触发css样式*/
 .page-item.active {
     background-color: #5b2ac9!important;
 }
