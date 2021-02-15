@@ -2,7 +2,7 @@
 {% load comment_tags %}
 {% load static %}
 {% block head %}
-    <title>{{article.title}}-{{ article.category.name }}</title>
+    <title>{{article.title}}|{{ article.category.name }}|Clyde Blog</title>
     <meta content="郑伊田,{{article.keywords}}" name="keywords">
     <meta content="{{article.descriptison}}" name="descriptison">
 {% endblock %}
@@ -11,7 +11,7 @@
 <div class="main-content paddsection">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-10 col-md-offset-2 col-sm-12 ">
+            <div class="col-lg-10 col-xs-12">
                 <div class="row">
                     <div class="container-main single-main">
                         <div class="col-md-12">

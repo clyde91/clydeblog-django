@@ -19,8 +19,17 @@
     padding-top: 100px!important;
 }
 
+
+@media (min-width: 960px){
+    .list_head{
+        margin: 0 80px;
+    }
+}
+
+
+
+
 .list_head {
-    margin: 0 80px;
     padding: 10px 0 30px 0;
     min-height: 40px;
     align-items: center!important;
@@ -69,4 +78,7 @@
 
 .border-r {
     border-radius: 15px;
+}
+.page-item.active {
+    background-color: #5b2ac9!important;
 }
