@@ -20,7 +20,7 @@
 }
 
 
-@media (min-width: 960px){
+@media (min-width: 992px){
     .list_head{
         margin: 0 80px;
     }
@@ -59,9 +59,14 @@
 
 
 
-.hero-content {
-    padding-left: 150px;
+@media (min-width: 992px){
+    .hero-content {
+        padding-left: 200px;
+    }
 }
+
+
+
 
 /*.blog {*/
 /*    list-style: none;*/
