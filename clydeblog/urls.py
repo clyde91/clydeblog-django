@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path, include
 from . import views
 from django.conf.urls.static import static
 from django.conf import settings
@@ -24,11 +24,12 @@ from .sitemap import sitemap_dict
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('blog/', include('blog.urls')),
+    # path('blog/', include('blog.urls')),
     path('arch_blog/', include('arch_blog.urls')),
     path('code_blog/', include('code_blog.urls')),
     path('diary/', include('diary.urls')),
-    path('architecture/', include('architecture.urls')),
+    path('gossip/', include('gossip.urls')),
+    # path('architecture/', include('architecture.urls')),
     path('', views.index, name='home'),
     path('index.html', views.index, name='home'),
     path('about/', views.about, name='about'),

@@ -38,11 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog',  # 注册博客
+    # 'blog',  # 注册博客
     'arch_blog',  # 注册建筑博客
     'code_blog',  # 注册编程博客
     'diary',  # 注册日记
-    'architecture',
+    'gossip',  # 注册说说
+    # 'architecture',
     'ckeditor',
     'ckeditor_uploader',
     'common_func',  # 注册通用功能app
@@ -66,7 +67,7 @@ ROOT_URLCONF = 'clydeblog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates', ), os.path.join(BASE_DIR, 'templates/blog', ), ]  #    模板路径添加
+        'DIRS': [os.path.join(BASE_DIR, 'templates', ), os.path.join(BASE_DIR, 'templates/blog', ), ]   # 模板路径添加
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -162,14 +163,14 @@ CKEDITOR_CONFIGS = {
     'comment_ckeditor': {
         'toolbar': 'custom',
         'toolbar_custom': [
-            ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
+            ['Font', 'FontSize', 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
             ["TextColor", "BGColor", 'RemoveFormat'],
             ['NumberedList', 'BulletedList'],
             ['Link', 'Unlink'],
             ["Smiley", "SpecialChar", 'Blockquote'],
         ],
         'width': 'auto',
-        'height': '180',
+        'height': '200',
         'tabSpaces': 4,
         'removePlugins': 'elementspath',
         'resize_enabled': False,
@@ -180,15 +181,16 @@ CKEDITOR_CONFIGS = {
         'language': 'zh-cn',
         # 编辑器的宽高请根据你的页面自行设置
         'width': 'auto',
-        'height': '150px',
+        # 'height': '150px',
         'image_previewText': ' ',
         'tabSpaces': 4,
         'toolbar': 'Custom',
         # 添加按钮在这里
         'toolbar_Custom': [
-            ['Bold', 'Italic', 'Underline', 'Format', 'RemoveFormat'],
+            ['Font', 'FontSize', 'Bold', 'Italic', 'Underline', 'TextColor', 'BGColor'],
+            ['Format', 'RemoveFormat'],
             ['NumberedList', 'BulletedList'],
-            ['Blockquote', 'CodeSnippet'],
+            ["Smiley", 'Blockquote', 'CodeSnippet'],
             ['Image', 'Link', 'Unlink'],
             ['Maximize']
         ],
