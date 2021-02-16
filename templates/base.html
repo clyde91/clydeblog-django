@@ -3,9 +3,11 @@
 <html lang="zh">
 
 <head>
-  <meta charset="utf-8">
-{#  <meta content="width=device-width, initial-scale=1.0" name="viewport">#}
+<!-- seo -->
+{% include 'seo.html' %}
   {% block head %}{% endblock %}
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <!-- Favicons -->
   <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
