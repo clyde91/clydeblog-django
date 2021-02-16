@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block head %}
     <title>说说|Clyde Blog</title>
 {% endblock %}
@@ -7,9 +7,54 @@
 {% block body %}
 
 <div class="main-content paddsection">
+
+
+
     <div class="container">
         <div class="text-center list_dairy">
             {% block list_title %}<h3>说说</h3>{% endblock %}
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-xs-12">
+                <div class="row">
+                    <div class="container-main single-main">
+                        <div class="col-lg-12">
+                            <div class="block-main mb-30">
+{#                                <img src="assets/img/blog-post-big.jpg" class="img-responsive" alt="reviews2">#}
+                                <div class="content-main single-post padDiv border-r">
+
+                    <div>
+                        {% if user.is_authenticated%}
+                            <form action="{% url 'submit_gossip' %}" method="POST">
+                                {% csrf_token %}
+                                <label for="exampleFormControlTextarea1">{{ user.username }},已登录。</label>
+                                <a href="{% url 'logout' %}">退出登录</a>
+                                <br>
+                                {{ gossip_form }}
+                                <input type="submit" value="发表" class="btn btn-primary">
+                            </form>
+                        {% else %}
+                            <form action="{% url 'submit_gossip' %}" method="POST">
+                                {% csrf_token %}
+                                <label for="exampleFormControlTextarea1">{{ user.username }}未登录。</label>
+                                <a class="btn btn-primary" href="{% url 'login' %}?from={{ request.get_full_path }}">登录</a>
+                                <span> </span>
+                                <a class="btn btn-danger" href="{% url 'register' %}?from={{ request.get_full_path }}">注册</a>
+                                {{ gossip_form }}
+                                <input type="submit" value="发表" class="btn btn-primary">
+                            </form>
+                        {% endif %}
+                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="container">
@@ -27,8 +72,8 @@
                     {% for i in page.object_list %}
                         <li class="blog entry-comments-item">
                             <p><a href="{{ i.get_absolute_url }}">{{i.title}}</a></p><!-- 创造了方法反解析自己的地址 -->
-                            <p>{{ i.body|striptags|truncatechars_html:50 }}...</p>
-                            <p><span>作者：{{i.author}}</span><span class="span-right">阅读({{ i.get_read_num }})</span></p>
+                            <p>{{ i.text|striptags|truncatechars_html:50|safe }}...</p>
+                            <p><span>作者：{{i.author}}</span><span class="span-right">日期：({{ i.created_time }})</span></p>
 {#                        <hr>#}
                         </li>
 
@@ -49,6 +94,7 @@
     </div>
 </div>
 
-
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
 
 {% endblock %}

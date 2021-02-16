@@ -5,13 +5,13 @@ from ckeditor_uploader.fields import RichTextUploadingField
 
 class Gossip(models.Model):
     # title = models.CharField(max_length=70, verbose_name="标题")
-    body = RichTextUploadingField(verbose_name="正文")
+    text = RichTextUploadingField(verbose_name="文本")
     created_time = models.DateTimeField(auto_now_add=True, verbose_name="创建日期")
     # tag = models.ManyToManyField(Tag, blank=True, verbose_name="标签")
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="作者")
 
     def __str__(self):
-        return '<%s>' % self.body  # 设置后台显示默认模型信息
+        return '<%s>' % self.text  # 设置后台显示默认模型信息
 
     class Meta:
         verbose_name_plural = "说说"
