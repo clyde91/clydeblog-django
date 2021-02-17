@@ -12,7 +12,7 @@ def index(request):
     apps = ["blog","architecture"]
     context = {}
     context['apps'] = apps
-    context['gossip'] = Gossip.objects.last()
+    context['gossip'] = Gossip.objects.filter(author_id=1).order_by("-created_time")[:2]
     context['archblogs'] = ArchBlog.objects.order_by("-created_time")[:6]
     return render(request, "index.html", context)
 
