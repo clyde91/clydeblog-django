@@ -135,8 +135,8 @@ $('a.dropdown-toggle').one('click', function () {
 
     <div class="container">
       <div class="hero-content hero-content_ex">
-        <h1>I'm <span class="typed"></span></h1>
-        <p class="typed-items" data-typed-person="Clyde the god">Fat pig,Architect, Programmer, Gamer</p>
+        <h1><span class="typed"></span></h1>
+        <p class="typed-items" data-typed-person="欢迎来到Clyde Blog"><span style="display: none">我是郑伊田,我是你爹, 儿子乖, 叫爸爸</span></p>
 
 {#        <ul class="list-unstyled list-social">#}
 {#          <li><a href="#"><i class="ion-social-facebook"></i></a></li>#}
@@ -148,102 +148,194 @@ $('a.dropdown-toggle').one('click', function () {
 {#        </ul>#}
       </div>
     </div>
-  </div><!-- End Hero -->
+  </div>
+  <!-- End Hero -->
 
   <main id="main">
 
-{#    <!-- ======= About Section ======= -->#}
-{#    <div id="about" class="paddsection">#}
-{#      <div class="container">#}
-{#        <div class="row justify-content-between">#}
-{##}
-{#          <div class="col-lg-4 ">#}
-{#            <div class="div-img-bg">#}
-{#              <div class="about-img">#}
-{#                <img src="assets/img/me.jpg" class="img-responsive" alt="me">#}
-{#              </div>#}
-{#            </div>#}
-{#          </div>#}
-{##}
-{#          <div class="col-lg-7">#}
-{#            <div class="about-descr">#}
-{##}
-{#              <p class="p-heading">im a ux /ui designer austin based who loves clean, simple & unique design. i also enjoy crafting brand identities, icons, & ilustration work. </p>#}
-{#              <p class="separator">To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me what Occidental is. The European languages are members of the same family.English person.</p>#}
-{##}
-{#            </div>#}
-{##}
+
+<!-- ======= Gossip Section ======= -->
+    <div id="portfolio" class="paddsection">
+
+      <div class="container">
+        <div class="section-title text-center">
+          <h2>闲言碎语</h2>
+        </div>
+      </div>
+      <div class="container">
+
+{#        <div class="row">#}
+{#          <div class="col-lg-12 d-flex justify-content-center">#}
+{#            <ul id="portfolio-flters">#}
+{#              <li data-filter="*" class="filter-active">All</li>#}
+{#              <li data-filter=".filter-app">App</li>#}
+{#              <li data-filter=".filter-card">Card</li>#}
+{#              <li data-filter=".filter-web">Web</li>#}
+{#            </ul>#}
 {#          </div>#}
 {#        </div>#}
-{#      </div>#}
-{#    </div><!-- End About Section -->#}
-{##}
-{#    <!-- ======= Services Section ======= -->#}
-{#    <div id="services">#}
-{#      <div class="container">#}
-{##}
-{#        <div class="services-carousel owl-theme">#}
-{##}
-{#          <div class="services-block">#}
-{##}
-{#            <i class="ion-ios-browsers-outline"></i>#}
-{#            <span>UI/UX DESIGN</span>#}
-{#            <p class="separator">To an English person, it will seem like simplified English,told me what </p>#}
-{##}
-{#          </div>#}
-{##}
-{#          <div class="services-block">#}
-{##}
-{#            <i class="ion-ios-lightbulb-outline"></i>#}
-{#            <span>BRAND IDENTITY</span>#}
-{#            <p class="separator">To an English person, it will seem like simplified English,told me what </p>#}
-{##}
-{#          </div>#}
-{##}
-{#          <div class="services-block">#}
-{##}
-{#            <i class="ion-ios-color-wand-outline"></i>#}
-{#            <span>WEB DESIGN</span>#}
-{#            <p class="separator">To an English person, it will seem like simplified English,told me what </p>#}
-{##}
-{#          </div>#}
-{##}
-{#          <div class="services-block">#}
-{##}
-{#            <i class="ion-social-android-outline"></i>#}
-{#            <span>MOBILE APPS</span>#}
-{#            <p class="separator">To an English person, it will seem like simplified English,told me what </p>#}
-{##}
-{#          </div>#}
-{##}
-{#          <div class="services-block">#}
-{##}
-{#            <i class="ion-ios-analytics-outline"></i>#}
-{#            <span>Analytics</span>#}
-{#            <p class="separator">To an English person, it will seem like simplified English,told me what </p>#}
-{##}
-{#          </div>#}
-{##}
-{#          <div class="services-block">#}
-{##}
-{#            <i class="ion-ios-camera-outline"></i>#}
-{#            <span>PHOTOGRAPHY</span>#}
-{#            <p class="separator">To an English person, it will seem like simplified English,told me what </p>#}
-{##}
-{#          </div>#}
-{##}
-{#        </div>#}
-{##}
-{#      </div>#}
-{##}
-{#    </div><!-- End Services Section -->#}
+
+        <div class="row portfolio-container">
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+{#            <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">#}
+            <div class="portfolio-info">
+              <h4>App 1</h4>
+              <p>App</p>
+{#              <a href="assets/img/portfolio/portfolio-1.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="App 1"><i class="bx bx-plus"></i></a>#}
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+{#            <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">#}
+            <div class="portfolio-info">
+              <h4>Web 3</h4>
+              <p>Web</p>
+              <a href="assets/img/portfolio/portfolio-2.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+{#            <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">#}
+            <div class="portfolio-info">
+              <h4>App 2</h4>
+              <p>App</p>
+              <a href="assets/img/portfolio/portfolio-3.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="App 2"><i class="bx bx-plus"></i></a>
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+{#            <img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">#}
+            <div class="portfolio-info">
+              <h4>Card 2</h4>
+              <p>Card</p>
+              <a href="assets/img/portfolio/portfolio-4.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="Card 2"><i class="bx bx-plus"></i></a>
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+{#            <img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">#}
+            <div class="portfolio-info">
+              <h4>Web 2</h4>
+              <p>Web</p>
+              <a href="assets/img/portfolio/portfolio-5.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="Web 2"><i class="bx bx-plus"></i></a>
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+{#            <img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">#}
+            <div class="portfolio-info">
+              <h4>App 3</h4>
+              <p>App</p>
+              <a href="assets/img/portfolio/portfolio-6.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="App 3"><i class="bx bx-plus"></i></a>
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ======= About Section ======= -->
+    <div id="about" class="paddsection">
+      <div class="container">
+        <div class="row justify-content-between">
+
+          <div class="col-lg-4 ">
+            <div class="div-img-bg">
+              <div class="about-img">
+                <img src="{% static 'img/clyde.jpg' %}" class="img-responsive" alt="me">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-7">
+            <div class="about-descr">
+
+              <p class="p-heading">我是建筑设计师</p>
+              <p class="separator">To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me what Occidental is. The European languages are members of the same family.English person.</p>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div><!-- End About Section -->
+
+    <!-- ======= Services Section ======= -->
+    <div id="services">
+      <div class="container">
+
+        <div class="services-carousel owl-theme">
+
+          <div class="services-block">
+
+            <i class="ion-ios-browsers-outline"></i>
+            <span>design</span>
+            <p class="separator">设计能力</p>
+
+          </div>
+
+          <div class="services-block">
+
+            <i class="ion-ios-lightbulb-outline"></i>
+            <span>PS/AI/ID</span>
+            <p class="separator">掌握Photoshop+Illustrator+InDesign的文本制作</p>
+
+          </div>
+
+          <div class="services-block">
+
+            <i class="ion-ios-color-wand-outline"></i>
+            <span>revit/rhino</span>
+            <p class="separator">掌握revit与rhino的建模方法。</p>
+
+          </div>
+
+          <div class="services-block">
+
+            <i class="ion-social-android-outline"></i>
+            <span>grasshopper/GhPython</span>
+            <p class="separator">掌握参数化的原理。运用编程调用grasshopper接口的方法生成复杂曲面。</p>
+
+          </div>
+
+          <div class="services-block">
+
+            <i class="ion-ios-analytics-outline"></i>
+            <span>Python/Django/CSS/JS</span>
+            <p class="separator">掌握python语言。会用Django建立简单应用。会用css与JavaScript美化网页。</p>
+
+          </div>
+
+          <div class="services-block">
+
+            <i class="ion-ios-camera-outline"></i>
+            <span>PHOTOGRAPHY</span>
+            <p class="separator">To an English person, it will seem like simplified English,told me what </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div><!-- End Services Section -->
 
     <!-- ======= Portfolio Section ======= -->
     <div id="portfolio" class="paddsection">
 
       <div class="container">
         <div class="section-title text-center">
-          <h2>My Portfolio</h2>
+          <h2>我的作品</h2>
         </div>
       </div>
 
@@ -326,74 +418,47 @@ $('a.dropdown-toggle').one('click', function () {
 
       </div>
 
-    </div><!-- End Portfolio Section -->
+    </div>
+    <!-- End Portfolio Section -->
 
     <!-- ======= Journal Section ======= -->
     <div id="journal" class="text-left paddsection">
 
       <div class="container">
         <div class="section-title text-center">
-          <h2>journal</h2>
+          <h2>我的文章</h2>
         </div>
       </div>
 
       <div class="container">
         <div class="journal-block">
           <div class="row">
-
-            <div class="col-lg-4 col-md-6">
-              <div class="journal-info">
+                    {% for i in archblogs %}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="journal-info">
 
 {#                <a href="#"><img src="assets/img/blog-post-1.jpg" class="img-responsive" alt="img"></a>#}
 
                 <div class="journal-txt">
-
-                  <h4><a href="#">SO LETS MAKE THE MOST IS BEAUTIFUL</a></h4>
-                  <p class="separator">To an English person, it will seem like simplified English
+                  <h3><a href="{{ i.get_absolute_url }}">{{i.title|striptags|truncatechars_html:50}}</a></h3>
+                  <p class="separator">{{ i.body|striptags|truncatechars_html:70 }}...
                   </p>
 
                 </div>
 
               </div>
-            </div>
+                    </div>
+                    {% empty %}
+                        <li>暂无文章</li>
+                    {% endfor %}
 
-            <div class="col-lg-4 col-md-6">
-              <div class="journal-info">
-
-{#                <a href="#"><img src="assets/img/blog-post-2.jpg" class="img-responsive" alt="img"></a>#}
-
-                <div class="journal-txt">
-
-                  <h4><a href="#">WE'RE GONA MAKE DREAMS COMES</a></h4>
-                  <p class="separator">To an English person, it will seem like simplified English
-                  </p>
-
-                </div>
-
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-              <div class="journal-info">
-
-{#                <a href="#"><img src="assets/img/blog-post-3.jpg" class="img-responsive" alt="img"></a>#}
-
-                <div class="journal-txt">
-
-                  <h4><a href="#">NEW LIFE CIVILIZATIONS TO BOLDLY</a></h4>
-                  <p class="separator">To an English person, it will seem like simplified English
-                  </p>
-
-                </div>
-
-              </div>
-            </div>
 
           </div>
         </div>
       </div>
 
-    </div><!-- End Journal Section -->
+    </div>
+    <!-- End Journal Section -->
 
     <!-- ======= Contact Section ======= -->
     <div id="contact" class="paddsection">
@@ -464,7 +529,8 @@ $('a.dropdown-toggle').one('click', function () {
           </div>
         </div>
       </div>
-    </div><!-- End Contact Section -->
+    </div>
+    <!-- End Contact Section -->
 
   </main><!-- End #main -->
 

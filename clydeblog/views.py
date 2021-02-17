@@ -4,12 +4,16 @@ from django.contrib import auth
 from django.urls import reverse    # 反向解析
 from .forms import LoginForm, RegForm
 from django.contrib.auth.models import User
+from gossip.models import Gossip
+from arch_blog.models import ArchBlog
 
 
 def index(request):
     apps = ["blog","architecture"]
     context = {}
     context['apps'] = apps
+    context['gossip'] = Gossip.objects.last()
+    context['archblogs'] = ArchBlog.objects.order_by("-created_time")[:6]
     return render(request, "index.html", context)
 
 

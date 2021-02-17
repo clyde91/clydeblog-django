@@ -18,12 +18,18 @@ class Category(models.Model):
         from django.urls import reverse
         return reverse(prefix+'blog_category', args=(self.id,))
 
+    class Meta:
+        verbose_name_plural = "分类"
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name_plural = "标签"
 
 
 class ArchBlog(models.Model, ReadnumMethod):
