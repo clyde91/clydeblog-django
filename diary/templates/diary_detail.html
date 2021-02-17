@@ -3,12 +3,8 @@
 
 {% block head %}
     <title>{{article.title}}|日志|Clyde Blog</title>
-{#    <meta content="{{article.keywords}}" name="keywords">#}
+    <meta content="郑伊田" name="keywords">
 {#    <meta content="{{article.descriptison}}" name="descriptison">#}
-
-<!--    <meta content="{{webseo.keywords}}" name="keywords">
-    <meta content="{{webseo.descriptison}}" name="descriptison">
--->
 
 {% endblock %}
 
@@ -21,7 +17,7 @@
                 <div class="row">
                     <div class="container-main single-main">
                         <div class="col-md-12">
-                            <div class="block-main mb-30">
+                            <div class="block-main mb-30 pd-t50">
 {#                                <img src="assets/img/blog-post-big.jpg" class="img-responsive" alt="reviews2">#}
                                 <div class="content-main single-post padDiv border-r">
                                     <div class="journal-txt">
@@ -34,6 +30,7 @@
                                             <li class="commont"><i class="ion-ios-heart-outline"></i>阅读数：<a href="#">{{ article.get_read_num }}</a></li>
                                             <li class="commont"><i class="ion-ios-heart-outline"></i>评论数：<a href="#">{% get_comment_num article %}</a></li>
                                         </ul>
+                                        <hr class="diag">
                                     </div>
                                     <p class="mb-30">
                                         {{article.body|safe}}

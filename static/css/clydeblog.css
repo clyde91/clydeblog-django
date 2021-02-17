@@ -124,3 +124,22 @@
 .page-item.active {
     background-color: #5b2ac9!important;
 }
+
+/*说说作者字体*/
+.gossip_author {
+    font-weight:bolder;
+    font-family:"微软雅黑";
+    font-size:120%
+}
+
+ul li{
+     list-style: none;
+}
+
+
+/*关于正文*/
+.about_text {
+    font-family:"微软雅黑";
+    font-size:18px;
+    padding:0 80px
+}
