@@ -3,3 +3,4 @@
 /static_collected/
 **/__pycache__/
 __pycache__/
+clydeblog/settings/production.py
