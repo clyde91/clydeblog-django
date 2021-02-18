@@ -288,11 +288,11 @@ $('a.dropdown-toggle').one('click', function () {
         <div class="row portfolio-container">
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-{#            <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">#}
+            <img src="{% static 'assets/img/1.jpg' %}" class="img-fluid" alt="">
             <div class="portfolio-info">
-              <h4>App 1</h4>
-              <p>App</p>
-{#              <a href="assets/img/portfolio/portfolio-1.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="App 1"><i class="bx bx-plus"></i></a>#}
+              <h4>背景</h4>
+              <p>这个也太强大了</p>
+              <a href="{% static 'assets/img/1.jpg' %}" data-gall="portfolioGallery" class="venobox preview-link" title="哈哈"><i class="bx bx-plus"></i></a>
               <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
             </div>
           </div>
@@ -402,58 +402,59 @@ $('a.dropdown-toggle').one('click', function () {
             <div class="col-lg-6">
               <div class="contact-contact">
 
-                <h2 class="mb-30">GET IN TOUCH</h2>
+                <h2 class="mb-30">联系我</h2>
 
                 <ul class="contact-details">
-                  <li><span>23 Main, Street</span></li>
-                  <li><span>New York, United States</span></li>
-                  <li><span>+88 01912704287</span></li>
-                  <li><span>example@example.com</span></li>
+                  <li><span>QQ：66704470</span></li>
+                  <li><span>微信：clyde91</span></li>
+                  <li><span>邮箱：clyde91@163.com</span></li>
+{#                  <li><span>邮箱：clyde91@163.com</span></li>#}
                 </ul>
 
               </div>
             </div>
 
             <div class="col-lg-6">
-              <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+              <form action="{% url 'contact_me' %}" method="POST" role="form" class="php-email-form">
+                  {% csrf_token %}
                 <div class="row">
 
                   <div class="col-lg-6">
                     <div class="form-group contact-block1">
-                      <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                      <input type="text" name="name" class="form-control" id="name" placeholder="你的名字" data-rule="minlen:1" data-msg="请输入你的名字" />
                       <div class="validate"></div>
                     </div>
                   </div>
 
                   <div class="col-lg-6">
                     <div class="form-group">
-                      <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                      <input type="email" class="form-control" name="email" id="email" placeholder="你的邮箱" data-rule="email" data-msg="请输入有效的邮箱" />
                       <div class="validate"></div>
                     </div>
                   </div>
 
                   <div class="col-lg-12">
                     <div class="form-group">
-                      <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                      <input type="text" class="form-control" name="subject" id="subject" placeholder="主题" data-rule="minlen:2" data-msg="主题至少输入2个字" />
                       <div class="validate"></div>
                     </div>
                   </div>
 
                   <div class="col-lg-12">
                     <div class="form-group">
-                      <textarea class="form-control" name="message" rows="12" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                      <textarea class="form-control" name="message" rows="12" data-rule="required" data-msg="内容不能为空" placeholder="信息"></textarea>
                       <div class="validate"></div>
                     </div>
                   </div>
 
                   <div class="col-lg-12 mb-3">
                     <div class="loading">Loading</div>
-                    <div class="error-message"></div>
+{#                    <div class="error-message"></div>#}
                     <div class="sent-message">Your message has been sent. Thank you!</div>
                   </div>
 
                   <div class="col-lg-12">
-                    <input type="submit" class="btn btn-defeault btn-send" value="Send message">
+                    <input type="submit" class="btn btn-defeault btn-send" value="发送信息">
                   </div>
 
                 </div>

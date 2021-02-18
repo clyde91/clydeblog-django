@@ -6,6 +6,7 @@ from .forms import LoginForm, RegForm
 from django.contrib.auth.models import User
 from gossip.models import Gossip
 from arch_blog.models import ArchBlog
+from django.core.mail import send_mail
 
 
 def index(request):
@@ -28,17 +29,6 @@ def test(request):
 
 
 def login(request):
-    '''
-    username = request.POST['username']     # POST大写
-    password = request.POST['password']
-    user = auth.authenticate(request, username=username,password=password)
-    referer = request.META.get('HTTP_REFERER', reverse('home'))    # 获得跳转前的网站。如果没有则后者  referer“反向解析”home在的地址
-    if user is not None:
-        auth.login(request, user)
-        return redirect(referer)
-    else:
-        return render(request, 'error.html', {"message":'用户名或密码不正确'})
-    '''
     if request.method == 'POST':  #加判断login这个方法是打开登录页面的处理，还是提交登录数据的请求。相当于2个方法合并到一个来。
         login_form = LoginForm(request.POST)  #将post传来的数据实例化成表单
         if login_form.is_valid():
@@ -82,3 +72,14 @@ def register(request):
     context = {}  #if分支的共有部分，都会执行以下代码。
     context['reg_form'] = reg_form
     return render(request, 'register.html', context)
+
+
+def contact_me(request):
+    referer = request.META.get('HTTP_REFERER', reverse('home'))
+    name = request.POST.get('name', '')
+    email = request.POST.get('email', '')
+    subject = request.POST.get('subject', '')
+    message = request.POST.get('message', '')
+    send_mail(subject, "姓名："+name+"\r\n邮箱："+email+"\r\n内容："+message, '66704470@qq.com',
+    ['66704470@qq.com'], fail_silently=False)
+    return redirect(referer)

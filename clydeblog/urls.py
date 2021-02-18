@@ -37,6 +37,7 @@ urlpatterns = [
     path('ckeditor', include('ckeditor_uploader.urls')),    # 添加上传功能
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),  # 退出登录
+    path('contact_me/', views.contact_me, name='contact_me'),  # 联系我
     path('register/', views.register, name='register'),
     path('comment/', include('comment.urls')),
     path('sitemap.xml', sitemap,
