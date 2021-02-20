@@ -29,6 +29,7 @@ urlpatterns = [
     path('code_blog/', include('code_blog.urls')),
     path('diary/', include('diary.urls')),
     path('gossip/', include('gossip.urls')),
+    path('health/', include('health.urls')),
     # path('architecture/', include('architecture.urls')),
     path('', views.index, name='home'),
     path('index.html', views.index, name='home'),
@@ -43,6 +44,8 @@ urlpatterns = [
     path('sitemap.xml', sitemap,
          {'sitemaps': sitemap_dict},
          name='django.contrib.sitemaps.views.sitemap'),  # sitemap
+
+    # path('bar/', views.BarView.as_view(), name='bar'),
 ]
 
 

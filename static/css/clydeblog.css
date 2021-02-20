@@ -149,3 +149,10 @@ ul li{
         padding:0 80px
     }
 }
+
+
+/*图表*/
+#health {
+    min-width: 800px;
+    height: 500px;
+}

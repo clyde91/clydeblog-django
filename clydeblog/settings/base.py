@@ -43,9 +43,11 @@ INSTALLED_APPS = [
     'code_blog',  # 注册编程博客
     'diary',  # 注册日记
     'gossip',  # 注册说说
+    'health',  # 注册体重
     # 'architecture',
     'ckeditor',
     'ckeditor_uploader',
+    # 'highcharts',  # 安装图表
     'common_func',  # 注册通用功能app
     'comment',    # 注册评论功能app
     'django.contrib.sitemaps',    # 注册sitemap

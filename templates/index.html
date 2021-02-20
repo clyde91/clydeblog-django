@@ -211,7 +211,7 @@ $('a.dropdown-toggle').one('click', function () {
 
           <div class="services-block">
 
-            <i class="ion-ios-browsers-outline"></i>
+            <i class="ion-ios-lightbulb-outline"></i>
             <span>design</span>
             <p class="separator">户型强排，平面布置，停车库设计，建筑外表皮设计</p>
 
@@ -219,7 +219,7 @@ $('a.dropdown-toggle').one('click', function () {
 
           <div class="services-block">
 
-            <i class="ion-ios-lightbulb-outline"></i>
+            <i class="ion-ios-browsers-outline"></i>
             <span>PS/AI/ID</span>
             <p class="separator">掌握Photoshop+Illustrator+InDesign的文本制作流程。</p>
 
@@ -249,13 +249,13 @@ $('a.dropdown-toggle').one('click', function () {
 
           </div>
 
-          <div class="services-block">
-
-            <i class="ion-ios-camera-outline"></i>
-            <span>PHOTOGRAPHY</span>
-            <p class="separator">To an English person, it will seem like simplified English,told me what </p>
-
-          </div>
+{#          <div class="services-block">#}
+{##}
+{#            <i class="ion-ios-camera-outline"></i>#}
+{#            <span>PHOTOGRAPHY</span>#}
+{#            <p class="separator">To an English person, it will seem like simplified English,told me what </p>#}
+{##}
+{#          </div>#}
 
         </div>
 
@@ -268,7 +268,7 @@ $('a.dropdown-toggle').one('click', function () {
 
       <div class="container">
         <div class="section-title text-center">
-          <h2>我的作品</h2>
+          <h2>我的体重</h2>
         </div>
       </div>
 
@@ -276,80 +276,121 @@ $('a.dropdown-toggle').one('click', function () {
 
         <div class="row">
           <div class="col-lg-12 d-flex justify-content-center">
-            <ul id="portfolio-flters">
-              <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-app">App</li>
-              <li data-filter=".filter-card">Card</li>
-              <li data-filter=".filter-web">Web</li>
-            </ul>
+        <div id="health"></div>
           </div>
         </div>
+{#  <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>#}
+  <script src="https://code.highcharts.com/highcharts.src.js"></script>
 
-        <div class="row portfolio-container">
+  <script>
+    Highcharts.chart('health', {
+        chart: {
+            {#type: 'column'#}
+            backgroundColor: 'rgba(0,0,0,0)'
+        },
+        title: {
+            text: ''
+        },
+        xAxis: {
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <img src="{% static 'assets/img/1.jpg' %}" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>背景</h4>
-              <p>这个也太强大了</p>
-              <a href="{% static 'assets/img/1.jpg' %}" data-gall="portfolioGallery" class="venobox preview-link" title="哈哈"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
+            categories: {{ time | safe }}
+        },
+        yAxis: {
+            title: {text: "公斤"},
+                min: {{ weight_min }},  //最小
+                tickInterval: 1, //步长
+                max:{{ weight_max }},//最大 　　　　　　　　　　　　　　
+        plotOptions: {
+			area: {
+				fillColor: "rgba(91,42,201,1)",
+				marker: {
+					radius: 2
+				},
+				lineWidth: 1,
+				states: {
+					hover: {
+						lineWidth: 1
+					}
+				},
+				threshold: null
+			}
+		},
+        },
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+        series: [{
+            type: 'area',
+            name: '体重',
+            data: {{ weight | safe }}
+        }, ]
+    });
+  </script>
+
+{##}
+{#        <div class="row portfolio-container">#}
+{##}
+{#          <div class="col-lg-4 col-md-6 portfolio-item filter-app">#}
+{#            <img src="{% static 'assets/img/1.jpg' %}" class="img-fluid" alt="">#}
+{#            <div class="portfolio-info">#}
+{#              <h4>背景</h4>#}
+{#              <p>这个也太强大了</p>#}
+{#              <a href="{% static 'assets/img/1.jpg' %}" data-gall="portfolioGallery" class="venobox preview-link" title="哈哈"><i class="bx bx-plus"></i></a>#}
+{#              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>#}
+{#            </div>#}
+{#          </div>#}
+{##}
+{#          <div class="col-lg-4 col-md-6 portfolio-item filter-web">#}
 {#            <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">#}
-            <div class="portfolio-info">
-              <h4>Web 3</h4>
-              <p>Web</p>
-              <a href="assets/img/portfolio/portfolio-2.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+{#            <div class="portfolio-info">#}
+{#              <h4>Web 3</h4>#}
+{#              <p>Web</p>#}
+{#              <a href="assets/img/portfolio/portfolio-2.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>#}
+{#              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>#}
+{#            </div>#}
+{#          </div>#}
+{##}
+{#          <div class="col-lg-4 col-md-6 portfolio-item filter-app">#}
 {#            <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">#}
-            <div class="portfolio-info">
-              <h4>App 2</h4>
-              <p>App</p>
-              <a href="assets/img/portfolio/portfolio-3.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="App 2"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+{#            <div class="portfolio-info">#}
+{#              <h4>App 2</h4>#}
+{#              <p>App</p>#}
+{#              <a href="assets/img/portfolio/portfolio-3.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="App 2"><i class="bx bx-plus"></i></a>#}
+{#              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>#}
+{#            </div>#}
+{#          </div>#}
+{##}
+{#          <div class="col-lg-4 col-md-6 portfolio-item filter-card">#}
 {#            <img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">#}
-            <div class="portfolio-info">
-              <h4>Card 2</h4>
-              <p>Card</p>
-              <a href="assets/img/portfolio/portfolio-4.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="Card 2"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+{#            <div class="portfolio-info">#}
+{#              <h4>Card 2</h4>#}
+{#              <p>Card</p>#}
+{#              <a href="assets/img/portfolio/portfolio-4.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="Card 2"><i class="bx bx-plus"></i></a>#}
+{#              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>#}
+{#            </div>#}
+{#          </div>#}
+{##}
+{#          <div class="col-lg-4 col-md-6 portfolio-item filter-web">#}
 {#            <img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">#}
-            <div class="portfolio-info">
-              <h4>Web 2</h4>
-              <p>Web</p>
-              <a href="assets/img/portfolio/portfolio-5.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="Web 2"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+{#            <div class="portfolio-info">#}
+{#              <h4>Web 2</h4>#}
+{#              <p>Web</p>#}
+{#              <a href="assets/img/portfolio/portfolio-5.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="Web 2"><i class="bx bx-plus"></i></a>#}
+{#              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>#}
+{#            </div>#}
+{#          </div>#}
+{##}
+{#          <div class="col-lg-4 col-md-6 portfolio-item filter-app">#}
 {#            <img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">#}
-            <div class="portfolio-info">
-              <h4>App 3</h4>
-              <p>App</p>
-              <a href="assets/img/portfolio/portfolio-6.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="App 3"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
+{#            <div class="portfolio-info">#}
+{#              <h4>App 3</h4>#}
+{#              <p>App</p>#}
+{#              <a href="assets/img/portfolio/portfolio-6.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="App 3"><i class="bx bx-plus"></i></a>#}
+{#              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>#}
+{#            </div>#}
+{#          </div>#}
+{##}
+{#        </div>#}
+{##}
+{#      </div>#}
 
     </div>
     <!-- End Portfolio Section -->

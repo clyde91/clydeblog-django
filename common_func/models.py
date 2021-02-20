@@ -33,3 +33,4 @@ class ReadnumMethod():
 #     content_object = GenericForeignKey('content_type', "object_id")    # 评论的实例
 #     keywords = models.CharField(max_length=70, blank=True, verbose_name="关键字")
 #     descriptison = models.TextField(max_length=70,blank=True, verbose_name="简介")
+

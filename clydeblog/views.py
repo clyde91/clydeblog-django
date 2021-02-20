@@ -6,20 +6,32 @@ from .forms import LoginForm, RegForm
 from django.contrib.auth.models import User
 from gossip.models import Gossip
 from arch_blog.models import ArchBlog
+from health.views import myhealth
 from django.core.mail import send_mail
 
 
 def index(request):
     apps = ["blog","architecture"]
+    health = myhealth()
     context = {}
     context['apps'] = apps
     context['gossip'] = Gossip.objects.filter(author_id=1).order_by("-created_time")[:2]
     context['archblogs'] = ArchBlog.objects.order_by("-created_time")[:6]
+    context['time'] = health["time"]
+    context['weight'] = health["weight"]
+    context['weight_max'] = max(health["weight"])
+    context['weight_min'] = min(health["weight"])-5
     return render(request, "index.html", context)
 
 
 def about(request):
+    healths = MyHealth.objects.all()
+    dic = {}
+    for i in healths:
+        dic[i.record_date] = i.weight
     context = {}
+    context['data'] = dic.keys()
+    context['record_date'] = dic.values()
     return render(request, "about.html", context)
 
 
@@ -83,3 +95,5 @@ def contact_me(request):
     send_mail(subject, "姓名："+name+"\r\n邮箱："+email+"\r\n内容："+message, '66704470@qq.com',
     ['66704470@qq.com'], fail_silently=False)
     return redirect(referer)
+
+
