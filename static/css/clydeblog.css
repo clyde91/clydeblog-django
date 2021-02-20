@@ -153,6 +153,30 @@ ul li{
 
 /*图表*/
 #health {
-    min-width: 800px;
     height: 500px;
+    width:500px;
+
 }
+@media (min-width: 1200px){
+    #health {
+        width:1100px!important;
+    }
+}
+@media (min-width: 800px){
+    #health {
+        width:700px;
+    }
+}
+
+/*@media (max-width: 600px){*/
+/*    #health {*/
+/*        width:500px;*/
+/*    }*/
+/*}*/
+/*!*说说作者字体*!*/
+/*.health_container {*/
+/*    float: left;*/
+/*    padding-bottom: 40%;*/
+/*    position: relative;*/
+/*    width: 45%;*/
+/*}*/
