@@ -30,6 +30,13 @@
     padding-left: 50px;
 }
 
+/*列表左边偏移50*/
+
+@media (max-width: 992px){
+    .card-body ul {
+        padding-left: 0px!important;
+    }
+}
 
 /*分割线*/
 .diag {
