@@ -1,4 +1,5 @@
 {% load static %}
+{% load comment_tags %}
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -277,7 +278,7 @@ $('a.dropdown-toggle').one('click', function () {
         <div class="row">
           <div class="col-lg-12 d-flex justify-content-center">
               <div class="health_container"><div id="health"></div></div>
-
+              {{ health|get_item:"weight_min" }}
           </div>
         </div>
   <script src="https://code.highcharts.com/highcharts.src.js"></script>
@@ -289,20 +290,22 @@ $('a.dropdown-toggle').one('click', function () {
             backgroundColor: 'rgba(0,0,0,0)',
             animation: false,
             {#height:500,#}
+            {#events:{load:getdata}#}
             {#width:1240#}
         },
         title: {
             text: ''
         },
         xAxis: {
-            categories: {{ time | safe }},
+            categories: {{ health|get_item:"time"|safe }},
+            {#categories: {{ health}},#}
             labels:{enabled: false},
         },
         yAxis: {
             title: {text: "公斤"},
-                min: {{ weight_min }},  //最小
+                min: {{ health|get_item:"weight_min" }},  //最小
                 tickInterval: 1, //步长
-                max:{{ weight_max }},//最大 　　　　　　　　　　　　　　
+                max:{{ health|get_item:"weight_max" }},//最大 　　　　　　　　　　　　　　
         },
 		plotOptions: {
 			area: {
@@ -323,7 +326,8 @@ $('a.dropdown-toggle').one('click', function () {
             {
             type: 'area',
             name: '体重',
-            data: {{ weight }},
+            data: {{ health|get_item:"weight" }},
+            {#data: [],#}
             color: '#5B2AC9',
         fillColor: {       // 设置渐变的填充颜色
 				linearGradient: {
@@ -341,6 +345,16 @@ $('a.dropdown-toggle').one('click', function () {
         ],
         credits: {enabled:false},
     });
+
+     {#var chart=this;#}
+     {#chart.showLoading();#}
+     {#$.get({% url 'home' %}, function(sdata)#}
+     {#{#}
+     {#    chart.series[0].setData(sdata);#}
+     {##}
+     {#   chart.hideLoading();#}
+     {#});#}
+
   </script>
 
     </div>

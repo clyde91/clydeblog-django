@@ -6,32 +6,42 @@ from .forms import LoginForm, RegForm
 from django.contrib.auth.models import User
 from gossip.models import Gossip
 from arch_blog.models import ArchBlog
+from health.models import MyHealth
 from health.views import myhealth
 from django.core.mail import send_mail
+import json
 
 
 def index(request):
     apps = ["blog","architecture"]
-    health = myhealth()
+    #health = myhealth(request)
     context = {}
     context['apps'] = apps
     context['gossip'] = Gossip.objects.filter(author_id=1).order_by("-created_time")[:2]
     context['archblogs'] = ArchBlog.objects.order_by("-created_time")[:6]
-    context['time'] = health["time"]
-    context['weight'] = health["weight"]
-    context['weight_max'] = max(health["weight"])
-    context['weight_min'] = min(health["weight"])-5
+
+    myhealth = MyHealth.objects.order_by("record_date")
+    time = []
+    weight = []
+    for info in myhealth:
+        time.append(info.record_date.strftime("%Y-%m-%d"))
+        weight.append(float(info.weight))
+    data = {}
+    data['time'] = time
+    data['weight'] = weight
+    data['weight_max'] = max(weight)
+    data['weight_min'] = min(weight)-5
+    context['health'] = data
+    #context['health'] = {'time': 1, 'weight': 123, 'weightmax': 123, 'weightmin': 123, }
+    #context['time'] = health["time"]
+    #context['weight'] = health["weight"]
+    #context['weight_max'] = max(health["weight"])
+    #context['weight_min'] = min(health["weight"])-5
     return render(request, "index.html", context)
 
 
 def about(request):
-    healths = MyHealth.objects.all()
-    dic = {}
-    for i in healths:
-        dic[i.record_date] = i.weight
     context = {}
-    context['data'] = dic.keys()
-    context['record_date'] = dic.values()
     return render(request, "about.html", context)
 
 
