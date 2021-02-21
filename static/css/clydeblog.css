@@ -100,15 +100,13 @@
 
 
 
-
-/*.blog {*/
-/*    list-style: none;*/
+/*添加缩进*/
+/*@media (min-width: 992px){*/
+/*    .margin-h {*/
+/*        padding:0 80px!important;*/
+/*    }*/
 /*}*/
 
-/*添加缩进*/
-.margin-h {
-    padding:0 80px!important;
-}
 
 #body_bg {
     background: url("../img/hyejin.jpg") center!important;
@@ -135,6 +133,16 @@
 ul li{
      list-style: none;
 }
+
+
+@media (max-width: 992px){
+    .footer_r{
+         margin-top: -130px!important;
+    }.footer_l{
+         margin-top: 40px!important;
+    }
+}
+
 
 
 /*关于正文*/
@@ -168,15 +176,3 @@ ul li{
     }
 }
 
-/*@media (max-width: 600px){*/
-/*    #health {*/
-/*        width:500px;*/
-/*    }*/
-/*}*/
-/*!*说说作者字体*!*/
-/*.health_container {*/
-/*    float: left;*/
-/*    padding-bottom: 40%;*/
-/*    position: relative;*/
-/*    width: 45%;*/
-/*}*/
