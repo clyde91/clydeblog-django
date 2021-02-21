@@ -26,8 +26,10 @@
 
 
 /*左边偏移50*/
-.pd-l50 {
-    padding-left: 50px;
+@media (min-width: 992px){
+    .pd-l50 {
+        padding-left: 50px;
+    }
 }
 
 /*列表左边偏移50*/
