@@ -110,6 +110,7 @@
 
 #body_bg {
     background: url("../img/hyejin.jpg") center!important;
+    background-repeat: repeat-x;
 }
 
 
