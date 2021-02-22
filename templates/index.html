@@ -34,102 +34,102 @@
 </head>
 
 <body>
-
-  <!-- ======= Navbar ======= -->
+    <!-- ======= Navbar ======= -->
 <nav id="main-nav">
-    <div class="row">
-        <div class="container">
-            <div class="logo"><a href="{% url "home" %}"><img src="{% static 'assets/img/logo-nav.png' %}" alt="logo"></a></div>
-            <div class="responsive"><i data-icon="m" class="ion-navicon-round"></i></div>
-            <ul class="nav-menu list-unstyled">
-                <li><a href="{% url "home" %}">主页</a></li>
-                <li><a href="{% url "about" %}">关于</a></li>
-                <li><a href="{% url "gossip_list" %}">说说</a></li>
-                <li><a href="{% url "diary_list" %}">日志</a></li>
-
-                <li class="dropdown"><a href="{% url "arch_blog_list" %}" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="100" data-close-others="false">建筑</a>
-                    <ul class="dropdown-menu">
-                    {% for i in nav_arch_categorys%}
-                        <li><a href="{% url "arch_blog_category" i.id %}">{{ i }}</a></li>
-                    {% endfor %}
-                    </ul>
-                </li>
-
-                <li class="dropdown"><a href="{% url "code_blog_list" %}" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="100" data-close-others="false">编程</a>
-                    <ul class="dropdown-menu">
-                    {% for i in nav_code_categorys%}
-                        <li><a href="{% url "code_blog_category" i.id %}">{{ i }}</a></li>
-                    {% endfor %}
-                    </ul>
-                </li>
-
-
-                <li><a href="https://www.zyt7.com">云盘</a></li>
-            </ul>
-        </div>
-    </div>
-
-<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
-<script type="text/javascript">
- (function ($, window, undefined) {
- // outside the scope of the jQuery plugin to
- // keep track of all dropdowns
- var $allDropdowns = $();
-
-// if instantlyCloseOthers is true, then it will instantly
- // shut other nav items when a new one is hovered over
- $.fn.dropdownHover = function (options) {
-
-// the element we really care about
- // is the dropdown-toggle's parent
- $allDropdowns = $allDropdowns.add(this.parent());
-
-return this.each(function () {
- var $this = $(this).parent(),
- defaults = {
- delay: 500,
- instantlyCloseOthers: true
- },
- data = {
- delay: $(this).data('delay'),
- instantlyCloseOthers: $(this).data('close-others')
- },
- options = $.extend(true, {}, defaults, options, data),
- timeout;
-
-$this.hover(function () {
- if (options.instantlyCloseOthers === true) {
- $allDropdowns.removeClass('show');
-$allDropdowns.find(".dropdown-menu").removeClass('show');
- }
-
-window.clearTimeout(timeout);
- $(this).addClass('show');
-$(this).find(".dropdown-menu").addClass('show');
- }, function () {
- timeout = window.setTimeout(function () {
- $this.removeClass('show');
-$this.find(".dropdown-menu").removeClass('show');
- }, options.delay);
- });
- });
- };
- $('[data-hover="dropdown"]').dropdownHover();
- })(jQuery, this);
-
-
-
- //点击链接如下：
-
-$('a.dropdown-toggle').one('click', function () {
- if ($(this).attr('href')!="")
- location.href = $(this).attr('href');
- });
-
-</script>
+    {% include 'nav_head.html' %}
+{#    <div class="row">#}
+{#        <div class="container">#}
+{#            <div class="logo"><a href="{% url "home" %}"><img src="{% static 'assets/img/logo-nav.png' %}" alt="logo"></a></div>#}
+{#            <div class="responsive"><i data-icon="m" class="ion-navicon-round"></i></div>#}
+{#            <ul class="nav-menu list-unstyled">#}
+{#                <li><a href="{% url "home" %}">主页</a></li>#}
+{#                <li><a href="{% url "about" %}">关于</a></li>#}
+{#                <li><a href="{% url "gossip_list" %}">说说</a></li>#}
+{#                <li><a href="{% url "diary_list" %}">日志</a></li>#}
+{##}
+{#                <li class="dropdown"><a href="{% url "arch_blog_list" %}" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="100" data-close-others="false">建筑</a>#}
+{#                    <ul class="dropdown-menu">#}
+{#                    {% for i in nav_arch_categorys%}#}
+{#                        <li><a href="{% url "arch_blog_category" i.id %}">{{ i }}</a></li>#}
+{#                    {% endfor %}#}
+{#                    </ul>#}
+{#                </li>#}
+{##}
+{#                <li class="dropdown"><a href="{% url "code_blog_list" %}" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="100" data-close-others="false">编程</a>#}
+{#                    <ul class="dropdown-menu">#}
+{#                    {% for i in nav_code_categorys%}#}
+{#                        <li><a href="{% url "code_blog_category" i.id %}">{{ i }}</a></li>#}
+{#                    {% endfor %}#}
+{#                    </ul>#}
+{#                </li>#}
+{##}
+{##}
+{#                <li><a href="https://www.zyt7.com">云盘</a></li>#}
+{#            </ul>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>#}
+{#<script type="text/javascript">#}
+{# (function ($, window, undefined) {#}
+{# // outside the scope of the jQuery plugin to#}
+{# // keep track of all dropdowns#}
+{# var $allDropdowns = $();#}
+{##}
+{#// if instantlyCloseOthers is true, then it will instantly#}
+{# // shut other nav items when a new one is hovered over#}
+{# $.fn.dropdownHover = function (options) {#}
+{##}
+{#// the element we really care about#}
+{# // is the dropdown-toggle's parent#}
+{# $allDropdowns = $allDropdowns.add(this.parent());#}
+{##}
+{#return this.each(function () {#}
+{# var $this = $(this).parent(),#}
+{# defaults = {#}
+{# delay: 500,#}
+{# instantlyCloseOthers: true#}
+{# },#}
+{# data = {#}
+{# delay: $(this).data('delay'),#}
+{# instantlyCloseOthers: $(this).data('close-others')#}
+{# },#}
+{# options = $.extend(true, {}, defaults, options, data),#}
+{# timeout;#}
+{##}
+{#$this.hover(function () {#}
+{# if (options.instantlyCloseOthers === true) {#}
+{# $allDropdowns.removeClass('show');#}
+{#$allDropdowns.find(".dropdown-menu").removeClass('show');#}
+{# }#}
+{##}
+{#window.clearTimeout(timeout);#}
+{# $(this).addClass('show');#}
+{#$(this).find(".dropdown-menu").addClass('show');#}
+{# }, function () {#}
+{# timeout = window.setTimeout(function () {#}
+{# $this.removeClass('show');#}
+{#$this.find(".dropdown-menu").removeClass('show');#}
+{# }, options.delay);#}
+{# });#}
+{# });#}
+{# };#}
+{# $('[data-hover="dropdown"]').dropdownHover();#}
+{# })(jQuery, this);#}
+{##}
+{##}
+{##}
+{# //点击链接如下：#}
+{##}
+{#$('a.dropdown-toggle').one('click', function () {#}
+{# if ($(this).attr('href')!="")#}
+{# location.href = $(this).attr('href');#}
+{# });#}
+{##}
+{#</script>#}
 
 </nav>
-  <!-- End Navbar -->
+    <!-- End #nav-menu -->
 
   <!-- ======= Hero Section ======= -->
   <div id="hero" class="home">

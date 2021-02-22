@@ -1,5 +1,5 @@
 {% load static %}
-<nav id="main-nav" class="subpage-nav">
+
     <div class="row">
         <div class="container">
             <div class="logo"><a href="{% url "home" %}"><img src="{% static 'assets/img/logo-nav.png' %}" alt="logo"></a></div>
@@ -28,6 +28,27 @@
 
 
                 <li><a href="https://www.zyt7.com">云盘</a></li>
+
+
+
+                    {% if not user.is_authenticated %}
+                        <li>
+                            <a href="{% url 'login' %}?from={{ request.get_full_path }}">登录</a>
+                        </li>
+
+                    {% else %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">{{ user.username }} <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'user_info' %}">个人资料</a></li>
+                                {% if user.is_staff or user.is_superuser %}
+                                <li><a href="{% url 'admin:index' %}">后台管理</a></li>
+                                {% endif %}
+                                <li><a href="{% url 'logout' %}?from={{ request.get_full_path }}">退出</a></li>
+                            </ul>
+                        </li>
+                    {% endif %}
+
             </ul>
         </div>
     </div>
@@ -94,15 +115,5 @@ $('a.dropdown-toggle').one('click', function () {
  });
 
 </script>
-
-</nav>
-
-{#<!-- ======= 社交按钮 ======= -->#}
-{#<nav class="nav social-nav pull-right d-none d-lg-inline">#}
-{#<a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-linkedin"></i></a> <a href="#"><i class="fa fa-envelope"></i></a>#}
-{#</nav>#}
-
-
-
 
 

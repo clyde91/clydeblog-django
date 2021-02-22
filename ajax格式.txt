@@ -1,0 +1,130 @@
+var comment_html = '<div id="root_' + data['id'] + '" class="comment"><span>' + data['username'] + '</span><span> (' + data['comment_time'] + ')：</span><div id="comment_' + data['id'] + '">' + data['text'] + '</div><a href="javascript:reply(' + data['id'] + ');">回复</a></div>';
+
+
+
+
+' 
+       <li>          <div class="entry-comments-item">{#            <img src="assets/img/avatar.jpg" class="entry-comments-avatar" alt="">#}            <div class="entry-comments-body">              <span class="entry-comments-author">
+' + data['username'] + ' 
+</span>
+              <span><a href="#">
+' + {data['comment_time'] + '
+ </a></span>
+              <p id="comment_
+' + data['id']+'
+" class="mb-10">
+' + data['text'] + '
+</p>
+              <a class="rep" href="javascript:reply(
+' + data['id'] + '
+);">回复</a>
+            </div>
+          </div>
+        </li>
+' 
+
+
+
+
+
+
+
+
+
+
+
+
+
+'
+       <li>          <div class="entry-comments-item">{#            <img src="assets/img/avatar.jpg" class="entry-comments-avatar" alt="">#}            <div class="entry-comments-body">              <span class="entry-comments-author">
+' + data['username'] + '
+</span>
+              <span><a href="#">
+' + {data['comment_time'] + '
+ </a></span>
+              <p id="comment_
+' + data['id']+'
+" class="mb-10">
+' + data['text'] + '
+</p>
+              <a class="rep" href=\"javascript:reply(
+' + data['id'] + '
+);\">回复</a>
+            </div>
+          </div>
+        </li>
+'
+
+
+ '<li><div class="entry-comments-item"><div class="entry-comments-body"><span class="entry-comments-author">' + data['username'] + '</span><p id="comment_' + data['id']+'" class="mb-10">' + data['text'] + '</p></div></div></li>'
+
+
+
+ '<li><div class="entry-comments-item"><div class="entry-comments-body"><span class="entry-comments-author">' + data['username'] + '</span><span><a href="#">' + data['comment_time'] + ' </a></span><p id="comment_' + data['id']+'" class="mb-10">' + data['text'] + '</p><a class="rep" href=\"javascript:reply(' + data['id'] + ');\">回复</a></div></div></li>'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'
+            <li>
+              <div class="entry-comments-item">
+{#                <img src="assets/img/avatar.jpg" class="entry-comments-avatar" alt="">#}
+                <div class="entry-comments-body">
+                  <span class="entry-comments-author">
+' + data['username'] + '
+</span><span><a href="#">
+' data['comment_time'] + '
+</a></span><span> 回复 </span><span>' + data['reply_to'] + '：</span>
+                  <p class="mb-10" id="comment_
+' + data['id'] + '
+">
+' + data['text'] + '
+</p>
+                  <a class="rep" href="javascript:reply(
+' + data['id'] + '
+);">回复</a>
+                </div>
+              </div>
+            </li>
+'
+
+
+
+
+
+'<div class="reply"><span>' + data['username'] + '</span><span> (' + data['comment_time'] + ')</span><span> 回复 </span><span>' + data['reply_to'] + '：</span><div id="comment_' + data['id'] + '">' + data['text'] + '</div><a href="javascript:reply(' + data['id'] + ');">回复</a></div>'
+
+
+
+
+
+
+
+
+
+
+

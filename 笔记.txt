@@ -1,6 +1,6 @@
 ﻿启动服务器
 python manage.py runserver
- 
+ '<li><div class="entry-comments-item"><div class="entry-comments-body"><span class="entry-comments-author">' + data['username'] + '</span><span><a href="#">' + data['comment_time'] + ' </a></span><p id="comment_' + data['id']+'" class="mb-10">' + data['text'] + '</p><a class="rep" href=\"javascript:reply(' + data['id'] + ');\">回复</a></div></div></li>'
 同步数据库
 python manage.py makemigrations   制造
 python manage.py migrate  迁移

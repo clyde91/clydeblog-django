@@ -3,7 +3,7 @@ from django.contrib import auth
 from django.contrib.auth.models import User
 
 
-class LoginForm(forms.Form):  #表单类
+class LoginForm(forms.Form):  # 表单类
     username = forms.CharField(label="用户名", widget=forms.TextInput(attrs={"class": "form-control", }))
     password = forms.CharField(label="密码", widget=forms.PasswordInput(attrs={"class": "form-control", }))
 

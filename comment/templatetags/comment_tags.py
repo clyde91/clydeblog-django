@@ -25,3 +25,7 @@ def get_comment_num(obj):  # 传入的obj很关键只要传入obj就能得到评
 @register.filter
 def get_item(dictionary, key):
     return dictionary.get(key)
+
+# @register.filter
+# def oder(dictionary, key):
+#     return dictionary.get(key)

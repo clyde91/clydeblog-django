@@ -24,6 +24,7 @@ from .sitemap import sitemap_dict
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('user/', include('user.urls')),
     # path('blog/', include('blog.urls')),
     path('arch_blog/', include('arch_blog.urls')),
     path('code_blog/', include('code_blog.urls')),
@@ -36,10 +37,7 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('test', views.test, name='test'),
     path('ckeditor', include('ckeditor_uploader.urls')),    # 添加上传功能
-    path('login/', views.login, name='login'),
-    path('logout/', views.logout, name='logout'),  # 退出登录
     path('contact_me/', views.contact_me, name='contact_me'),  # 联系我
-    path('register/', views.register, name='register'),
     path('comment/', include('comment.urls')),
     path('sitemap.xml', sitemap,
          {'sitemaps': sitemap_dict},

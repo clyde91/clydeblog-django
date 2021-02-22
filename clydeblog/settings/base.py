@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'diary',  # 注册日记
     'gossip',  # 注册说说
     'health',  # 注册体重
+    'user',  # 注册用户
     # 'architecture',
     'ckeditor',
     'ckeditor_uploader',

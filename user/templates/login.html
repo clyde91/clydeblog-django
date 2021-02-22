@@ -14,7 +14,7 @@
                         <div class="col-md-12">
                             <div class="block-main mb-30 pd-t50">
                                 <div class="content-main single-post padDiv border-r">
-
+        {% if not user.is_authenticated %}
         <div class="col-xs-8 col-xs-4">
             <form action="" method="POST">     <!--POST大写，这里action一定要空。不然后面提交表单时候会出问题无法跳转回之前页面.提交为空表示提交给当前页面-->
             {% csrf_token %}
@@ -25,7 +25,12 @@
             <input type="submit" class="btn btn-primary" value="登录">
             </form>
         </div>
-
+        {% else %}
+            <span>已登录，跳转到首页...</span>
+            <script type="text/javascript">
+                window.location.href = '/';
+            </script>
+        {% endif %}
                                 </div>
                             </div>
                         </div>

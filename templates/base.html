@@ -33,9 +33,11 @@
 
 <body>
 
-      <!-- #nav-menu-container -->
-      {% include 'nav_head.html' %}
-
+    <!-- #nav-menu-container -->
+<nav id="main-nav" class="subpage-nav">
+    {% include 'nav_head.html' %}
+</nav>
+    <!-- End #nav-menu -->
 
   <main id="main">
       {% block body %}{% endblock %}

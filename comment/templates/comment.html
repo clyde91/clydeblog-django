@@ -35,9 +35,9 @@
 <br>
 <div class="col-lg-12">
   <div class="comments text-left padDiv mb-30 border-r">
-    <div class="entry-comments" id="comment_list">
+    <div class="entry-comments">
       <h6 class="mb-30">{% get_comment_num article %} comments</h6>
-      <ul class="entry-comments-list list-unstyled">
+      <ul class="entry-comments-list list-unstyled" id="comment_list">
       {% for comment in comments %}
         <li>
           <div class="entry-comments-item">
@@ -49,15 +49,17 @@
               <a class="rep" href="javascript:reply({{ comment.id }});">回复</a>
             </div>
           </div>
-          <ul class="entry-comments-reply list-unstyled">
-          {% for reply in comment.root_comments.all %}
+          <ul class="entry-comments-reply list-unstyled" id="root_{{ comment.id }}">
+          {% for reply in comment.root_comments.all|dictsort:"id" %}
+              <!-- |dictsort:"id"倒序过滤器 -->
             <li>
               <div class="entry-comments-item">
 {#                <img src="assets/img/avatar.jpg" class="entry-comments-avatar" alt="">#}
                 <div class="entry-comments-body">
                   <span class="entry-comments-author">{{ reply.user }}</span>
                   <span><a href="#">{{ reply.comment_time|date:"Y-m-d H:i:s"}}</a></span>
-                  <p class="mb-10" id="comment_{{ reply.id }}">{{ reply.text|safe }}</p>
+                  <P>回复 {{ reply.reply_to}}：</P>
+                  <p id="comment_{{ reply.id }}" class="mb-10">{{ reply.text|safe }}</p>
                   <a class="rep" href="javascript:reply({{ reply.id }});">回复</a>
                 </div>
               </div>
@@ -65,9 +67,11 @@
           {% endfor %}
           </ul>
         </li>
+
       {% empty %}
           <span id="no_comment">暂无评论</span>
       {% endfor %}
+
       </ul>
     </div>
   </div>
@@ -107,14 +111,15 @@
                     if(data['status']=="SUCCESS"){
                         if($('#reply_comment_id').val()=='0'){
                             // 插入评论
-                            var comment_html = '<div id="root_' + data['id'] + '" class="comment"><span>' + data['username'] + '</span><span> (' + data['comment_time'] + ')：</span><div id="comment_' + data['id'] + '">' + data['text'] + '</div><a href="javascript:reply(' + data['id'] + ');">回复</a></div>';
+                            var comment_html = '<li><div class="entry-comments-item"><div class="entry-comments-body"><span class="entry-comments-author">' + data['username'] + '</span><span><a href="#">' + data['comment_time'] + ' </a></span><p id="comment_' + data['id']+'" class="mb-10">' + data['text'] + '</p><a class="rep" href=\"javascript:reply(' + data['id'] + ');\">回复</a></div></div></li>';
                             $("#comment_list").prepend(comment_html);
                         }else{
                             // 插入回复
-                            var reply_html ='<div class="reply"><span>' + data['username'] + '</span><span> (' + data['comment_time'] + ')</span><span> 回复 </span><span>' + data['reply_to'] + '：</span><div id="comment_' + data['id'] + '">' + data['text'] + '</div><a href="javascript:reply(' + data['id'] + ');">回复</a></div>';
+                            var reply_html = '<li><div class="entry-comments-item">{#<img src="assets/img/avatar.jpg" class="entry-comments-avatar" alt="">#}<div class="entry-comments-body"><span class="entry-comments-author">' + data['username'] + '</span><span><a href="#">'+ data['comment_time'] + '</a></span><P> 回复 </span><span>' + data['reply_to'] + '：</P>                  <p class="mb-10" id="comment_' + data['id'] + '">' + data['text'] + '</p><a class="rep" href="javascript:reply(' + data['id'] + ');">回复</a></div></div></li>';
                             $("#root_" + data['root_id']).append(reply_html);
                         }
-
+                        // 显示成功信息
+                        $("#comment_error").text("评论成功！");
                         // 清空编辑框的内容
                         CKEDITOR.instances['id_text'].setData('');
                         $('#reply_content_container').hide();
@@ -132,10 +137,11 @@
             return false;
         });
         function reply(reply_comment_id){
-            // 设置值
+            // 获取id
             $('#reply_comment_id').val(reply_comment_id);
-            var html = $("#comment_" + reply_comment_id);
-            // 回复：？
+            // 通过id获取评论内容.不知道为啥老是提取失败
+            var html = $("#comment_" + reply_comment_id).html();
+            // 回复：
             $('#reply_content').html(html);
             $('#reply_content_container').show();
 
