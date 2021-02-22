@@ -12,11 +12,11 @@ from django.core.mail import send_mail
 
 
 def index(request):
-    apps = ["blog","architecture"]
+    #apps = ["blog","architecture"]
     #health = myhealth(request)
     context = {}
-    context['apps'] = apps
-    context['gossip'] = Gossip.objects.filter(author_id=1).order_by("-created_time")[:2]
+    #context['apps'] = apps
+    context['gossip'] = Gossip.objects.filter(author_id=1).order_by("-created_time")[:10]
     context['archblogs'] = ArchBlog.objects.order_by("-created_time")[:6]
 
     myhealth = MyHealth.objects.order_by("record_date")
@@ -45,6 +45,7 @@ def about(request):
 
 def test(request):
     context = {}
+    context['gossip'] = Gossip.objects.filter(author_id=1).order_by("-created_time")[:10]
     return render(request, "test.html", context)
 
 

@@ -29,6 +29,8 @@ def submit_comment(request):
         # 返回数据
         data['status'] = 'SUCCESS'
         data['username'] = comment.user.username
+        data['avatar_url'] = comment.user.profile.avatar_url()
+        #data['avatar_url'] = '/media/user/guest.jpg'
         data['comment_time'] = comment.comment_time.strftime('%Y-%m-%d %H:%M:%S')
         data['text'] = comment.text
         if not parent is None:

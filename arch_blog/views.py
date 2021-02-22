@@ -21,7 +21,7 @@ def blog_article(request, id):
     content_type = ContentType.objects.get_for_model(article)  # 用具体的obj来获得content_type
     comments = Comment.objects.filter(content_type=content_type, object_id=id, parent=None)  #只筛选根评论（根据parent=none）
     context['comments'] = comments
-    #context['comment_user'] = get_object_or_404(User, id=1).profile.nickname
+    context['comment_user'] = get_object_or_404(User, id=1).profile.nickname
     context['comment_form'] = CommentForm(initial={"content_type":content_type.model, "object_id":id, "reply_comment_id":"0"})  # 实例化一个form表单。content_type.model这个.model很关键不然会出错
     context["now_categorys"] = Category.objects.all()  # 当前所有分类
     context['now_app_name'] = now_app_name

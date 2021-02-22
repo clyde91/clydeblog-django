@@ -4,6 +4,7 @@ from .models import Gossip
 from django.contrib.contenttypes.models import ContentType
 from gossip.forms import GossipForm
 from django.urls import reverse
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -14,6 +15,27 @@ def gossip_list(request):
     context['gossips'] = gossip_all
     context['gossip_form'] = GossipForm()  # 实例化一个form表单。
     return render(request, "gossip_list.html", context)
+
+
+
+def gossip_index(request):
+    data = {}
+    gossip_all = Gossip.objects.filter(author_id=1).order_by("-created_time")[:10]
+    i = 1
+    for gossip in gossip_all:
+        data[str(i)] = {}
+        data[str(i)]["words"] = gossip.text
+        data[str(i)]["grade"] = '最强王者'
+        data[str(i)]["img_src"] = "http://127.0.0.1:8000/static/ckeditor/ckeditor/plugins/smiley/images/cry_smile.png"
+        i += 1
+    return JsonResponse(data)
+
+
+
+
+
+
+
 
 
 def submit_gossip(request):
