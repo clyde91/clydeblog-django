@@ -66,7 +66,7 @@
                         <li class="blog entry-comments-item">
                             <p><a href="{{ i.get_absolute_url }}">{{i.title}}</a></p><!-- 创造了方法反解析自己的地址 -->
 {#                            <p>{{ i.text|striptags|truncatechars_html:50|safe }}...</p>#}
-                            <p><span class="gossip_author">{{i.author}}：</span><span>{{ i.text|striptags|safe }}</span><span class="span-right">{{ i.created_time }}</span></p>
+                            <p><span class="gossip_author">{{i.author}}：</span><span>{{ i.text|safe }}</span><span class="span-right">{{ i.created_time }}</span></p>
 {#                        <hr>#}
                         </li>
 

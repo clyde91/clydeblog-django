@@ -40,7 +40,7 @@
       <ul class="entry-comments-list list-unstyled" id="comment_list">
       {% for comment in comments %}
         <li>
-          <div class="entry-comments-item">
+          <div class="entry-reply-item">
 {#            <img src="assets/img/avatar.jpg" class="entry-comments-avatar" alt="">#}
             <div class="entry-comments-body">
               <span class="entry-comments-author">{{ comment.user }}</span>
@@ -53,7 +53,7 @@
           {% for reply in comment.root_comments.all|dictsort:"id" %}
               <!-- |dictsort:"id"倒序过滤器 -->
             <li>
-              <div class="entry-comments-item">
+              <div class="entry-reply-item">
 {#                <img src="assets/img/avatar.jpg" class="entry-comments-avatar" alt="">#}
                 <div class="entry-comments-body">
                   <span class="entry-comments-author">{{ reply.user }}</span>
@@ -111,11 +111,11 @@
                     if(data['status']=="SUCCESS"){
                         if($('#reply_comment_id').val()=='0'){
                             // 插入评论
-                            var comment_html = '<li><div class="entry-comments-item"><div class="entry-comments-body"><span class="entry-comments-author">' + data['username'] + '</span><span><a href="#">' + data['comment_time'] + ' </a></span><p id="comment_' + data['id']+'" class="mb-10">' + data['text'] + '</p><a class="rep" href=\"javascript:reply(' + data['id'] + ');\">回复</a></div></div></li>';
+                            var comment_html = '<li><div class="entry-reply-item"><div class="entry-comments-body"><span class="entry-comments-author">' + data['username'] + '</span><span><a href="#">' + data['comment_time'] + ' </a></span><p id="comment_' + data['id']+'" class="mb-10">' + data['text'] + '</p><a class="rep" href=\"javascript:reply(' + data['id'] + ');\">回复</a></div></div></li>';
                             $("#comment_list").prepend(comment_html);
                         }else{
                             // 插入回复
-                            var reply_html = '<li><div class="entry-comments-item">{#<img src="assets/img/avatar.jpg" class="entry-comments-avatar" alt="">#}<div class="entry-comments-body"><span class="entry-comments-author">' + data['username'] + '</span><span><a href="#">'+ data['comment_time'] + '</a></span><P> 回复 </span><span>' + data['reply_to'] + '：</P>                  <p class="mb-10" id="comment_' + data['id'] + '">' + data['text'] + '</p><a class="rep" href="javascript:reply(' + data['id'] + ');">回复</a></div></div></li>';
+                            var reply_html = '<li><div class="entry-reply-item">{#<img src="assets/img/avatar.jpg" class="entry-comments-avatar" alt="">#}<div class="entry-comments-body"><span class="entry-comments-author">' + data['username'] + '</span><span><a href="#">'+ data['comment_time'] + '</a></span><P> 回复 </span><span>' + data['reply_to'] + '：</P>                  <p class="mb-10" id="comment_' + data['id'] + '">' + data['text'] + '</p><a class="rep" href="javascript:reply(' + data['id'] + ');">回复</a></div></div></li>';
                             $("#root_" + data['root_id']).append(reply_html);
                         }
                         // 显示成功信息

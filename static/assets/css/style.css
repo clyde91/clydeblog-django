@@ -823,9 +823,9 @@ nav ul li a {
 }
 
 .entry-comments-item {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border-top: 1px dashed #B4B4B4;
+  margin-top: 40px;
+  padding-bottom: 40px;
+  border-bottom: 2px dotted #B4B4B4;
 }
 
 .entry-comments-avatar {

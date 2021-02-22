@@ -189,3 +189,10 @@ ul li{
     }
 }
 
+
+/*评论框参数*/
+.entry-reply-item {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px dashed #B4B4B4;
+}
