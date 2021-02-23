@@ -9,7 +9,10 @@ python manage.py migrate  迁移
  
 创建超级管理员
 python manage.py createsuperuser
- 
+
+删除app
+python manage.py migrate your_app_name zero
+
 创建应用 
 python manage.py startapp XXX
  
