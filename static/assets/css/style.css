@@ -218,7 +218,8 @@ nav ul li a {
 # Hero
 --------------------------------------------------------------*/
 #hero {
-  background: url("../img/home-bg.jpg") no-repeat 0px 0px scroll ;
+  background: url("../img/home-bg.jpg") no-repeat 0px 0px scroll;
+  background-size: cover;
   height: 100vh;
   width: 100%;
 }
