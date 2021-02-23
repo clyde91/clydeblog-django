@@ -228,13 +228,24 @@ p img{
     display: block;
 }
 
+@media (min-width: 992px){
+    .gossip_main {
+        width: 900px;!important;
+    }
+}
 
+@media (max-width: 600px){
+    .gossip_main {
+        width: 580px;!important;
+        height: 290px;!important;
+    }
+}
 
 
 .gossip_main{
   position: relative;
   width: 780px;
-  height: 390px;
+  height: 350px;
   /*background-color: #fff;*/
   -webkit-tap-highlight-color:rgba(255,0,0,0);
 }
