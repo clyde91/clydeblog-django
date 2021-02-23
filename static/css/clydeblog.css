@@ -253,13 +253,13 @@ p img{
   position: absolute;
   left:0px;
   top:0px;
-  width: 220px;
-  height: 225px;
+  /*width: 220px;*/
+  /*height: 225px;*/
   /*background-color: none;*/
   z-index: 200;
   /*background-image: url(/static/i/1.png);*/
-  background-repeat: no-repeat;
-  background-position: center;
+  /*background-repeat: no-repeat;*/
+  /*background-position: center;*/
 }
 
 .gossip_random p{
