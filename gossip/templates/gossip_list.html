@@ -8,7 +8,7 @@
 
 <div class="main-content paddsection">
     <div class="container">
-        <div class="text-center list_dairy">
+        <div class="text-center head_dairy">
             {% block list_title %}<h3>说说</h3>{% endblock %}
         </div>
     </div>
@@ -20,7 +20,7 @@
                         <div class="col-lg-12">
                             <div class="block-main mb-30">
 {#                                <img src="assets/img/blog-post-big.jpg" class="img-responsive" alt="reviews2">#}
-                                <div class="content-main single-post padDiv border-r">
+                                <div class="content-main single-post padDiv border-r article_detail">
 
                     <div>
                         <form action="{% url 'submit_gossip' %}" method="POST">
@@ -58,16 +58,13 @@
                         <div class="col-lg-12">
                             <div class="block-main mb-30">
 {#                                <img src="assets/img/blog-post-big.jpg" class="img-responsive" alt="reviews2">#}
-                                <div class="content-main single-post padDiv border-r">
+                                <div class="content-main single-post padDiv border-r article_detail">
 
                 <div class="card-body">
                     <ul>
                     {% for i in page.object_list %}
                         <li class="blog entry-comments-item">
-
-                            <p><a href="{{ i.get_absolute_url }}">{{i.title}}</a></p><!-- 创造了方法反解析自己的地址 -->
-{#                            <p>{{ i.text|striptags|truncatechars_html:50|safe }}...</p>#}
-                            <p><span class="gossip_author">{{i.author}}：</span><span>{{ i.text|safe }}</span><span class="span-right">{{ i.created_time }}</span></p>
+                            <p style="margin-left: -20px;"><span class="gossip_author">{{i.author}}：</span><span>{{ i.text|safe }}</span><span class="span-right">{{ i.created_time }}</span></p>
 {#                        <hr>#}
                         </li>
 
