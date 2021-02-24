@@ -8,7 +8,7 @@ class Gossip(models.Model):
     text = RichTextUploadingField(verbose_name="文本")
     created_time = models.DateTimeField(auto_now_add=True, verbose_name="创建日期")
     # tag = models.ManyToManyField(Tag, blank=True, verbose_name="标签")
-    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="作者")
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="作者")  # 通过author_id反链
 
     def __str__(self):
         return '<%s>' % self.text  # 设置后台显示默认模型信息

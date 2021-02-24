@@ -100,7 +100,7 @@ $.getJSON("{% url 'gossip_index' %}",function(ret){
         var i = 0;
         var left1 = 0;
         move = setInterval(function() {
-          if (i < 10) {
+          if (i < 30) {
           var full = Math.ceil(parseInt($('.gossip_main'). outerWidth(true))/10);//;
           var left = Math.ceil(Math.random() * (9 - 0) + 0) * full;
           var top = Math.ceil(Math.random() * (9 - 0) + 0) * 18;

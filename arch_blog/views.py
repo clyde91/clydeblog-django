@@ -42,9 +42,9 @@ def blog_list(request):
 
 def blog_category(request, id):
     context = {}
-    category = get_object_or_404(Category,id=id)    # 通过id=id获取分类的实例（当前category）
+    category = get_object_or_404(Category, id=id)    # 通过id=id获取分类的实例（当前category）
     articles_category = ArchBlog.objects.filter(category=id)    # 用分类筛选后的文章
-    paginate(request,articles_all=articles_category,context=context)    # 分页器
+    paginate(request,articles_all=articles_category, context=context)    # 分页器
     context["articles"] = articles_category  # 当前分类的所有文章
     context["now_category"] = category  # 当前分类
     context["now_categorys"] = Category.objects.all()  # 当前所有分类

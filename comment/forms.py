@@ -3,6 +3,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.db.models import ObjectDoesNotExist
 from ckeditor.widgets import CKEditorWidget
 from .models import Comment
+from django.contrib.auth.models import User
 
 
 class CommentForm(forms.Form):
@@ -23,7 +24,8 @@ class CommentForm(forms.Form):
         if self.user.is_authenticated:
             self.cleaned_data["user"] = self.user  # 为了统一就赋值。
         else:
-            raise forms.ValidationError("用户尚未登录")
+            self.cleaned_data["user"] = User.objects.get(id=2)  # 改未登录用guest发表
+            # raise forms.ValidationError("用户尚未登录")
         # 评论对象验证
         content_type = self.cleaned_data["content_type"]  # .cleaned_data。读取表单"content_type"的返回值。
         object_id = self.cleaned_data["object_id"]

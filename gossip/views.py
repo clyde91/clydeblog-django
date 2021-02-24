@@ -1,7 +1,7 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from common_func.utils import paginate
 from .models import Gossip
-from django.contrib.contenttypes.models import ContentType
+# from django.contrib.contenttypes.models import ContentType
 from gossip.forms import GossipForm
 from django.urls import reverse
 from django.http import JsonResponse
@@ -28,13 +28,6 @@ def gossip_index(request):
         # data["gossip"] = gossip.text
 
     return JsonResponse(data)
-
-
-
-
-
-
-
 
 
 def submit_gossip(request):
