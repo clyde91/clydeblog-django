@@ -32,7 +32,7 @@ urlpatterns = [
     path('health/', include('health.urls')),
     # path('architecture/', include('architecture.urls')),
     path('', views.index, name='home'),
-    # path('index.html', views.index, name='home'),
+    path('index.html', views.index, name='index'),
     path('about/', views.about, name='about'),
     path('test', views.test, name='test'),
     path('ckeditor', include('ckeditor_uploader.urls')),    # 添加上传功能

@@ -99,12 +99,13 @@ $.getJSON("{% url 'gossip_index' %}",function(ret){
         var left1 = 0;
         move = setInterval(function() {
           if (i < 30) {
+          var gossip = ret["gossip"];
           var fullwidth = Math.floor($('.gossip_main'). outerWidth(true));//;
           var fullheight = Math.floor($('.gossip_main'). outerHeight(true));//;
           var left = Math.floor(Math.random() * fullwidth * 0.9);
           var top = Math.floor(Math.random() * fullheight * 0.8);
-          var shu = Math.floor(Math.random() * (6));
-          var gossip = ret["gossip"];
+          var shu = Math.floor(Math.random() * gossip.length);
+
 
           $("<div class='gossip_random'>"+gossip[shu]+"</div>").css({'left':left,'top':top}).appendTo($('.gossip_main'));
           $('.gossip_random').eq(0).fadeOut(400);

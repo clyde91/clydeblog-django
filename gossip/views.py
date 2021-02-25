@@ -20,7 +20,7 @@ def gossip_list(request):
 def gossip_index(request):
     data = {}
     data["gossip"] = []
-    gossip_all = Gossip.objects.filter(author_id=1).order_by("-created_time")[:15]
+    gossip_all = Gossip.objects.filter(author_id=1).order_by("-created_time")[:15]  # 指定提取数量15即15条
 
     for gossip in gossip_all:
         data["gossip"].append(gossip.text)
