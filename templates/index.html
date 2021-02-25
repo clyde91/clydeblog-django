@@ -101,10 +101,11 @@ $.getJSON("{% url 'gossip_index' %}",function(ret){
         var left1 = 0;
         move = setInterval(function() {
           if (i < 30) {
-          var full = Math.ceil(parseInt($('.gossip_main'). outerWidth(true))/10);//;
-          var left = Math.ceil(Math.random() * (9 - 0) + 0) * full;
-          var top = Math.ceil(Math.random() * (9 - 0) + 0) * 18;
-          var shu = Math.ceil(Math.random() * (4));
+          var fullwidth = Math.floor($('.gossip_main'). outerWidth(true));//;
+          var fullheight = Math.floor($('.gossip_main'). outerHeight(true));//;
+          var left = Math.floor(Math.random() * fullwidth);
+          var top = Math.floor(Math.random() * fullheight);
+          var shu = Math.floor(Math.random() * (6));
           var gossip = ret["gossip"];
 
           $("<div class='gossip_random'>"+gossip[shu]+"</div>").css({'left':left,'top':top}).appendTo($('.gossip_main'));
