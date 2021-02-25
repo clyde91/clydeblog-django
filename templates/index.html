@@ -74,11 +74,9 @@
       </div>
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 d-flex justify-content-center">
+          <div class="col-lg-12 d-flex justify-content-center gossip_main">
 
-		<div class="gossip_main">
 			<div class="gossip_random"></div>
-		</div>
 <script>
 $.getJSON("{% url 'gossip_index' %}",function(ret){
  (function($) {
@@ -104,7 +102,7 @@ $.getJSON("{% url 'gossip_index' %}",function(ret){
           var fullwidth = Math.floor($('.gossip_main'). outerWidth(true));//;
           var fullheight = Math.floor($('.gossip_main'). outerHeight(true));//;
           var left = Math.floor(Math.random() * fullwidth * 0.9);
-          var top = Math.floor(Math.random() * fullheight * 0.9);
+          var top = Math.floor(Math.random() * fullheight * 0.8);
           var shu = Math.floor(Math.random() * (6));
           var gossip = ret["gossip"];
 
@@ -125,6 +123,7 @@ $.getJSON("{% url 'gossip_index' %}",function(ret){
 });
 
 </script>
+
           </div>
         </div>
       </div>
