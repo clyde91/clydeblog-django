@@ -25,7 +25,6 @@ from .sitemap import sitemap_dict
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('user.urls')),
-    # path('blog/', include('blog.urls')),
     path('arch_blog/', include('arch_blog.urls')),
     path('code_blog/', include('code_blog.urls')),
     path('diary/', include('diary.urls')),
@@ -33,7 +32,7 @@ urlpatterns = [
     path('health/', include('health.urls')),
     # path('architecture/', include('architecture.urls')),
     path('', views.index, name='home'),
-    path('index.html', views.index, name='home'),
+    # path('index.html', views.index, name='home'),
     path('about/', views.about, name='about'),
     path('test', views.test, name='test'),
     path('ckeditor', include('ckeditor_uploader.urls')),    # 添加上传功能
@@ -43,7 +42,6 @@ urlpatterns = [
          {'sitemaps': sitemap_dict},
          name='django.contrib.sitemaps.views.sitemap'),  # sitemap
 
-    # path('bar/', views.BarView.as_view(), name='bar'),
 ]
 
 
