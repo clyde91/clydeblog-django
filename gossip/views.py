@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_object_or_404,redirect
+from django.shortcuts import render, redirect
 from common_func.utils import paginate
 from .models import Gossip
 # from django.contrib.contenttypes.models import ContentType
@@ -20,13 +20,10 @@ def gossip_list(request):
 def gossip_index(request):
     data = {}
     data["gossip"] = []
-    gossip_all = Gossip.objects.filter(author_id=1).order_by("-created_time")[:10]
+    gossip_all = Gossip.objects.filter(author_id=1).order_by("-created_time")[:15]
 
     for gossip in gossip_all:
-
         data["gossip"].append(gossip.text)
-        # data["gossip"] = gossip.text
-
     return JsonResponse(data)
 
 

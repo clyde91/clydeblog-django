@@ -1,7 +1,5 @@
-from django.shortcuts import render, HttpResponse
 from health.models import MyHealth
 from django.http import JsonResponse
-import json
 
 
 def myhealth(request):
@@ -17,5 +15,3 @@ def myhealth(request):
     data['weight_max'] = max(weight)
     data['weight_min'] = min(weight)-5
     return JsonResponse(data)
-    #return HttpResponse(json.dumps(data), content_type='application/json')
-    #return data

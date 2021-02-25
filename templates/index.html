@@ -203,19 +203,12 @@ $.getJSON("{% url 'gossip_index' %}",function(ret){
 
           </div>
 
-{#          <div class="services-block">#}
-{##}
-{#            <i class="ion-ios-camera-outline"></i>#}
-{#            <span>PHOTOGRAPHY</span>#}
-{#            <p class="separator">To an English person, it will seem like simplified English,told me what </p>#}
-{##}
-{#          </div>#}
-
         </div>
 
       </div>
 
-    </div><!-- End Services Section -->
+    </div>
+    <!-- End Services Section -->
 
     <!-- ======= Portfolio Section ======= -->
     <div id="portfolio" class="paddsection">
@@ -234,9 +227,10 @@ $.getJSON("{% url 'gossip_index' %}",function(ret){
 
           </div>
         </div>
-  <script src="{% static 'js/highcharts.js' %}"></script>
 
+  <script src="{% static 'js/highcharts.js' %}"></script>
   <script>
+$.getJSON("{% url 'myhealth' %}",function(myweight) {
     Highcharts.chart('health', {
         chart: {
             {#type: 'area',#}
@@ -250,63 +244,55 @@ $.getJSON("{% url 'gossip_index' %}",function(ret){
             text: null
         },
         xAxis: {
-            categories: {{ health|get_item:"time"|safe }},
+            categories: myweight['time'],
             {#categories: {{ health}},#}
-            labels:{enabled: false},
+            labels: {enabled: false},
         },
         yAxis: {
             title: {text: "公斤"},
-                min: {{ health|get_item:"weight_min" }},  //最小
-                tickInterval: 1, //步长
-                max:{{ health|get_item:"weight_max" }},//最大 　　　　　　　　　　　　　　
+            min: myweight['weight_min'],  //最小
+            tickInterval: 1, //步长
+            max:myweight['weight_max'],//最大 　　　　　　　　　　　　　　
         },
-		plotOptions: {
-			area: {
-				fillOpacity: 0.8, // 指定所有面积图的透明度
-				marker: {
-					enabled: false,
-					symbol: 'circle',
-					radius: 2,
-					states: {
-						hover: {
-							enabled: true
-						}
-					}
-				}
-			},
-		},
+        plotOptions: {
+            area: {
+                fillOpacity: 0.8, // 指定所有面积图的透明度
+                marker: {
+                    enabled: false,
+                    symbol: 'circle',
+                    radius: 2,
+                    states: {
+                        hover: {
+                            enabled: true
+                        }
+                    }
+                }
+            },
+        },
         series: [
             {
-            type: 'area',
-            name: '体重',
-            data: {{ health|get_item:"weight" }},
-            {#data: [],#}
-            color: '#5B2AC9',
-        fillColor: {       // 设置渐变的填充颜色
-				linearGradient: {
-					x1: 0,
-					y1: 0,
-					x2: 0,
-					y2: 1
-				},
-				stops: [
-					[0, Highcharts.getOptions().colors[4]],
-					[1, Highcharts.Color(Highcharts.getOptions().colors[5]).setOpacity(0).get('rgba')]
-				]
-			},
+                type: 'area',
+                name: '体重',
+                data: myweight['weight'],
+                {#data: [],#}
+                color: '#5B2AC9',
+                fillColor: {       // 设置渐变的填充颜色
+                    linearGradient: {
+                        x1: 0,
+                        y1: 0,
+                        x2: 0,
+                        y2: 1
+                    },
+                    stops: [
+                        [0, Highcharts.getOptions().colors[4]],
+                        [1, Highcharts.Color(Highcharts.getOptions().colors[5]).setOpacity(0).get('rgba')]
+                    ]
+                },
             },
         ],
-        credits: {enabled:false},
+        credits: {enabled: false},
     });
-
-     {#var chart=this;#}
-     {#chart.showLoading();#}
-     {#$.get({% url 'home' %}, function(sdata)#}
-     {#{#}
-     {#    chart.series[0].setData(sdata);#}
-     {##}
-     {#   chart.hideLoading();#}
-     {#});#}
+})
 
   </script>
 
