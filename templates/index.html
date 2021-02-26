@@ -98,9 +98,10 @@ $.getJSON("{% url 'gossip_index' %}",function(ret){
           var left = Math.floor(Math.random() * fullwidth * 0.8);
           var top = Math.floor(Math.random() * fullheight * 0.8);
           var shu = Math.floor(Math.random() * gossip.length);
-
-
-          $("<div class='gossip_random'>"+gossip[shu]+"</div>").css({'left':left,'top':top}).appendTo($('.gossip_main'));
+          var gossip_item = $("<div class='gossip_random'>"+gossip[shu]+"</div>");
+          if ((Math.floor(gossip_item. outerWidth(true))+left)>fullwidth){left = fullwidth-Math.floor(gossip_item. outerWidth(true))}
+          if ((Math.floor(gossip_item. outerHeight(true))+top)>fullheight){top = fullheight-Math.floor(gossip_item. outerHeight(true))}
+          gossip_item.css({'left':left,'top':top}).appendTo($('.gossip_main'));
           $('.gossip_random').eq(0).fadeOut(500);
           setTimeout(function() {
             $('.gossip_random').eq(0).remove();
