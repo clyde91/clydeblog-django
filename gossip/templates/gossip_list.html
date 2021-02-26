@@ -63,9 +63,8 @@
                 <div class="card-body">
                     <ul>
                     {% for i in page.object_list %}
-                        <li class="blog entry-comments-item">
+                        <li class="entry-comments-item gossip_item">
                             <p style="margin-left: -20px;"><span class="gossip_author">{{i.author}}：</span><span>{{ i.text|safe }}</span><span class="span-right">{{ i.created_time }}</span></p>
-{#                        <hr>#}
                         </li>
 
                     {% empty %}

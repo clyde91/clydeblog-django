@@ -241,7 +241,7 @@ p img{
     }
 }
 
-
+/*首页闪烁说说*/
 .gossip_main{
   position: relative;
   /*width: auto;*/
@@ -270,5 +270,10 @@ p img{
     margin: 0;
 }
 .gossip_random p img{
+    display: inline;
+}
+
+/*说说表情行内*/
+.gossip_item p img{
     display: inline;
 }
