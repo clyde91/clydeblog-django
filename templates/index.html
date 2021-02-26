@@ -95,7 +95,7 @@ $.getJSON("{% url 'gossip_index' %}",function(ret){
           var gossip = ret["gossip"];
           var fullwidth = Math.floor($('.gossip_main'). outerWidth(true));//;
           var fullheight = Math.floor($('.gossip_main'). outerHeight(true));//;
-          var left = Math.floor(Math.random() * fullwidth * 0.9);
+          var left = Math.floor(Math.random() * fullwidth * 0.8);
           var top = Math.floor(Math.random() * fullheight * 0.8);
           var shu = Math.floor(Math.random() * gossip.length);
 
