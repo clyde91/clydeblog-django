@@ -267,6 +267,7 @@ p img{
     font-family:"微软雅黑";
     font-size:120%;
     max-width: 220px;
+    margin: 0;
 }
 .gossip_random p img{
     display: inline;
