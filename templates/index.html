@@ -101,14 +101,14 @@ $.getJSON("{% url 'gossip_index' %}",function(ret){
 
 
           $("<div class='gossip_random'>"+gossip[shu]+"</div>").css({'left':left,'top':top}).appendTo($('.gossip_main'));
-          $('.gossip_random').eq(0).fadeOut(600);
+          $('.gossip_random').eq(0).fadeOut(500);
           setTimeout(function() {
             $('.gossip_random').eq(0).remove();
-          },1600);
+          },800);
           i++
         }else {
         }
-        }, 1000)
+        }, 1200)
     }
   };
   oPage.init();
