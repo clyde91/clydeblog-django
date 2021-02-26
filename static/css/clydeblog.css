@@ -230,21 +230,21 @@ p img{
 
 @media (min-width: 992px){
     .gossip_main {
-        width: 900px;!important;
+        width: 900px;
     }
 }
 
-@media (max-width: 600px){
+@media (max-width: 560px){
     .gossip_main {
-        width: 580px;!important;
-        height: 290px;!important;
+        width: 540px;
+        height: 290px;
     }
 }
 
 
 .gossip_main{
   position: relative;
-  width: auto;
+  /*width: auto;*/
   height: 350px;
   /*background-color: #fff;*/
   -webkit-tap-highlight-color:rgba(255,0,0,0);
