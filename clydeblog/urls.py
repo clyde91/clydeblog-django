@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.sitemaps.views import sitemap
 from .sitemap import sitemap_dict
+from django.views.generic import TemplateView
 
 
 urlpatterns = [
@@ -38,6 +39,7 @@ urlpatterns = [
     path('ckeditor', include('ckeditor_uploader.urls')),    # 添加上传功能
     path('contact_me/', views.contact_me, name='contact_me'),  # 联系我
     path('comment/', include('comment.urls')),
+    path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),  # 添加robots.txt到根目录
     path('sitemap.xml', sitemap,
          {'sitemaps': sitemap_dict},
          name='django.contrib.sitemaps.views.sitemap'),  # sitemap
