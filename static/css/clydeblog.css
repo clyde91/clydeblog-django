@@ -268,3 +268,6 @@ p img{
     font-size:120%;
     max-width: 220px;
 }
+.gossip_random p img{
+    display: inline;
+}
