@@ -89,16 +89,15 @@ $.getJSON("{% url 'gossip_index' %}",function(ret){
       var time = 1;
       var m = 0;
         var i = 0;
-        var left1 = 0;
+        var gossip = ret["gossip"];
         move = setInterval(function() {
-          if (i < 30) {
-          var gossip = ret["gossip"];
+          if (i < gossip.length) {
           var fullwidth = Math.floor($('.gossip_main'). outerWidth(true));//;
           var fullheight = Math.floor($('.gossip_main'). outerHeight(true));//;
           var left = Math.floor(Math.random() * fullwidth * 0.8);
           var top = Math.floor(Math.random() * fullheight * 0.8);
           var shu = Math.floor(Math.random() * gossip.length);
-          var gossip_item = $("<div class='gossip_random'>"+gossip[shu]+"</div>");
+          if (i != (gossip.length-1)) {var gossip_item = $("<div class='gossip_random'>"+gossip[shu]+"</div>");}else {var gossip_item = $("<div class='gossip_random'>"+gossip[gossip.length-1]+"</div>");}
           var word_width = gossip[shu].length*18.5;
           if (word_width > 220){word_width = 220}
           if (word_width+left > fullwidth){left = fullwidth-220}
