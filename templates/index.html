@@ -97,7 +97,7 @@ $.getJSON("{% url 'gossip_index' %}",function(ret){
           var left = Math.floor(Math.random() * fullwidth * 0.8);
           var top = Math.floor(Math.random() * fullheight * 0.8);
           var shu = Math.floor(Math.random() * gossip.length);
-          if (i != (gossip.length-1)) {var gossip_item = $("<div class='gossip_random'>"+gossip[shu]+"</div>");}else {var gossip_item = $("<div class='gossip_random'>"+gossip[gossip.length-1]+"</div>");}
+          if (i != (gossip.length-1)) {var gossip_item = $("<div class='gossip_random'>"+gossip[shu]+"</div>");}else {var gossip_item = $("<div class='gossip_random'>"+gossip[0]+"</div>");}
           var word_width = gossip[shu].length*18.5;
           if (word_width > 220){word_width = 220}
           if (word_width+left > fullwidth){left = fullwidth-220}
