@@ -11,10 +11,12 @@ class Readnum(models.Model):
     content_type = models.ForeignKey(ContentType, on_delete=models.DO_NOTHING)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', "object_id")    # 跨APP的类，获取实例
-    # article = models.OneToOneField(Article, on_delete=models.DO_NOTHING)
 
-    # def __str__(self):
-    #     return '%s' % self.read_num
+    class Meta:
+        verbose_name_plural = "阅读数"
+
+    def __str__(self):
+        return '%s' % self.read_num
 
 
 class ReadnumMethod():
@@ -25,6 +27,7 @@ class ReadnumMethod():
             return readnum.read_num
         except Exception as e:
             return 0
+
 
 
 # class WebSEO(models.Model):

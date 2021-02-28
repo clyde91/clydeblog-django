@@ -102,14 +102,14 @@ $.getJSON("{% url 'gossip_index' %}",function(ret){
           if (word_width > 220){word_width = 220}
           if (word_width+left > fullwidth){left = fullwidth-220}
           gossip_item.css({'left':left,'top':top}).appendTo($('.gossip_main'));
-          $('.gossip_random').eq(0).fadeOut(500);
+          $('.gossip_random').eq(0).fadeOut(400);
           setTimeout(function() {
             $('.gossip_random').eq(0).remove();
-          },800);
+          },700);
           i++
         }else {
         }
-        }, 1200)
+        }, 1300)
     }
   };
   oPage.init();
