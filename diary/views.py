@@ -10,7 +10,7 @@ from comment.forms import CommentForm
 # Create your views here.
 def diary_article(request, id):
     article = get_object_or_404(Diary, id=id)
-    key=read_click(request, obj=article)
+    key = read_click(request, obj=article)
     context = {}
     context['article'] = article
     context['object_id'] = id
@@ -27,6 +27,10 @@ def diary_article(request, id):
 def diary_list(request):
     context = {}
     articles_all = Diary.objects.all()
-    paginate(request,articles_all=articles_all,context=context)    # 分页器
+    diary_all = Diary.objects.filter(private=False)
+
+    paginate(request, articles_all=articles_all, context=context)    # 分页器
+    paginate(request, articles_all=diary_all, context=context)    # 分页器
     context['articles'] = articles_all
+    context['diary_all'] = diary_all
     return render(request, "diary_list.html", context)

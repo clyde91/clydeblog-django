@@ -10,6 +10,7 @@ class Diary(models.Model, ReadnumMethod):
     created_time = models.DateTimeField(auto_now_add=True, verbose_name="创建日期")
     modified_time = models.DateTimeField(auto_now=True, verbose_name="修改日期")
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="作者")
+    private = models.BooleanField(default=False, verbose_name="是否私密")
 
     def __str__(self):
         return '<%s>' % self.title  # 设置后台显示默认模型信息
