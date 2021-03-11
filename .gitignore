@@ -1,6 +1,6 @@
 /.idea/
-*/__pycache__
+*/__pycache__/
 /static_collected/
-**/__pycache__/
 __pycache__/
 /media/*
+*/migrations/
