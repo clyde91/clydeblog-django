@@ -26,11 +26,10 @@ def diary_article(request, id):
 
 def diary_list(request):
     context = {}
-    articles_all = Diary.objects.all()
-    diary_all = Diary.objects.filter(private=False)
-
+    if request.user.is_authenticated:
+        articles_all = Diary.objects.all()
+    else:
+        articles_all = Diary.objects.filter(private=False)
     paginate(request, articles_all=articles_all, context=context)    # 分页器
-    paginate(request, articles_all=diary_all, context=context)    # 分页器
     context['articles'] = articles_all
-    context['diary_all'] = diary_all
     return render(request, "diary_list.html", context)
