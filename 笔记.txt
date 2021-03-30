@@ -22,7 +22,8 @@ python manage.py startapp XXX
 生成环境需求文件
 pip freeze > requirements.txt
  
-
+提交百度seo
+curl -H 'Content-Type:text/plain' --data-binary @seo.txt "http://data.zz.baidu.com/urls?site=https://www.clydeblog.com&token=HlDFQbjTdkpCQEpW"
 
  
 views   存放请求方法。即不同网页回复请求

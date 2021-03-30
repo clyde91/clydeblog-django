@@ -6,6 +6,6 @@ from .models import MyHealth
 class MyHealthAdmin(admin.ModelAdmin):
     list_display = ("id", "weight", "record_date")
     list_per_page = 20
-    ordering = ("id",)
+    ordering = ("-record_date",)
     list_display_links = ("weight",)    # 打开链接的字段
     # fields = ("title","body")    # 在修改页面显示的字段数

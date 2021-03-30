@@ -15,6 +15,6 @@ codeblog_dict = {
 
 
 sitemap_dict = {
-    'arch_blog': GenericSitemap(archblog_dict, priority=0.9),
+    'arch_blog': GenericSitemap(archblog_dict, priority=1.0),
     'code_blog': GenericSitemap(codeblog_dict, priority=0.6),
 }
