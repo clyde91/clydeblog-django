@@ -35,7 +35,6 @@ class CodeBlog(models.Model, ReadnumMethod):
     tag = models.ManyToManyField(Tag, blank=True, verbose_name="标签")
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="作者")
     keywords = models.CharField(max_length=100, blank=True, verbose_name="关键词")
-    descriptison = models.CharField(max_length=200, blank=True, verbose_name="描述")
     description = models.CharField(max_length=200, blank=True, verbose_name="描述")
 
     def __str__(self):
