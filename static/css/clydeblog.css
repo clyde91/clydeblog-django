@@ -3,6 +3,18 @@
 /*#main{border-radius: 6px;background: #FFFFFF;}*/
 /*.mainer{background: #FFFFFF;border-radius: 6px;}*/
 
+/*代码字体*/
+code {
+  font-size:15px!important;
+}
+
+/*加粗字体*/
+strong {
+  font-weight: bold!important;
+}
+
+
+
 /*右边对齐*/
 .span-right {
   float:right;
