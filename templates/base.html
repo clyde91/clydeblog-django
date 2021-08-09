@@ -27,6 +27,10 @@
 
   <!-- Template clyde CSS File -->
   <link href="{% static 'css/clydeblog.css' %}" rel="stylesheet">
+
+  <!-- Highlight CSS File -->
+  <link href="{% static 'highlight/styles/github.min.css' %}" rel="stylesheet">
+
 <!-- seo -->
 {% include 'seo.html' %}
 </head>
@@ -63,6 +67,11 @@
 
   <!-- Template Main JS File -->
   <script src="{% static 'assets/js/main.js' %}"></script>
+
+  <!-- Highlight JS File -->
+  <script src="{% static 'highlight/highlight.min.js' %}"></script>
+  <script >hljs.initHighlightingOnLoad();</script>
+
   <!-- seo -->
 {% include 'seo.html' %}
 </body>
