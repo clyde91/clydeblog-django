@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
 from common_func.models import ReadnumMethod
+#from django_ckeditor_5.fields import CKEditor5Field
 # Create your models here.
 
 prefix = "arch_"  # 设置前缀
@@ -35,6 +36,7 @@ class Tag(models.Model):
 class ArchBlog(models.Model, ReadnumMethod):
     title = models.CharField(max_length=70, verbose_name="标题")
     body = RichTextUploadingField(verbose_name="正文")
+    #body = CKEditor5Field(verbose_name="正文")
     created_time = models.DateTimeField(auto_now_add=True, verbose_name="创建日期")
     modified_time = models.DateTimeField(auto_now=True, verbose_name="修改日期")
     category = models.ForeignKey(Category,on_delete=models.CASCADE, verbose_name="分类")

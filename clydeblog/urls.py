@@ -37,6 +37,7 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('test', views.test, name='test'),
     path('ckeditor', include('ckeditor_uploader.urls')),    # 添加上传功能
+    #path("ckeditor5/", include('django_ckeditor_5.urls')),    # 添加ckeditor_5
     path('contact_me/', views.contact_me, name='contact_me'),  # 联系我
     path('comment/', include('comment.urls')),
     path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),  # 添加robots.txt到根目录
