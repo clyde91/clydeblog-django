@@ -5,7 +5,7 @@ from .models import CodeBlog, Category, Tag
 
 @admin.register(CodeBlog)
 class CodeBlogAdmin(admin.ModelAdmin):
-    list_display = ("id", "title", "created_time", "modified_time", "get_read_num", "keywords", "description")
+    list_display = ("id", "title", "created_time", "modified_time", "get_read_num", "keywords", "description", "logo")
     list_per_page = 20
     ordering = ("-id",)
     list_display_links = ("title",)    # 打开链接的字段
@@ -14,7 +14,7 @@ class CodeBlogAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", )
+    list_display = ("id", "name", "logo",)
     ordering = ("id",)
 
 

@@ -15,10 +15,22 @@ strong {
 
 
 
+/*文章缩略图*/
+.blog_logo {
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+
+}
+
+
+
+
 /*右边对齐*/
 .span-right {
   float:right;
 }
+
 
 /*日志*/
 .head_dairy {
@@ -34,10 +46,12 @@ strong {
     margin-top: 40px!important;
 }
 
+/*.list_dairy {*/
 .article_title {
     font-weight:bolder;
     font-family:"微软雅黑";
-    font-size:110%
+    font-size:120%;
+    margin:0;
 }
 
 

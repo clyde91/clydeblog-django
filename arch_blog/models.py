@@ -11,6 +11,8 @@ prefix = "arch_"  # 设置前缀
 class Category(models.Model):
     name = models.CharField(max_length=30)
     text = models.CharField(max_length=120, blank=True, null=True)
+    logo = models.ImageField(upload_to="blog/arch_category", null=True, blank=True, verbose_name='分类图',
+                             default='blog/empty.jpg')
 
     def __str__(self):
         return self.name
@@ -36,6 +38,7 @@ class Tag(models.Model):
 class ArchBlog(models.Model, ReadnumMethod):
     title = models.CharField(max_length=70, verbose_name="标题")
     body = RichTextUploadingField(verbose_name="正文")
+    logo = models.ImageField(upload_to="blog/arch_blog", null=True, blank=True, verbose_name='缩略图')
     #body = CKEditor5Field(verbose_name="正文")
     created_time = models.DateTimeField(auto_now_add=True, verbose_name="创建日期")
     modified_time = models.DateTimeField(auto_now=True, verbose_name="修改日期")
