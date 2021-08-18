@@ -42,7 +42,7 @@ class ArchBlog(models.Model, ReadnumMethod):
     #body = CKEditor5Field(verbose_name="正文")
     created_time = models.DateTimeField(auto_now_add=True, verbose_name="创建日期")
     modified_time = models.DateTimeField(auto_now=True, verbose_name="修改日期")
-    category = models.ForeignKey(Category,on_delete=models.CASCADE, verbose_name="分类")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="分类")
     tag = models.ManyToManyField(Tag, blank=True, verbose_name="标签")
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="作者")
     keywords = models.CharField(max_length=100, blank=True, verbose_name="关键词")
