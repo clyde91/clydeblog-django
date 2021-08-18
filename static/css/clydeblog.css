@@ -66,6 +66,9 @@ strong {
     margin:0;
 }
 
+.article_title a {
+    /*color: #5B2AC9;*/
+}
 
 .article_text {
     font-size:13px;
@@ -75,6 +78,18 @@ strong {
     position: absolute;
     right: 20px;
 }
+
+
+.diary_info {
+    margin-bottom: -30px!important;
+    margin-top: 40px!important;
+    /*position: absolute;*/
+    font-size:14px;
+    bottom: 0;
+
+    width:100%;
+}
+
 
 
 /*顶部偏移50*/

@@ -27,10 +27,10 @@
                 <div class="card-body">
                     <ul>
                     {% for i in page.object_list %}
-                        <li class="blog entry-comments-item">
+                        <li class="entry-comments-item ">
                             <p class="article_title"><a href="{% url 'diary_article' i.id %}">{{i.title}}</a></p>
-                            <p>{{ i.body|striptags|truncatechars_html:50 }}...</p>
-                            <p class="article_info"><span>作者：{{i.author}}</span><span class="span-right">阅读({{ i.get_read_num }})</span></p>
+                            <p class="article_text">{{ i.body|striptags|safe|truncatechars_html:100 }}...</p>
+                            <p class="diary_info"><span>作者：{{i.author}}</span><span class="span-right">阅读({{ i.get_read_num }})</span></p>
                         </li>
                     {% empty %}
                         <li>暂无日志</li>
