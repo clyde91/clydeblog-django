@@ -33,7 +33,7 @@
                         <li class="entry-comments-item row article_box">
                             <div class="col-md-4">
                                 <img class= "blog_logo" src="
-                                {% if i.logo != null or i.logo != none %}
+                                {% if i.logo %}
                                     {{ i.logo.url }}
                                 {% else %}
                                     {{ i.category.logo.url }}
