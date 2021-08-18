@@ -32,13 +32,13 @@
                     {% for i in page.object_list %}
                         <li class="entry-comments-item row article_box">
                             <div class="col-md-4">
-                                <img class= "blog_logo" src="
+                                <a href="{{ i.get_absolute_url }}"><img class= "blog_logo" src="
                                 {% if i.logo %}
                                     {{ i.logo.url }}
                                 {% else %}
                                     {{ i.category.logo.url }}
                                 {% endif %}
-                                " alt="">
+                                " alt="" href="{{ i.get_absolute_url }}"></a>
                             </div>
                             <div class="col-md-8 col-xs-12">
 

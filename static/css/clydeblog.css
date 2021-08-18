@@ -60,15 +60,30 @@ strong {
 
 
 .article_title {
-    font-weight:bolder;
+    font-weight:bold;
     font-family:"微软雅黑";
     font-size:120%;
     margin:0;
 }
 
 .article_title a {
-    /*color: #5B2AC9;*/
+    color: #31164f;
+    text-decoration: none !important;
+    transition: all 0.5s ease-in-out 0s;
 }
+
+
+.article_title a:hover {
+  transition: all 0.5s ease-in-out 0s;
+}
+
+.article_title a:hover, a:focus {
+  color: #b8a07e;
+  text-decoration: underline;
+}
+
+
+
 
 .article_text {
     font-size:13px;
