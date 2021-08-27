@@ -20,12 +20,18 @@ class Category(models.Model):
         from django.urls import reverse
         return reverse(prefix+'blog_category', args=(self.id,))
 
+    class Meta:
+        verbose_name_plural = "2.分类"
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name_plural = "3.标签"
 
 
 class CodeBlog(models.Model, ReadnumMethod):
@@ -44,7 +50,7 @@ class CodeBlog(models.Model, ReadnumMethod):
         return '<%s>' % self.title  # 设置后台显示默认模型信息
 
     class Meta:
-        verbose_name_plural = "文章"
+        verbose_name_plural = "1.编程blog"
         ordering = ['-created_time']
 
     def get_absolute_url(self):  # 获得自己文章的url

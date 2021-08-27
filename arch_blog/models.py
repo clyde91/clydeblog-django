@@ -22,7 +22,7 @@ class Category(models.Model):
         return reverse(prefix+'blog_category', args=(self.id,))
 
     class Meta:
-        verbose_name_plural = "分类"
+        verbose_name_plural = "2.分类"
 
 
 class Tag(models.Model):
@@ -32,7 +32,7 @@ class Tag(models.Model):
         return self.name
 
     class Meta:
-        verbose_name_plural = "标签"
+        verbose_name_plural = "3.标签"
 
 
 class ArchBlog(models.Model, ReadnumMethod):
@@ -52,7 +52,7 @@ class ArchBlog(models.Model, ReadnumMethod):
         return '<%s>' % self.title  # 设置后台显示默认模型信息
 
     class Meta:
-        verbose_name_plural = "文章"
+        verbose_name_plural = "1.建筑blog"
         ordering = ['-created_time']
 
     def get_absolute_url(self):  # 获得自己文章的url
