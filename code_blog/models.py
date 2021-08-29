@@ -37,7 +37,7 @@ class Tag(models.Model):
 class CodeBlog(models.Model, ReadnumMethod):
     title = models.CharField(max_length=70, verbose_name="标题")
     body = RichTextUploadingField(verbose_name="正文")
-    logo = models.ImageField(upload_to="blog/code_blog", null=True, verbose_name='缩略图')
+    logo = models.ImageField(upload_to="blog/code_blog", blank=True, null=True, verbose_name='缩略图')
     created_time = models.DateTimeField(auto_now_add=True, verbose_name="创建日期")
     modified_time = models.DateTimeField(auto_now=True, verbose_name="修改日期")
     category = models.ForeignKey(Category,on_delete=models.CASCADE, verbose_name="分类")

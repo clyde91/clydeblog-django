@@ -38,7 +38,7 @@ class Tag(models.Model):
 class ArchBlog(models.Model, ReadnumMethod):
     title = models.CharField(max_length=70, verbose_name="标题")
     body = RichTextUploadingField(verbose_name="正文")
-    logo = models.ImageField(upload_to="blog/arch_blog", null=True, verbose_name='缩略图')
+    logo = models.ImageField(upload_to="blog/arch_blog", blank=True, null=True, verbose_name='缩略图')
     #body = CKEditor5Field(verbose_name="正文")
     created_time = models.DateTimeField(auto_now_add=True, verbose_name="创建日期")
     modified_time = models.DateTimeField(auto_now=True, verbose_name="修改日期")
