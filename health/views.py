@@ -1,17 +1,53 @@
 from health.models import MyHealth, Run
 from django.http import JsonResponse
+import time
+
+
+# def myhealth(request):
+#     myhealth = MyHealth.objects.order_by("record_date")
+#     time = []
+#     weight = []
+#     for info in myhealth:
+#         time.append(info.record_date.strftime("%Y-%m-%d"))
+#         weight.append(float(info.weight))
+#     data = {}
+#     data['time'] = time
+#     data['weight'] = weight
+#     data['weight_max'] = max(weight)
+#     data['weight_min'] = min(weight)-5
+#     return JsonResponse(data)
+
+def str_data_to_num(str_data):
+    # 格式时间成毫秒
+    strptime = time.strptime(str_data, "%Y-%m-%d")
+    mktime = int(time.mktime(strptime)*1000)
+    return mktime
+
+
+def num_to_str_data(str_data):
+    str_data = str_data/1000
+    # 格式毫秒成指定格式时间
+    str_data = time.localtime(str_data)  # 生成一个元祖式的时间
+    print(str_data)
+    strptime = time.strftime("%Y-%m-%d", str_data) #格式化元祖
+    print("strptime",strptime)
 
 
 def myhealth(request):
     myhealth = MyHealth.objects.order_by("record_date")
-    time = []
+    health = []
     weight = []
+    # time = []
     for info in myhealth:
-        time.append(info.record_date.strftime("%Y-%m-%d"))
+        message = []
+        message.append(str_data_to_num(info.record_date.strftime("%Y-%m-%d")))
+        message.append(float(info.weight))
+        # time.append(info.record_date.strftime("%Y-%m-%d"))
         weight.append(float(info.weight))
+        health.append(message)
     data = {}
-    data['time'] = time
-    data['weight'] = weight
+    # data['time'] = time
+    data['health'] = health
     data['weight_max'] = max(weight)
     data['weight_min'] = min(weight)-5
     return JsonResponse(data)

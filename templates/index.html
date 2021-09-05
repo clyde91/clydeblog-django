@@ -227,11 +227,18 @@ $.getJSON("{% url 'gossip_index' %}",function(ret){
   <script src="{% static 'js/highcharts.js' %}"></script>
   <script>
 $.getJSON("{% url 'myhealth' %}",function(myweight) {
+    Highcharts.setOptions({
+        lang:{
+            resetZoom: '重置缩放比例',  //汉化文字，默认是英文
+
+        },
+    });
     Highcharts.chart('health', {
         chart: {
             {#type: 'area',#}
             backgroundColor: 'rgba(0,0,0,0)',
-            animation: false,
+            animation: false,  //关闭动画
+            zoomType: 'x'  //指定可缩放轴
             {#height:500,#}
             {#events:{load:getdata}#}
             {#width:1240#}
@@ -240,16 +247,35 @@ $.getJSON("{% url 'myhealth' %}",function(myweight) {
             text: null
         },
         xAxis: {
-            categories: myweight['time'],
+            type: 'datetime',  //设置x轴类型，这里是datetime
+            dateTimeLabelFormats: {  //设置时间轴的格式。当缩放不同大小显示不同的格式
+				millisecond: '%H:%M:%S.%L',
+				second: '%H:%M:%S',
+				minute: '%H:%M',
+				hour: '%H:%M',
+				day: '%m-%d',
+				week: '%m-%d',
+				month: '%Y-%m',
+				year: '%Y'
+			},
+            {#categories: myweight['time'],#}
             {#categories: {{ health}},#}
-            labels: {enabled: false},
+            {#labels: {enabled: false},#}
+
         },
         yAxis: {
-            title: {text: "公斤"},
-            min: myweight['weight_min'],  //最小
-            tickInterval: 1, //步长
-            max:myweight['weight_max'],//最大 　　　　　　　　　　　　　　
+            title: {text: "公斤"},  //设置单位
+            min: myweight['weight_min'],  //设置最小值
+            tickInterval: 2, //步长
+            max:myweight['weight_max'],//设置最大值 　　　　　　　　　　　　　　
         },
+        tooltip: {
+        headerFormat: '{point.x:%Y-%m-%d}<br>',  //设置显示格式
+        pointFormat: '{point.y}公斤',
+        {#align: 'center',#}
+        {#style:{textAlign:"center",},#}
+        shared: true
+    },
         plotOptions: {
             area: {
                 fillOpacity: 0.8, // 指定所有面积图的透明度
@@ -267,9 +293,9 @@ $.getJSON("{% url 'myhealth' %}",function(myweight) {
         },
         series: [
             {
-                type: 'area',
+                type: 'area',  //如果是areaspline用曲线连接每个点
                 name: '体重',
-                data: myweight['weight'],
+                data: myweight['health'],  //数据来源。这里是一组数据一个列表[日期,体重]
                 {#data: [],#}
                 color: '#5B2AC9',
                 fillColor: {       // 设置渐变的填充颜色
