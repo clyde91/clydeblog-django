@@ -261,6 +261,7 @@ $.getJSON("{% url 'myhealth' %}",function(myweight) {
             {#categories: myweight['time'],#}
             {#categories: {{ health}},#}
             {#labels: {enabled: false},#}
+            minRange: 86400000*180  //设置坐标轴显示最小间隔。这里是2个月
 
         },
         yAxis: {
