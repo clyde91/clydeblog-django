@@ -4,3 +4,5 @@
 __pycache__/
 /media/*
 */migrations/
+/clydeblog/settings/development.py
+/clydeblog/settings/production.py
