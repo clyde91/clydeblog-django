@@ -26,33 +26,33 @@ DATABASES = {
 
 
 # 日志文件
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': '/home/clydeblog_debug.log',
-        },
-        # 'mail_admins': {                         #和邮件有关，有需求就查ysh的40期视频
-        #     'level': 'ERROR',
-        #     'class': 'django.utils.log.AdminEmailHandler',
-        # }
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-        # 'django.request': {
-        #     'handlers': ['mail_admins'],
-        #     'level': 'ERROR',
-        #     'propagate': False,
-        # },
-    },
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'file': {
+#             'level': 'DEBUG',
+#             'class': 'logging.FileHandler',
+#             'filename': '/home/clydeblog_debug.log',
+#         },
+#         # 'mail_admins': {                         #和邮件有关，有需求就查ysh的40期视频
+#         #     'level': 'ERROR',
+#         #     'class': 'django.utils.log.AdminEmailHandler',
+#         # }
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['file'],
+#             'level': 'DEBUG',
+#             'propagate': True,
+#         },
+#         # 'django.request': {
+#         #     'handlers': ['mail_admins'],
+#         #     'level': 'ERROR',
+#         #     'propagate': False,
+#         # },
+#     },
+# }
 
 
 # 邮箱
